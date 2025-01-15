@@ -2,7 +2,7 @@ package projeto_locadora_de_carro;
 
 public class ClassePrincipal {
   public static void main (String [] args) {
-    System.out.prinln("Teste");
+    System.out.println("Teste");
   }
 
 }
