@@ -1,4 +1,3 @@
-package projeto_locadora_de_carro.src;
 
 public class Cliente {
     private int id;

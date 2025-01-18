@@ -1,4 +1,3 @@
-package projeto_locadora_de_carro.src;
 
 import javax.swing.*;
 
