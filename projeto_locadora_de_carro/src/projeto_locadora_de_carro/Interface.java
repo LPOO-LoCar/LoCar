@@ -9,6 +9,8 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -126,14 +128,45 @@ public class Interface {
 		separator_1_1_1.setBounds(-48, 232, 787, 1);
 		frame.getContentPane().add(separator_1_1_1);
 		
-		JButton btnReserv_1 = new JButton("Reservar Carro");
-		btnReserv_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnReserv_1.setBounds(21, 245, 216, 54);
-		frame.getContentPane().add(btnReserv_1);
+		JButton btnLocaesAtivas = new JButton("Locações Ativas");
+		btnLocaesAtivas.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnLocaesAtivas.setBounds(21, 245, 216, 54);
+		frame.getContentPane().add(btnLocaesAtivas);
 		
-		JButton btnPagamentos_1 = new JButton("Pagamentos");
+		JButton btnPagamentos_1 = new JButton("Relatórios");
 		btnPagamentos_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnPagamentos_1.setBounds(440, 244, 216, 54);
 		frame.getContentPane().add(btnPagamentos_1);
+		
+		JLabel lblNewLabel_3 = new JLabel("");
+		lblNewLabel_3.setBounds(247, 117, 64, 60);
+		frame.getContentPane().add(lblNewLabel_3);
+		lblNewLabel_3.setIcon(new ImageIcon("C:\\Users\\mathe\\Downloads\\reserva-on-line.png"));
+		
+		JLabel lblNewLabel_3_1 = new JLabel("");
+		lblNewLabel_3_1.setIcon(new ImageIcon("C:\\Users\\mathe\\Downloads\\carro-compacto.png"));
+		lblNewLabel_3_1.setBounds(366, 372, 64, 60);
+		frame.getContentPane().add(lblNewLabel_3_1);
+		
+		JLabel lblNewLabel_3_2 = new JLabel("");
+		lblNewLabel_3_2.setIcon(new ImageIcon("C:\\Users\\mathe\\Downloads\\cliente.png"));
+		lblNewLabel_3_2.setBounds(247, 372, 64, 60);
+		frame.getContentPane().add(lblNewLabel_3_2);
+		
+		JLabel lblNewLabel_3_3 = new JLabel("");
+		lblNewLabel_3_3.setIcon(new ImageIcon("C:\\Users\\mathe\\Downloads\\dinheiro.png"));
+		lblNewLabel_3_3.setBounds(366, 112, 80, 69);
+		frame.getContentPane().add(lblNewLabel_3_3);
+		
+		JLabel lblNewLabel_3_4 = new JLabel("");
+		lblNewLabel_3_4.setIcon(new ImageIcon("C:\\Users\\mathe\\Downloads\\aluguel-de-carros.png"));
+		lblNewLabel_3_4.setBounds(247, 244, 64, 60);
+		frame.getContentPane().add(lblNewLabel_3_4);
+		
+		JLabel lblNewLabel_3_4_1 = new JLabel("");
+		lblNewLabel_3_4_1.setIcon(new ImageIcon("C:\\Users\\mathe\\Downloads\\relatorio-de-lucro.png"));
+		lblNewLabel_3_4_1.setBounds(382, 244, 64, 60);
+		frame.getContentPane().add(lblNewLabel_3_4_1);
+		
 	}
 }
