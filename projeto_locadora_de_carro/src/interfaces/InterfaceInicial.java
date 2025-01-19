@@ -1,10 +1,12 @@
-package projeto_locadora_de_carro;
+package interfaces;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
@@ -23,8 +25,17 @@ import javax.swing.JSlider;
 import javax.swing.JSeparator;
 import java.awt.Color;
 import java.awt.Panel;
+import javax.swing.JScrollPane;
+import javax.swing.UIManager;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.JSplitPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JToolBar;
+import javax.swing.JLayeredPane;
+import javax.swing.JDesktopPane;
+import javax.swing.JInternalFrame;
 
-public class Interface {
+public class InterfaceInicial {
 
 	private JFrame frame;
 
@@ -35,7 +46,7 @@ public class Interface {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Interface window = new Interface();
+					InterfaceInicial window = new InterfaceInicial();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,7 +58,7 @@ public class Interface {
 	/**
 	 * Create the application.
 	 */
-	public Interface() {
+	public InterfaceInicial() {
 		initialize();
 	}
 
@@ -60,10 +71,6 @@ public class Interface {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		Panel panel = new Panel();
-		panel.setBounds(0, 0, 10, 10);
-		frame.getContentPane().add(panel);
-		
 		JLabel lblNewLabel = new JLabel("Locadora de carros");
 		lblNewLabel.setBounds(170, 11, 367, 35);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -73,12 +80,16 @@ public class Interface {
 		JButton btnNewButton = new JButton("Cadastrar Cliente");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Panel panelClientes = new Panel();
-				panelClientes.setBounds(0, 0, 10, 10);
-				frame.getContentPane().add(panel);
-				
-			}
+		        frame.getContentPane().removeAll();
+		        frame.revalidate();
+		        frame.repaint();
+		        
+		        InterfaceClientes interfaceClientes = new InterfaceClientes();
+		        interfaceClientes.initialize();
+		        }
 		});
+		 
+		
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnNewButton.setBounds(21, 372, 216, 54);
 		frame.getContentPane().add(btnNewButton);
