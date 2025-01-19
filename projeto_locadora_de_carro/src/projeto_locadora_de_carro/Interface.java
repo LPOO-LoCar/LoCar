@@ -73,6 +73,10 @@ public class Interface {
 		JButton btnNewButton = new JButton("Cadastrar Cliente");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Panel panelClientes = new Panel();
+				panelClientes.setBounds(0, 0, 10, 10);
+				frame.getContentPane().add(panel);
+				
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -165,7 +169,7 @@ public class Interface {
 		
 		JLabel lblNewLabel_3_4_1 = new JLabel("");
 		lblNewLabel_3_4_1.setIcon(new ImageIcon("C:\\Users\\mathe\\Downloads\\relatorio-de-lucro.png"));
-		lblNewLabel_3_4_1.setBounds(382, 244, 64, 60);
+		lblNewLabel_3_4_1.setBounds(370, 244, 64, 60);
 		frame.getContentPane().add(lblNewLabel_3_4_1);
 		
 	}
