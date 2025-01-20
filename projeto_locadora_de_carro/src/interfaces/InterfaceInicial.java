@@ -80,12 +80,10 @@ public class InterfaceInicial {
 		JButton btnNewButton = new JButton("Cadastrar Cliente");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		        frame.getContentPane().removeAll();
-		        frame.revalidate();
-		        frame.repaint();
+				InterfaceClientes interfaceClientes = new InterfaceClientes();
+				frame.dispose();
+				interfaceClientes.setVisible(true);
 		        
-		        InterfaceClientes interfaceClientes = new InterfaceClientes();
-		        interfaceClientes.initialize();
 		        }
 		});
 		 
@@ -97,6 +95,9 @@ public class InterfaceInicial {
 		JButton btnCadastrarCarro = new JButton("Cadastrar Carro");
 		btnCadastrarCarro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				InterfaceCarro interfaceCarro = new InterfaceCarro();
+				frame.dispose();
+				interfaceCarro.setVisible(true);
 			}
 		});
 		btnCadastrarCarro.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -183,5 +184,8 @@ public class InterfaceInicial {
 		lblNewLabel_3_4_1.setBounds(370, 244, 64, 60);
 		frame.getContentPane().add(lblNewLabel_3_4_1);
 		
+	}
+	public void setVisible(boolean b) {
+		frame.setVisible(b);
 	}
 }
