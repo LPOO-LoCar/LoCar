@@ -6,6 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -197,8 +200,21 @@ public class InterfaceCarro {
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNewButton_1.setBounds(567, 414, 107, 36);
 		frame.getContentPane().add(btnNewButton_1);
+		
+        JButton btnNewButton_2 = new JButton("Voltar");
+        btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        btnNewButton_2.setBounds(10, 11, 97, 33);
+        frame.getContentPane().add(btnNewButton_2);
+        btnNewButton_2.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+			InterfaceInicial interfaceInicial = new InterfaceInicial();
+			frame.dispose();
+			interfaceInicial.setVisible(true);
+        }
+        });
 	}
 	public void setVisible(boolean b) {
 		frame.setVisible(b);
 	}
+      
 }
