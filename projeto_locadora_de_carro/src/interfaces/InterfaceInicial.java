@@ -71,13 +71,13 @@ public class InterfaceInicial {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Locadora de carros");
-		lblNewLabel.setBounds(170, 11, 367, 35);
+		JLabel lblNewLabel = new JLabel("LoCar - Locadora de veículos");
+		lblNewLabel.setBounds(140, 11, 425, 35);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		frame.getContentPane().add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("Cadastrar Cliente");
+		JButton btnNewButton = new JButton("Cadastrar cliente");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				InterfaceClientes interfaceClientes = new InterfaceClientes();
@@ -92,7 +92,7 @@ public class InterfaceInicial {
 		btnNewButton.setBounds(21, 372, 216, 54);
 		frame.getContentPane().add(btnNewButton);
 		
-		JButton btnCadastrarCarro = new JButton("Cadastrar Carro");
+		JButton btnCadastrarCarro = new JButton("Cadastrar veículo");
 		btnCadastrarCarro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				InterfaceCarro interfaceCarro = new InterfaceCarro();
@@ -119,7 +119,7 @@ public class InterfaceInicial {
 		lblNewLabel_2.setBounds(118, 70, 477, 29);
 		frame.getContentPane().add(lblNewLabel_2);
 		
-		JButton btnReserv = new JButton("Reservar Carro");
+		JButton btnReserv = new JButton("Reservar veículo");
 		btnReserv.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnReserv.setBounds(21, 120, 216, 54);
 		frame.getContentPane().add(btnReserv);
@@ -144,7 +144,7 @@ public class InterfaceInicial {
 		separator_1_1_1.setBounds(-48, 232, 787, 1);
 		frame.getContentPane().add(separator_1_1_1);
 		
-		JButton btnLocaesAtivas = new JButton("Locações Ativas");
+		JButton btnLocaesAtivas = new JButton("Locações ativas");
 		btnLocaesAtivas.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnLocaesAtivas.setBounds(21, 245, 216, 54);
 		frame.getContentPane().add(btnLocaesAtivas);

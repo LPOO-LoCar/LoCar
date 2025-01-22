@@ -57,7 +57,7 @@ public class InterfaceCarro {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Cadastro de carros");
+		JLabel lblNewLabel = new JLabel("Cadastro de veículos");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 44));
 		lblNewLabel.setBounds(148, 11, 422, 40);
 		frame.getContentPane().add(lblNewLabel);
