@@ -1,0 +1,245 @@
+package test3;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.Color;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JButton;
+import javax.swing.JTabbedPane;
+
+public class TelaPrincipal extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					TelaPrincipal frame = new TelaPrincipal();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public TelaPrincipal() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 460, 310);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel LocarTituloPreto = new JLabel("Locar");
+		LocarTituloPreto.setFont(new Font("Robotronica", Font.PLAIN, 30));
+		LocarTituloPreto.setBounds(177, 28, 80, 42);
+		contentPane.add(LocarTituloPreto);
+		
+		JLabel LocarSombraVermelha = new JLabel("Locar");
+		LocarSombraVermelha.setForeground(new Color(255, 0, 0));
+		LocarSombraVermelha.setFont(new Font("Robotronica", Font.PLAIN, 30));
+		LocarSombraVermelha.setBounds(175, 26, 80, 42);
+		contentPane.add(LocarSombraVermelha);
+		
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBackground(new Color(240, 240, 240));
+		menuBar.setBounds(0, 0, 434, 22);
+		contentPane.add(menuBar);
+		
+		JMenu mnNewMenu = new JMenu("Arquivo");
+		menuBar.add(mnNewMenu);
+		
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Novo Cliente");
+		mnNewMenu.add(mntmNewMenuItem_3);
+		
+		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Novo Veículo");
+		mnNewMenu.add(mntmNewMenuItem_4);
+		
+		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Novo Funcionário");
+		mnNewMenu.add(mntmNewMenuItem_5);
+		
+		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Nova Locação");
+		mnNewMenu.add(mntmNewMenuItem_6);
+		
+		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Nova Reserva");
+		mnNewMenu.add(mntmNewMenuItem_7);
+		
+		JMenuItem mntmNewMenuItem_8 = new JMenuItem("Sair");
+		mnNewMenu.add(mntmNewMenuItem_8);
+		
+		JMenu mnNewMenu_1 = new JMenu("Editar");
+		menuBar.add(mnNewMenu_1);
+		
+		JMenu submenuCliente = new JMenu ("Gerenciar Cliente");
+		
+		JMenuItem editarCliente = new JMenuItem("Editar Cliente");
+		JMenuItem removerCliente = new JMenuItem("Remover Cliente");
+		
+		submenuCliente.add(editarCliente);
+		submenuCliente.add(removerCliente);
+		
+		mnNewMenu_1.add(submenuCliente);
+		
+		JMenu submenuVeiculo = new JMenu("Gerenciar Veículo");
+		
+		JMenuItem editarVeiculo = new JMenuItem("Editar Veículo");
+		JMenuItem removerVeiculo = new JMenuItem("Remover Veículo");
+		JMenuItem agendarManutençao = new JMenuItem("Agendar Manutenção Veicular");
+		JMenuItem agendarVistoria = new JMenuItem("Agenddar Vistoria Veicular");
+		
+		submenuVeiculo.add(editarVeiculo);
+		submenuVeiculo.add(removerVeiculo);
+		submenuVeiculo.add(agendarManutençao);
+		submenuVeiculo.add(agendarVistoria);
+		
+		mnNewMenu_1.add(submenuVeiculo);
+		
+		JMenu submenuLocaçoes = new JMenu("Locações");
+		
+		JMenuItem editarLocaçoesAt = new JMenuItem ("Editar Locações Ativas");
+		JMenuItem editarLocaçoesIn = new JMenuItem ("Editar Locações Inativas");
+		
+		submenuLocaçoes.add(editarLocaçoesAt);
+		submenuLocaçoes.add(editarLocaçoesIn);
+		
+		mnNewMenu_1.add(submenuLocaçoes);
+		
+		JMenu submenuReservas = new JMenu("Reservas");
+		
+		JMenuItem editarReservasAt = new JMenuItem ("Editar Reservas Ativas");
+		JMenuItem cancelarReservas = new JMenuItem ("Cancelar Reserva");
+		
+		submenuReservas.add(editarReservasAt);
+		submenuReservas.add(cancelarReservas);
+		
+		mnNewMenu_1.add(submenuReservas);
+		
+		JMenu mnNewMenu_2 = new JMenu("Buscar");
+		menuBar.add(mnNewMenu_2);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Buscar Cliente");
+		mnNewMenu_2.add(mntmNewMenuItem);
+		
+		JMenuItem mntmNewMenuItem_9 = new JMenuItem("Buscar Veículo");
+		mnNewMenu_2.add(mntmNewMenuItem_9);
+		
+		JMenuItem mntmNewMenuItem_10 = new JMenuItem("Buscar Funcionário");
+		mnNewMenu_2.add(mntmNewMenuItem_10);
+		
+		JMenuItem mntmNewMenuItem_11 = new JMenuItem("Buscar Locação");
+		mnNewMenu_2.add(mntmNewMenuItem_11);
+		
+		JMenuItem mntmNewMenuItem_12 = new JMenuItem("Buscar Reserva");
+		mnNewMenu_2.add(mntmNewMenuItem_12);
+		
+		JMenu mnNewMenu_4 = new JMenu("Relatórios");
+		menuBar.add(mnNewMenu_4);
+		
+		JMenu mnNewMenu_5 = new JMenu("Visualizar");
+		mnNewMenu_4.add(mnNewMenu_5);
+		
+		JMenuItem mntmNewMenuItem_13 = new JMenuItem("Locações Ativas");
+		mnNewMenu_5.add(mntmNewMenuItem_13);
+		
+		JMenuItem mntmNewMenuItem_14 = new JMenuItem("Reservas");
+		mnNewMenu_5.add(mntmNewMenuItem_14);
+		
+		JMenuItem mntmNewMenuItem_15 = new JMenuItem("Cadastro de Clientes");
+		mnNewMenu_5.add(mntmNewMenuItem_15);
+		
+		JMenuItem mntmNewMenuItem_16 = new JMenuItem("Cadastro de Veículos");
+		mnNewMenu_5.add(mntmNewMenuItem_16);
+		
+		JMenuItem mntmNewMenuItem_17 = new JMenuItem("Cadastro de Funcionários");
+		mnNewMenu_5.add(mntmNewMenuItem_17);
+		
+		JMenu mnNewMenu_6 = new JMenu("Gerar Relatórios");
+		mnNewMenu_4.add(mnNewMenu_6);
+		
+		JMenu mnNewMenu_7 = new JMenu("Receita");
+		mnNewMenu_6.add(mnNewMenu_7);
+		
+		JMenuItem mntmNewMenuItem_22 = new JMenuItem("Receita Diaria");
+		mnNewMenu_7.add(mntmNewMenuItem_22);
+		
+		JMenuItem mntmNewMenuItem_23 = new JMenuItem("Receita Semanal");
+		mnNewMenu_7.add(mntmNewMenuItem_23);
+		
+		JMenuItem mntmNewMenuItem_24 = new JMenuItem("Receita Mensal");
+		mnNewMenu_7.add(mntmNewMenuItem_24);
+		
+		JMenuItem mntmNewMenuItem_25 = new JMenuItem("Receita Anual");
+		mnNewMenu_7.add(mntmNewMenuItem_25);
+		
+		JMenuItem mntmNewMenuItem_18 = new JMenuItem("Manutenção Veícular");
+		mnNewMenu_6.add(mntmNewMenuItem_18);
+		
+		JMenuItem mntmNewMenuItem_19 = new JMenuItem("Vistorias");
+		mnNewMenu_6.add(mntmNewMenuItem_19);
+		
+		JMenuItem mntmNewMenuItem_20 = new JMenuItem("Locações");
+		mnNewMenu_6.add(mntmNewMenuItem_20);
+		
+		JMenuItem mntmNewMenuItem_21 = new JMenuItem("Reservas");
+		mnNewMenu_6.add(mntmNewMenuItem_21);
+		
+		JMenu mnNewMenu_3 = new JMenu("Ajuda");
+		menuBar.add(mnNewMenu_3);
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Help-me!");
+		mnNewMenu_3.add(mntmNewMenuItem_1);
+		
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Sobre");
+		mnNewMenu_3.add(mntmNewMenuItem_2);
+		
+		JLabel lblNewLabel_2 = new JLabel("Locadora de Veículos");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNewLabel_2.setBounds(135, 54, 156, 27);
+		contentPane.add(lblNewLabel_2);
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(10, 76, 424, 184);
+		contentPane.add(tabbedPane);
+		
+		tabbedPane.addTab("Test1", CriarPaineltes1());
+		tabbedPane.addTab("Test2", CriarPaineltes2());
+		tabbedPane.addTab("Test3", CriarPaineltes3());
+	}
+	
+	private JPanel CriarPaineltes1() {
+		JPanel panel = new JPanel();
+		panel.add(new JLabel("test test"));
+		return panel;
+	}
+	
+	private JPanel CriarPaineltes2() {
+		JPanel panel = new JPanel();
+		panel.add(new JLabel("test test"));
+		return panel;
+	}
+	
+	private JPanel CriarPaineltes3() {
+		JPanel panel = new JPanel();
+		panel.add(new JLabel("test test"));
+		return panel;
+	}
+	
+	
+}
