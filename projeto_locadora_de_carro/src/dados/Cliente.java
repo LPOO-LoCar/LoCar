@@ -1,3 +1,4 @@
+package dados;
 
 public class Cliente {
     private int id;
