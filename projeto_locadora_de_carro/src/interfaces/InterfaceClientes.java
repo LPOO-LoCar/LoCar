@@ -238,7 +238,7 @@ public class InterfaceClientes {
         		try {
         			Class.forName("com.mysql.cj.jdbc.Driver");
         			Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/locadora_de_carro", "root", "192815Math@");
-        			String sql = "INSERT INTO cliente (id, nome, data_nascimento, cpf, sexo, bairro_rua, numero, cep, cidade, estado, telefone, email) " +
+        			String sql = "INSERT INTO cliente (id, nome, dataNascimento, cpf, sexo, bairroRua, numero, cep, cidade, estado, telefone, email) " +
                             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         			PreparedStatement pstmt = connection.prepareStatement(sql);
         			
@@ -254,6 +254,14 @@ public class InterfaceClientes {
                     pstmt.setString(10, cliente.getEstado());
                     pstmt.setString(11, cliente.getTelefone());
                     pstmt.setString(12, cliente.getEmail());
+                    
+                    int rowsAffected = pstmt.executeUpdate();
+                    
+                    if (rowsAffected > 0) {
+                        JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Erro ao cadastrar cliente.");
+                    }
                     
 
         		} catch (Exception e1){
