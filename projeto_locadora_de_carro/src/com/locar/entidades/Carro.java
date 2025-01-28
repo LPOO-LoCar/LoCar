@@ -1,4 +1,4 @@
-package com.locar.dados;
+package com.locar.entidades;
 
 public class Carro {
     private int id;

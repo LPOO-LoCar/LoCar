@@ -1,5 +1,6 @@
 package com.locar.ui;
 
+import com.locar.regras_negocio.*;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -18,7 +19,7 @@ import java.sql.Statement;
 
 import javax.swing.JTextField;
 
-import com.locar.dados.Cliente;
+import com.locar.entidades.Cliente;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -222,52 +223,22 @@ public class InterfaceClientes {
         JButton butaoCadastrar = new JButton("Cadastrar");
         butaoCadastrar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		Cliente cliente = new Cliente();
-        		cliente.setId(1);
-        		cliente.setNome(campoTextoNomeCompleto.getText());
-        		cliente.setDataNascimento(campoTextoDataNascimento.getText());
-        		cliente.setCpf(campoTextoCpf.getText());
-        		cliente.setSexo(campoTextoSexo.getSelectedItem().toString());
-        		cliente.setBairroRua(campoTextoBairroRua.getText());
-        		cliente.setNumero(Integer.parseInt(campoTextoNumero.getText()));
-        		cliente.setCep(campoTextoCep.getText());
-        		cliente.setCidade(campoTextoCidade.getText());
-        		cliente.setEstado(campoTextoEstado.getText());
-        		cliente.setTelefone(campoTextoTelefone.getText());
-        		cliente.setEmail(campoTextoEmail.getText());
         		
-        		try {
-        			Class.forName("com.mysql.cj.jdbc.Driver");
-        			Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/locadora_de_carro", "root", "192815Math@");
-        			String sql = "INSERT INTO cliente (id, nome, dataNascimento, cpf, sexo, bairroRua, numero, cep, cidade, estado, telefone, email) " +
-                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        			PreparedStatement pstmt = connection.prepareStatement(sql);
-        			
-                    pstmt.setInt(1, cliente.getId());
-                    pstmt.setString(2, cliente.getNome());
-                    pstmt.setString(3, cliente.getDataNascimento());
-                    pstmt.setString(4, cliente.getCpf());
-                    pstmt.setString(5, cliente.getSexo());
-                    pstmt.setString(6, cliente.getBairroRua());
-                    pstmt.setInt(7, cliente.getNumero());
-                    pstmt.setString(8, cliente.getCep());
-                    pstmt.setString(9, cliente.getCidade());
-                    pstmt.setString(10, cliente.getEstado());
-                    pstmt.setString(11, cliente.getTelefone());
-                    pstmt.setString(12, cliente.getEmail());
-                    
-                    int rowsAffected = pstmt.executeUpdate();
-                    
-                    if (rowsAffected > 0) {
-                        JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Erro ao cadastrar cliente.");
-                    }
-                    
-
-        		} catch (Exception e1){
-        			// A fazer	
-        		}    		
+        		String nomeCompleto = campoTextoNomeCompleto.getText();
+        		String dataNascimento = campoTextoDataNascimento.getText();
+        		String cpf = campoTextoCpf.getText();
+        		String Sexo = campoTextoSexo.getSelectedItem().toString();
+        		String BairroRua = campoTextoBairroRua.getText();
+        		int numero = Integer.parseInt(campoTextoNumero.getText());
+        		String cep = campoTextoCep.getText();
+        		String cidade = campoTextoCidade.getText();
+        		String estado = campoTextoEstado.getText();
+        		String telefone = campoTextoTelefone.getText();
+        		String email = campoTextoEmail.getText();
+        		
+        		ControladorControleAcesso controlador = new ControladorControleAcesso();
+        		controlador.registrarCliente(nomeCompleto,dataNascimento, cpf, Sexo, BairroRua, numero, cep, cidade, estado, telefone, email);
+        		 		
         	}
         });
         butaoCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 20));

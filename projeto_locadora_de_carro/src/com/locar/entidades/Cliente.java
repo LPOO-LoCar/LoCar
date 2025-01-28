@@ -1,8 +1,8 @@
-package com.locar.dados;
+package com.locar.entidades;
 
 public class Cliente {
-	private int id;
-    private String nome;
+	private long id;
+    private String nomeCompleto;
     private String dataNascimento;
     private String cpf;
     private String sexo;
@@ -13,8 +13,23 @@ public class Cliente {
     private String estado;
     private String telefone;
     private String email;
+    
+    public Cliente(String nomeCompleto, String dataNascimento, String cpf, String sexo, String bairroRua,
+			int numero, String cep, String cidade, String estado, String telefone, String email) {
+    	this.nomeCompleto = nomeCompleto;
+    	this.dataNascimento = dataNascimento;
+    	this.cpf = cpf;
+    	this.sexo = sexo;
+    	this.bairroRua = bairroRua;
+    	this.numero = numero;
+    	this.cep = cep;
+    	this.cidade = cidade;
+    	this.estado = estado;
+    	this.telefone = telefone;
+    	this.email = email;
+    }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -22,12 +37,12 @@ public class Cliente {
         this.id = id;
     }
     
-    public String getNome() {
-        return nome;
+    public String getNomeCompleto() {
+        return nomeCompleto;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
     }
 
     public String getDataNascimento() {
