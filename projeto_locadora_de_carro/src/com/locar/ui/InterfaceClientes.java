@@ -1,4 +1,4 @@
-package interfaces;
+package com.locar.ui;
 
 import java.awt.EventQueue;
 
@@ -17,13 +17,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.JTextField;
+
+import com.locar.dados.Cliente;
+
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSeparator;
 import java.awt.Color;
 import javax.swing.JButton;
-
-import dados.Cliente;
 
 public class InterfaceClientes {
 

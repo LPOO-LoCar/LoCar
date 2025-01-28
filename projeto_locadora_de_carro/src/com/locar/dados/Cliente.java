@@ -1,4 +1,4 @@
-package dados;
+package com.locar.dados;
 
 public class Cliente {
 	private int id;
