@@ -226,8 +226,8 @@ public class NovaReservaArquivo extends JFrame {
 		contentPane.add(resStatusdeReserva_comboBox);
 		
 		JButton reservar_Button = new JButton("Reservar");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnNewButton.setBounds(445, 337, 119, 43);
-		contentPane.add(btnNewButton);
+		reservar_Button.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		reservar_Button.setBounds(445, 337, 119, 43);
+		contentPane.add(reservar_Button);
 	}
 }
