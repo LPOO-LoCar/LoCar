@@ -15,8 +15,6 @@ public class ControladorControleAcesso {
 		Repositorio repositorio = new Repositorio();
 		repositorio.registrarCliente(cliente);
 		
-		
 	}
 	
-
 }

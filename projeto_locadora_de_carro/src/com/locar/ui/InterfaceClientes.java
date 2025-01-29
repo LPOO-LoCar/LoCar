@@ -1,5 +1,6 @@
 package com.locar.ui;
-
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import com.locar.regras_negocio.*;
 import java.awt.EventQueue;
 
@@ -108,6 +109,27 @@ public class InterfaceClientes {
         campoTextoDataNascimento.setColumns(10);
         campoTextoDataNascimento.setBounds(10, 178, 205, 20);
         frame.getContentPane().add(campoTextoDataNascimento);
+        campoTextoDataNascimento.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                String texto = campoTextoDataNascimento.getText();
+                texto = texto.replaceAll("[^0-9]", ""); // Remove caracteres não numéricos
+
+                // Adiciona as barras automaticamente
+                if (texto.length() >= 2) {
+                    texto = texto.substring(0, 2) + "/" + texto.substring(2);
+                }
+                if (texto.length() >= 5) {
+                    texto = texto.substring(0, 5) + "/" + texto.substring(5);
+                }
+                // Limita o texto a 10 caracteres
+                if (texto.length() >= 10) {
+                    texto = texto.substring(0, 10);
+                }
+
+                campoTextoDataNascimento.setText(texto);
+            }
+        });
         
         JLabel TextoEmail = new JLabel("Email:");
         TextoEmail.setFont(new Font("Tahoma", Font.PLAIN, 18));
