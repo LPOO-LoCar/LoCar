@@ -14,7 +14,10 @@ import java.awt.Color;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaPrincipal extends JFrame {
 
@@ -43,7 +46,7 @@ public class TelaPrincipal extends JFrame {
 	public TelaPrincipal() {
 		setTitle("Locar - Locadora de Veiculos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 460, 310);
+		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -54,7 +57,7 @@ public class TelaPrincipal extends JFrame {
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBackground(new Color(240, 240, 240));
-		menuBar.setBounds(0, 0, 434, 22);
+		menuBar.setBounds(0, 0, 774, 22);
 		contentPane.add(menuBar);
 		
 		//Barra de Menu - Botão Arquivo
@@ -103,8 +106,21 @@ public class TelaPrincipal extends JFrame {
 			telaNovaReserva.setVisible(true);
 		});
 		
-		JMenuItem mntmNewMenuItem_8 = new JMenuItem("Sair");
-		menuArquivo.add(mntmNewMenuItem_8);
+		JMenuItem sairMenuItem = new JMenuItem("Sair");
+		sairMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			int confirmacao = JOptionPane.showConfirmDialog(
+					null,
+					"Tem certeza que deseja sair?",
+					"Confirmar Saída",
+					JOptionPane.YES_NO_OPTION);
+			if (confirmacao == JOptionPane.YES_NO_OPTION) {
+				System.exit(0);
+			}
+			
+			}
+		});
+		menuArquivo.add(sairMenuItem);
 		
 		//Barra de Menu - Botão Editar
 		
