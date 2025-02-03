@@ -1,4 +1,4 @@
-package test5;
+package ;
 
 import java.awt.EventQueue;
 
@@ -10,11 +10,13 @@ import test1.TelaVeiculos;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -106,6 +108,31 @@ public class TelaPrincipal extends JFrame {
 			telaNovaReserva.setVisible(true);
 		});
 		
+		JMenuItem mudarSenhaMenuItem = new JMenuItem("Mudar Senha");
+		menuArquivo.add(mudarSenhaMenuItem);
+		
+		mudarSenhaMenuItem.addActionListener(e -> {
+			MudarSenhaArquivo telaMudarSenha = new MudarSenhaArquivo();
+			telaMudarSenha.setVisible(true);
+		});
+		
+		JMenuItem fazerLogoutMenuItem = new JMenuItem("Fazer logout");
+		menuArquivo.add(fazerLogoutMenuItem);
+		
+		fazerLogoutMenuItem.addActionListener(e -> {
+			int confirmacao = JOptionPane.showConfirmDialog(
+					null,
+					"Tem certeza que deseja encessar a sessão?",
+					"Confirmar Logout",
+					JOptionPane.YES_NO_OPTION
+					);
+			if (confirmacao == JOptionPane.YES_NO_OPTION) {
+				dispose();
+				new Login().setVisible(true);
+			}
+			
+		});
+		
 		JMenuItem sairMenuItem = new JMenuItem("Sair");
 		sairMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -120,6 +147,7 @@ public class TelaPrincipal extends JFrame {
 			
 			}
 		});
+				
 		menuArquivo.add(sairMenuItem);
 		
 		//Barra de Menu - Botão Editar
@@ -127,41 +155,14 @@ public class TelaPrincipal extends JFrame {
 		JMenu menuEditar = new JMenu("Editar");
 		menuBar.add(menuEditar);
 		
-		JMenu submenuCliente = new JMenu ("Gerenciar Cliente");
-		menuEditar.add(submenuCliente);
-		
-		JMenuItem editarCliente = new JMenuItem("Editar Cliente");
-		submenuCliente.add(editarCliente);
-		
-		editarCliente.addActionListener(e -> {
-			EditarClienteEditar telaEditarClienteEditar = new EditarClienteEditar();
-			telaEditarClienteEditar.setVisible(true);
-		});
-		
-		JMenuItem removerCliente = new JMenuItem("Remover Cliente");
-		submenuCliente.add(removerCliente);
-		
-		removerCliente.addActionListener(e ->{
-			RemoverClienteEditar telaRemoverCliente = new RemoverClienteEditar();
-			telaRemoverCliente.setVisible(true);
-		});
-		
 		JMenu submenuVeiculo = new JMenu("Gerenciar Veículo");
 		
-		JMenuItem editarVeiculo = new JMenuItem("Editar Veículo");
-		submenuVeiculo.add(editarVeiculo);
+		JMenuItem editarremoverVeiculo = new JMenuItem("Editar/Remover Veículo");
+		submenuVeiculo.add(editarremoverVeiculo);
 		
-		editarVeiculo.addActionListener(e -> {
+		editarremoverVeiculo.addActionListener(e -> {
 			EditarVeiculoEditar telaEditarVeiculo = new EditarVeiculoEditar();
 			telaEditarVeiculo.setVisible(true);
-		});
-		
-		JMenuItem removerVeiculo = new JMenuItem("Remover Veículo");
-		submenuVeiculo.add(removerVeiculo);
-		
-		removerVeiculo.addActionListener(e -> {
-			RemoverVeiculoEditar telaRemoverVeiculo = new RemoverVeiculoEditar();
-			telaRemoverVeiculo.setVisible(true);
 		});
 		
 		JMenuItem agendarManutençao = new JMenuItem("Agendar Manutenção Veicular");
@@ -179,6 +180,9 @@ public class TelaPrincipal extends JFrame {
 			AgendarVistoriaVeicularEditar telaAgendarVistoria = new AgendarVistoriaVeicularEditar();
 			telaAgendarVistoria.setVisible(true);
 		});
+		
+		JMenuItem editarGerenciarCliente = new JMenuItem("Gerenciar Cliente");
+		menuEditar.add(editarGerenciarCliente);
 		
 		menuEditar.add(submenuVeiculo);
 		
@@ -199,6 +203,9 @@ public class TelaPrincipal extends JFrame {
 			EditarLocInativaEditar telaEditarLocaçaoInativa = new EditarLocInativaEditar();
 			telaEditarLocaçaoInativa.setVisible(true);
 		});
+		
+		JMenuItem editarGerenciarFuncionario = new JMenuItem("Gerenciar Funcionario");
+		menuEditar.add(editarGerenciarFuncionario);
 		
 		menuEditar.add(submenuLocaçoes);
 		
@@ -266,6 +273,24 @@ public class TelaPrincipal extends JFrame {
 			BuscarReservaBuscar telaBuscarReserva = new BuscarReservaBuscar();
 			telaBuscarReserva.setVisible(true);
 		});
+		
+		JMenu menuPagamentos = new JMenu("Pagamentos");
+		menuBar.add(menuPagamentos);
+		
+		JMenuItem pagamentosPagar = new JMenuItem("Pagar");
+		menuPagamentos.add(pagamentosPagar);
+		
+		JMenu submenuRegistroDePagamentos = new JMenu("Registro de Pagamentos");
+		menuPagamentos.add(submenuRegistroDePagamentos);
+		
+		JMenuItem pagRegistroPendente = new JMenuItem("Pendentes");
+		submenuRegistroDePagamentos.add(pagRegistroPendente);
+		
+		JMenuItem pagRegistroQuitados = new JMenuItem("Quitados");
+		submenuRegistroDePagamentos.add(pagRegistroQuitados);
+		
+		JMenuItem pagamentosSimulador = new JMenuItem("Simulador de Pagamentos");
+		menuPagamentos.add(pagamentosSimulador);
 		
 		//Barra de Menu - Botão Relatórios
 		
@@ -381,10 +406,17 @@ public class TelaPrincipal extends JFrame {
 		JMenuItem menuSobre = new JMenuItem("Sobre");
 		menuAjuda.add(menuSobre);
 		
+				
 		menuSobre.addActionListener(e -> {
 			SobreAjuda telaAjuda = new SobreAjuda();
 			telaAjuda.setVisible(true);
 		});
 		
+		//Imagem
+		
+		/*JLabel carrinho = new JLabel("");
+		carrinho.setIcon(new ImageIcon(getClass().getResource("/imagem/CarroNeon.jpg")));
+		carrinho.setBounds(27, 33, 730, 505);
+		contentPane.add(carrinho);*/
 	}
 }
