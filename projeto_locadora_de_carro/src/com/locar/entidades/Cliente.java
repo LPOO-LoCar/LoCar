@@ -6,6 +6,8 @@ public class Cliente {
     private String dataNascimento;
     private String cpf;
     private String sexo;
+    private String cnh;
+    private String vencimentoCnh;
     private String bairroRua;
     private int numero;
     private String cep;
@@ -14,12 +16,15 @@ public class Cliente {
     private String telefone;
     private String email;
     
-    public Cliente(String nomeCompleto, String dataNascimento, String cpf, String sexo, String bairroRua,
-			int numero, String cep, String cidade, String estado, String telefone, String email) {
+    public Cliente(String nomeCompleto, String dataNascimento, String cpf, String sexo, String cnh,
+    		String vencimentoCnh, String bairroRua, int numero, String cep, String cidade, String estado,
+    		String telefone, String email) {
     	this.nomeCompleto = nomeCompleto;
     	this.dataNascimento = dataNascimento;
     	this.cpf = cpf;
     	this.sexo = sexo;
+    	this.cnh = cnh;
+    	this.vencimentoCnh = vencimentoCnh;
     	this.bairroRua = bairroRua;
     	this.numero = numero;
     	this.cep = cep;
@@ -67,6 +72,22 @@ public class Cliente {
 
     public void setSexo(String sexo) {
         this.sexo = sexo;
+    }
+    
+    public String getCnh() {
+        return cnh;
+    }
+    
+    public void setCnh(String cnh) {
+        this.cnh = cnh;
+    }
+    
+    public String getVencimentoCnh() {
+        return vencimentoCnh;
+    }
+    
+    public void setVencimentoCnh(String vencimentoCnh) {
+        this.vencimentoCnh = vencimentoCnh;
     }
 
     public String getBairroRua() {

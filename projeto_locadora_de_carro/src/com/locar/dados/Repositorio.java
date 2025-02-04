@@ -15,9 +15,9 @@ public class Repositorio {
 		Statement statement = null;
 		try {
 		    statement = connection.createStatement();
-			statement.execute("INSERT INTO cliente (nomeCompleto, dataNascimento, cpf, sexo, bairroRua,"
+			statement.execute("INSERT INTO cliente (nomeCompleto, dataNascimento, cpf, sexo, cnh, vencimentoCnh, bairroRua,"
 					+ " numero, cep, cidade, estado, telefone, email) VALUES ('" + cliente.getNomeCompleto() + "', '" + cliente.getDataNascimento()
-					+"', '" + cliente.getCpf() + "', '" + cliente.getSexo() + "', '" + cliente.getBairroRua() + "', '" + cliente.getNumero()
+					+"', '" + cliente.getCpf() + "', '" + cliente.getSexo() + "', '" + cliente.getCnh() + "', '" + cliente.getVencimentoCnh() + "', '" + cliente.getBairroRua() + "', '" + cliente.getNumero()
 					+ "', '" + cliente.getCep() + "', '" + cliente.getCidade() + "', '" + cliente.getEstado() 
 					+ "', '" + cliente.getTelefone() + "', '" + cliente.getEmail() + "')");
 			

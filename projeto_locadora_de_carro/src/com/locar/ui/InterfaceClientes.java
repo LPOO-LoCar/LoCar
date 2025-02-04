@@ -41,6 +41,8 @@ public class InterfaceClientes {
 	private JTextField campoTextoEstado;
 	private JTextField campoTextoTelefone;
 	private JTextField campoTextoEmail;
+	private JTextField campoTextoCnh;
+	private JTextField campoTextoVencimentoCnh;
 
 	/**
 	 * Launch the application.
@@ -70,7 +72,7 @@ public class InterfaceClientes {
 	 */
 	public void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 700, 550);
+		frame.setBounds(100, 100, 700, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -102,7 +104,7 @@ public class InterfaceClientes {
         
         JLabel textoTelefone = new JLabel("Telefone:");
         textoTelefone.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        textoTelefone.setBounds(10, 436, 85, 14);
+        textoTelefone.setBounds(10, 481, 85, 14);
         frame.getContentPane().add(textoTelefone);
         
         campoTextoDataNascimento = new JTextField();
@@ -133,12 +135,12 @@ public class InterfaceClientes {
         
         JLabel TextoEmail = new JLabel("Email:");
         TextoEmail.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        TextoEmail.setBounds(325, 436, 67, 14);
+        TextoEmail.setBounds(330, 481, 67, 14);
         frame.getContentPane().add(TextoEmail);
         
         campoTextoBairroRua = new JTextField();
         campoTextoBairroRua.setColumns(10);
-        campoTextoBairroRua.setBounds(10, 291, 374, 20);
+        campoTextoBairroRua.setBounds(10, 329, 374, 20);
         frame.getContentPane().add(campoTextoBairroRua);
         
         JLabel textoSexo = new JLabel("Sexo:");
@@ -153,13 +155,13 @@ public class InterfaceClientes {
         frame.getContentPane().add(campoTextoSexo);
         
         JLabel textoDataNascimento = new JLabel("Data de Nascimento:");
-        textoDataNascimento.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        textoDataNascimento.setFont(new Font("Tahoma", Font.PLAIN, 18));
         textoDataNascimento.setBounds(10, 153, 166, 14);
         frame.getContentPane().add(textoDataNascimento);
         
         campoTextoNumero = new JTextField();
         campoTextoNumero.setColumns(10);
-        campoTextoNumero.setBounds(427, 291, 150, 20);
+        campoTextoNumero.setBounds(427, 329, 150, 20);
         frame.getContentPane().add(campoTextoNumero);
         
         JLabel textoDados = new JLabel("Dados");
@@ -174,72 +176,72 @@ public class InterfaceClientes {
         
         JLabel textoEndereco = new JLabel("Endereço");
         textoEndereco.setFont(new Font("Tahoma", Font.PLAIN, 30));
-        textoEndereco.setBounds(10, 209, 154, 29);
+        textoEndereco.setBounds(10, 254, 154, 39);
         frame.getContentPane().add(textoEndereco);
         
         JSeparator separator_1 = new JSeparator();
         separator_1.setForeground(Color.BLACK);
-        separator_1.setBounds(0, 246, 684, 1);
+        separator_1.setBounds(0, 292, 684, 1);
         frame.getContentPane().add(separator_1);
         
         JLabel TextoBairroRua = new JLabel("Bairro e rua:");
         TextoBairroRua.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        TextoBairroRua.setBounds(10, 261, 116, 14);
+        TextoBairroRua.setBounds(10, 304, 116, 14);
         frame.getContentPane().add(TextoBairroRua);
         
         JLabel TextoNumero = new JLabel("Número:");
         TextoNumero.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        TextoNumero.setBounds(423, 261, 91, 14);
+        TextoNumero.setBounds(427, 304, 91, 14);
         frame.getContentPane().add(TextoNumero);
         
         JLabel textoContato = new JLabel("Contato");
         textoContato.setFont(new Font("Tahoma", Font.PLAIN, 30));
-        textoContato.setBounds(10, 378, 116, 29);
+        textoContato.setBounds(10, 416, 116, 29);
         frame.getContentPane().add(textoContato);
         
         JLabel textoCep = new JLabel("CEP:");
         textoCep.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        textoCep.setBounds(10, 322, 46, 14);
+        textoCep.setBounds(10, 360, 46, 14);
         frame.getContentPane().add(textoCep);
         
         campoTextoCep = new JTextField();
         campoTextoCep.setColumns(10);
-        campoTextoCep.setBounds(10, 347, 205, 20);
+        campoTextoCep.setBounds(10, 385, 205, 20);
         frame.getContentPane().add(campoTextoCep);
         
         JLabel textoCidade = new JLabel("Cidade:");
         textoCidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        textoCidade.setBounds(242, 322, 91, 14);
+        textoCidade.setBounds(243, 360, 91, 14);
         frame.getContentPane().add(textoCidade);
         
         campoTextoCidade = new JTextField();
         campoTextoCidade.setColumns(10);
-        campoTextoCidade.setBounds(243, 347, 154, 20);
+        campoTextoCidade.setBounds(243, 385, 154, 20);
         frame.getContentPane().add(campoTextoCidade);
         
         JLabel textoEstado = new JLabel("Estado:");
         textoEstado.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        textoEstado.setBounds(423, 322, 91, 14);
+        textoEstado.setBounds(427, 360, 91, 14);
         frame.getContentPane().add(textoEstado);
         
         campoTextoEstado = new JTextField();
         campoTextoEstado.setColumns(10);
-        campoTextoEstado.setBounds(423, 347, 154, 20);
+        campoTextoEstado.setBounds(427, 385, 154, 20);
         frame.getContentPane().add(campoTextoEstado);
         
         JSeparator separator_1_1 = new JSeparator();
         separator_1_1.setForeground(Color.BLACK);
-        separator_1_1.setBounds(0, 413, 694, 1);
+        separator_1_1.setBounds(0, 456, 694, 1);
         frame.getContentPane().add(separator_1_1);
         
         campoTextoTelefone = new JTextField();
         campoTextoTelefone.setColumns(10);
-        campoTextoTelefone.setBounds(92, 436, 205, 20);
+        campoTextoTelefone.setBounds(89, 481, 205, 20);
         frame.getContentPane().add(campoTextoTelefone);
         
         campoTextoEmail = new JTextField();
         campoTextoEmail.setColumns(10);
-        campoTextoEmail.setBounds(385, 435, 192, 20);
+        campoTextoEmail.setBounds(385, 481, 192, 20);
         frame.getContentPane().add(campoTextoEmail);
         
         JButton butaoCadastrar = new JButton("Cadastrar");
@@ -249,8 +251,10 @@ public class InterfaceClientes {
         		String nomeCompleto = campoTextoNomeCompleto.getText();
         		String dataNascimento = campoTextoDataNascimento.getText();
         		String cpf = campoTextoCpf.getText();
-        		String Sexo = campoTextoSexo.getSelectedItem().toString();
-        		String BairroRua = campoTextoBairroRua.getText();
+        		String sexo = campoTextoSexo.getSelectedItem().toString();
+        		String cnh = campoTextoCnh.getText();
+        		String vencimentoCnh = campoTextoVencimentoCnh.getText();
+        		String bairroRua = campoTextoBairroRua.getText();
         		int numero = Integer.parseInt(campoTextoNumero.getText());
         		String cep = campoTextoCep.getText();
         		String cidade = campoTextoCidade.getText();
@@ -259,23 +263,59 @@ public class InterfaceClientes {
         		String email = campoTextoEmail.getText();
         		
         		ControladorControleAcesso controlador = new ControladorControleAcesso();
-        		controlador.registrarCliente(nomeCompleto,dataNascimento, cpf, Sexo, BairroRua, numero, cep, cidade, estado, telefone, email);
+        		controlador.registrarCliente(nomeCompleto,dataNascimento, cpf, sexo, cnh, vencimentoCnh, bairroRua, numero, cep, cidade, estado, telefone, email);
         		 		
         	}
         });
         butaoCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        butaoCadastrar.setBounds(407, 470, 122, 34);
+        butaoCadastrar.setBounds(407, 520, 122, 34);
         frame.getContentPane().add(butaoCadastrar);
         
         JButton butaoLimpar = new JButton("Limpar");
+        butaoLimpar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		campoTextoNomeCompleto.setText("");
+        		campoTextoDataNascimento.setText("");
+        		campoTextoCpf.setText("");
+        		campoTextoCnh.setText("");
+        		campoTextoVencimentoCnh.setText("");
+        		campoTextoBairroRua.setText("");
+        		campoTextoNumero.setText("");
+        		campoTextoCep.setText("");
+        		campoTextoCidade.setText("");
+        		campoTextoEstado.setText("");
+        		campoTextoTelefone.setText("");
+        		campoTextoEmail.setText("");
+        	}
+        });
         butaoLimpar.setFont(new Font("Tahoma", Font.PLAIN, 25));
-        butaoLimpar.setBounds(552, 471, 122, 34);
+        butaoLimpar.setBounds(552, 520, 122, 34);
         frame.getContentPane().add(butaoLimpar);
         
         JButton butaoVoltar = new JButton("Voltar");
         butaoVoltar.setFont(new Font("Tahoma", Font.PLAIN, 18));
         butaoVoltar.setBounds(10, 11, 97, 33);
         frame.getContentPane().add(butaoVoltar);
+        
+        JLabel textoCnh = new JLabel("CNH:");
+        textoCnh.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        textoCnh.setBounds(10, 209, 46, 14);
+        frame.getContentPane().add(textoCnh);
+        
+        campoTextoCnh = new JTextField();
+        campoTextoCnh.setColumns(10);
+        campoTextoCnh.setBounds(10, 234, 252, 20);
+        frame.getContentPane().add(campoTextoCnh);
+        
+        JLabel textoVencimentoCnh = new JLabel("Vencimento da CNH:");
+        textoVencimentoCnh.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        textoVencimentoCnh.setBounds(305, 211, 180, 14);
+        frame.getContentPane().add(textoVencimentoCnh);
+        
+        campoTextoVencimentoCnh = new JTextField();
+        campoTextoVencimentoCnh.setColumns(10);
+        campoTextoVencimentoCnh.setBounds(305, 234, 272, 20);
+        frame.getContentPane().add(campoTextoVencimentoCnh);
         butaoVoltar.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
 			InterfaceInicial interfaceInicial = new InterfaceInicial();
