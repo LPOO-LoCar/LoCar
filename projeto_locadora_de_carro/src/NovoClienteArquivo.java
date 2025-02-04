@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -13,6 +14,8 @@ import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class NovoClienteArquivo extends JFrame {
 
@@ -24,7 +27,7 @@ public class NovoClienteArquivo extends JFrame {
 	private JTextField Email_textField;
 	private JLabel Sexo_Label;
 	private JLabel CEP_Label;
-	private JTextField CPF_textField;
+	private JTextField CEP_textField;
 	private JLabel Celular_Label;
 	private JTextField Celular_textField;
 	private JLabel dadosDoClienteLabel;
@@ -158,11 +161,11 @@ public class NovoClienteArquivo extends JFrame {
 		CEP_Label.setBounds(20, 234, 39, 26);
 		contentPane.add(CEP_Label);
 		
-		CPF_textField = new JTextField();
-		CPF_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		CPF_textField.setColumns(10);
-		CPF_textField.setBounds(58, 236, 126, 23);
-		contentPane.add(CPF_textField);
+		CEP_textField = new JTextField();
+		CEP_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		CEP_textField.setColumns(10);
+		CEP_textField.setBounds(58, 236, 126, 23);
+		contentPane.add(CEP_textField);
 		
 		Celular_Label = new JLabel("Celular:");
 		Celular_Label.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -327,6 +330,13 @@ public class NovoClienteArquivo extends JFrame {
 		contentPane.add(contato_Label);
 		
 		JButton btnNewButton = new JButton("Voltar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaPrincipal telaPrincipal = new TelaPrincipal();
+				dispose();
+				telaPrincipal.setVisible(true);
+			}
+		});
 		btnNewButton.setBounds(10, 11, 77, 23);
 		contentPane.add(btnNewButton);
 	}
