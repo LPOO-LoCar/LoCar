@@ -88,6 +88,29 @@ public class InterfaceClientes {
         frame.getContentPane().add(textoNomeCompleto);
         
         campoTextoCpf = new JTextField();
+        campoTextoCpf.addKeyListener(new KeyAdapter() {
+        	@Override
+        	public void keyReleased(KeyEvent e) {
+        		String textoCpf = campoTextoCpf.getText();
+        		textoCpf = textoCpf.replaceAll("[^0-9]", ""); 
+        		
+        		if (textoCpf.length() >= 3) {
+        			textoCpf = textoCpf.substring(0,3) + "." + textoCpf.substring(3);
+        		}
+        		if (textoCpf.length() >= 7) {
+        			textoCpf = textoCpf.substring(0,7) + "." + textoCpf.substring(7);
+        		}
+        		if (textoCpf.length() >= 11) {
+        			textoCpf = textoCpf.substring(0,11) + "-" + textoCpf.substring(11);
+        		}
+        		
+        		if (textoCpf.length() >= 13) {
+        			textoCpf = textoCpf.substring(0,14);
+        		}
+        		
+        		campoTextoCpf.setText(textoCpf);
+        	}
+        });
         campoTextoCpf.setBounds(243, 178, 154, 20);
         frame.getContentPane().add(campoTextoCpf);
         campoTextoCpf.setColumns(10);
@@ -114,22 +137,20 @@ public class InterfaceClientes {
         campoTextoDataNascimento.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
-                String texto = campoTextoDataNascimento.getText();
-                texto = texto.replaceAll("[^0-9]", ""); // Remove caracteres não numéricos
+                String textoDataNascimento = campoTextoDataNascimento.getText();
+                textoDataNascimento = textoDataNascimento.replaceAll("[^0-9]", ""); 
 
-                // Adiciona as barras automaticamente
-                if (texto.length() >= 2) {
-                    texto = texto.substring(0, 2) + "/" + texto.substring(2);
+                if (textoDataNascimento.length() >= 2) {
+                    textoDataNascimento = textoDataNascimento.substring(0, 2) + "/" + textoDataNascimento.substring(2);
                 }
-                if (texto.length() >= 5) {
-                    texto = texto.substring(0, 5) + "/" + texto.substring(5);
+                if (textoDataNascimento.length() >= 5) {
+                    textoDataNascimento = textoDataNascimento.substring(0, 5) + "/" + textoDataNascimento.substring(5);
                 }
-                // Limita o texto a 10 caracteres
-                if (texto.length() >= 10) {
-                    texto = texto.substring(0, 10);
+                if (textoDataNascimento.length() >= 10) {
+                    textoDataNascimento = textoDataNascimento.substring(0, 10);
                 }
 
-                campoTextoDataNascimento.setText(texto);
+                campoTextoDataNascimento.setText(textoDataNascimento);
             }
         });
         
@@ -205,6 +226,23 @@ public class InterfaceClientes {
         frame.getContentPane().add(textoCep);
         
         campoTextoCep = new JTextField();
+        campoTextoCep.addKeyListener(new KeyAdapter() {
+        	@Override
+        	public void keyReleased(KeyEvent e) {
+        		String textoCep = campoTextoCep.getText();
+        		textoCep = textoCep.replaceAll("[^0-9]", ""); 
+        		
+        		if(textoCep.length() >=6) {
+        			textoCep = textoCep.substring(0,6) + "-" + textoCep.substring(6);
+        		}
+        		
+        		if(textoCep.length() >=9) {
+        			textoCep = textoCep.substring(0,9);
+        		}
+        		
+        		campoTextoCep.setText(textoCep);
+        	}
+        });
         campoTextoCep.setColumns(10);
         campoTextoCep.setBounds(10, 385, 205, 20);
         frame.getContentPane().add(campoTextoCep);
@@ -244,8 +282,8 @@ public class InterfaceClientes {
         campoTextoEmail.setBounds(385, 481, 192, 20);
         frame.getContentPane().add(campoTextoEmail);
         
-        JButton butaoCadastrar = new JButton("Cadastrar");
-        butaoCadastrar.addActionListener(new ActionListener() {
+        JButton botaoCadastrar = new JButton("Cadastrar");
+        botaoCadastrar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		
         		String nomeCompleto = campoTextoNomeCompleto.getText();
@@ -267,12 +305,12 @@ public class InterfaceClientes {
         		 		
         	}
         });
-        butaoCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        butaoCadastrar.setBounds(407, 520, 122, 34);
-        frame.getContentPane().add(butaoCadastrar);
+        botaoCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        botaoCadastrar.setBounds(407, 520, 122, 34);
+        frame.getContentPane().add(botaoCadastrar);
         
-        JButton butaoLimpar = new JButton("Limpar");
-        butaoLimpar.addActionListener(new ActionListener() {
+        JButton botaoLimpar = new JButton("Limpar");
+        botaoLimpar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		campoTextoNomeCompleto.setText("");
         		campoTextoDataNascimento.setText("");
@@ -288,14 +326,14 @@ public class InterfaceClientes {
         		campoTextoEmail.setText("");
         	}
         });
-        butaoLimpar.setFont(new Font("Tahoma", Font.PLAIN, 25));
-        butaoLimpar.setBounds(552, 520, 122, 34);
-        frame.getContentPane().add(butaoLimpar);
+        botaoLimpar.setFont(new Font("Tahoma", Font.PLAIN, 25));
+        botaoLimpar.setBounds(552, 520, 122, 34);
+        frame.getContentPane().add(botaoLimpar);
         
-        JButton butaoVoltar = new JButton("Voltar");
-        butaoVoltar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        butaoVoltar.setBounds(10, 11, 97, 33);
-        frame.getContentPane().add(butaoVoltar);
+        JButton botaoVoltar = new JButton("Voltar");
+        botaoVoltar.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        botaoVoltar.setBounds(10, 11, 97, 33);
+        frame.getContentPane().add(botaoVoltar);
         
         JLabel textoCnh = new JLabel("CNH:");
         textoCnh.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -316,7 +354,7 @@ public class InterfaceClientes {
         campoTextoVencimentoCnh.setColumns(10);
         campoTextoVencimentoCnh.setBounds(305, 234, 272, 20);
         frame.getContentPane().add(campoTextoVencimentoCnh);
-        butaoVoltar.addActionListener(new ActionListener() {
+        botaoVoltar.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
 			InterfaceInicial interfaceInicial = new InterfaceInicial();
 			frame.dispose();
