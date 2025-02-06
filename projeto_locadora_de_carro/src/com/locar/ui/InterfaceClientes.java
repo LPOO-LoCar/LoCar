@@ -38,7 +38,6 @@ public class InterfaceClientes {
 	private JTextField campoTextoNumero;
 	private JTextField campoTextoCep;
 	private JTextField campoTextoCidade;
-	private JTextField campoTextoEstado;
 	private JTextField campoTextoTelefone;
 	private JTextField campoTextoEmail;
 	private JTextField campoTextoCnh;
@@ -171,9 +170,14 @@ public class InterfaceClientes {
         
         JComboBox campoTextoSexo = new JComboBox();
         campoTextoSexo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        campoTextoSexo.setModel(new DefaultComboBoxModel(new String[] {"Masculino", "Feminino"}));
+        campoTextoSexo.setModel(new DefaultComboBoxModel(new String[] {"Masculino", "Feminino", "Outro"}));
         campoTextoSexo.setBounds(423, 178, 154, 22);
         frame.getContentPane().add(campoTextoSexo);
+        
+        JComboBox campoTextoEstado = new JComboBox();
+        campoTextoEstado.setModel(new DefaultComboBoxModel(new String[] {"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RS", "RR", "RO", "SC", "SP", "SE", "TO"}));
+        campoTextoEstado.setBounds(427, 384, 150, 22);
+        frame.getContentPane().add(campoTextoEstado);
         
         JLabel textoDataNascimento = new JLabel("Data de Nascimento:");
         textoDataNascimento.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -262,11 +266,6 @@ public class InterfaceClientes {
         textoEstado.setBounds(427, 360, 91, 14);
         frame.getContentPane().add(textoEstado);
         
-        campoTextoEstado = new JTextField();
-        campoTextoEstado.setColumns(10);
-        campoTextoEstado.setBounds(427, 385, 154, 20);
-        frame.getContentPane().add(campoTextoEstado);
-        
         JSeparator separator_1_1 = new JSeparator();
         separator_1_1.setForeground(Color.BLACK);
         separator_1_1.setBounds(0, 456, 694, 1);
@@ -325,7 +324,7 @@ public class InterfaceClientes {
         		int numero = Integer.parseInt(campoTextoNumero.getText());
         		String cep = campoTextoCep.getText();
         		String cidade = campoTextoCidade.getText();
-        		String estado = campoTextoEstado.getText();
+        		String estado = campoTextoEstado.getSelectedItem().toString();
         		String telefone = campoTextoTelefone.getText();
         		String email = campoTextoEmail.getText();
         		
@@ -350,7 +349,6 @@ public class InterfaceClientes {
         		campoTextoNumero.setText("");
         		campoTextoCep.setText("");
         		campoTextoCidade.setText("");
-        		campoTextoEstado.setText("");
         		campoTextoTelefone.setText("");
         		campoTextoEmail.setText("");
         	}
@@ -380,9 +378,31 @@ public class InterfaceClientes {
         frame.getContentPane().add(textoVencimentoCnh);
         
         campoTextoVencimentoCnh = new JTextField();
+        campoTextoVencimentoCnh.addKeyListener(new KeyAdapter() {
+        	@Override
+        	public void keyReleased(KeyEvent e) {
+        		String textoVencimentoCnh = campoTextoVencimentoCnh.getText();
+        		textoVencimentoCnh = textoVencimentoCnh.replaceAll("[^0-9]", ""); 
+
+                if (textoVencimentoCnh.length() >= 2) {
+                    textoVencimentoCnh = textoVencimentoCnh.substring(0, 2) + "/" + textoVencimentoCnh.substring(2);
+                }
+                if (textoVencimentoCnh.length() >= 5) {
+                    textoVencimentoCnh = textoVencimentoCnh.substring(0, 5) + "/" + textoVencimentoCnh.substring(5);
+                }
+                if (textoVencimentoCnh.length() >= 10) {
+                    textoVencimentoCnh = textoVencimentoCnh.substring(0, 10);
+                }
+
+                campoTextoVencimentoCnh.setText(textoVencimentoCnh);
+        		
+        	}
+        });
         campoTextoVencimentoCnh.setColumns(10);
         campoTextoVencimentoCnh.setBounds(305, 234, 272, 20);
         frame.getContentPane().add(campoTextoVencimentoCnh);
+        
+
         botaoVoltar.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
 			InterfaceInicial interfaceInicial = new InterfaceInicial();

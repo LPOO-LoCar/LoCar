@@ -16,6 +16,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.DefaultComboBoxModel;
 
 public class NovoClienteArquivo extends JFrame {
 
@@ -311,6 +312,7 @@ public class NovoClienteArquivo extends JFrame {
 		contentPane.add(estado_Label);
 		
 		JComboBox estado_comboBox = new JComboBox <> (new String [] {"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RS", "RR", "RO", "SC", "SP", "SE", "TO"});
+		estado_comboBox.setModel(new DefaultComboBoxModel(new String[] {"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RS", "RR", "RO", "SC", "SP", "SE", "TO"}));
 		estado_comboBox.setBounds(462, 266, 67, 23);
 		contentPane.add(estado_comboBox);
 		
