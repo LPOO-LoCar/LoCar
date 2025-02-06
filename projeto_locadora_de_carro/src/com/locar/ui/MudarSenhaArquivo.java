@@ -4,7 +4,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
-import com.locar.ui.MudarSenhaController; // Importando a classe de regras de negócio, tem que mudar para o nome do package onde tá o Controller
+import com.locar.regras_negocio.MudarSenhaController; // Importando a classe de regras de negócio, tem que mudar para o nome do package onde tá o Controller
 
 public class MudarSenhaArquivo extends JFrame {
     private static final long serialVersionUID = 1L;
