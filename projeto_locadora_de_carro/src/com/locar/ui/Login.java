@@ -22,8 +22,8 @@ public class Login extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField campoTextoSenha;
+	private JTextField campoTextoUsuario;
 
 	/**
 	 * Launch the application.
@@ -77,10 +77,10 @@ public class Login extends JFrame {
 		lblNewLabel_3.setBounds(241, 137, 91, 27);
 		contentPane.add(lblNewLabel_3);
 		
-		textField = new JTextField();
-		textField.setBounds(143, 237, 276, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		campoTextoSenha = new JTextField();
+		campoTextoSenha.setBounds(143, 237, 276, 20);
+		contentPane.add(campoTextoSenha);
+		campoTextoSenha.setColumns(10);
 		
 		JLabel lblNewLabel_4 = new JLabel("Fazer Login");
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
@@ -93,16 +93,16 @@ public class Login extends JFrame {
 		lblNewLabel_5.setBounds(246, 206, 73, 20);
 		contentPane.add(lblNewLabel_5);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(143, 175, 276, 20);
-		contentPane.add(textField_1);
+		campoTextoUsuario = new JTextField();
+		campoTextoUsuario.setColumns(10);
+		campoTextoUsuario.setBounds(143, 175, 276, 20);
+		contentPane.add(campoTextoUsuario);
 		
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String usuario = textField.getText();
-				String senha = textField_1.getText();
+				String usuario = campoTextoUsuario.getText();
+				String senha = campoTextoSenha.getText();
 				
 				if (usuario.equals("admin") && senha.equals("1234")) {
 					JOptionPane.showMessageDialog(null, "Login bem-sucedido!");
