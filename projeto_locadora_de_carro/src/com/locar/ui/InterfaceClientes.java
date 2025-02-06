@@ -313,24 +313,29 @@ public class InterfaceClientes {
         JButton botaoCadastrar = new JButton("Cadastrar");
         botaoCadastrar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		try {
+        			String nomeCompleto = campoTextoNomeCompleto.getText();
+            		String dataNascimento = campoTextoDataNascimento.getText();
+            		String cpf = campoTextoCpf.getText();
+            		String sexo = campoTextoSexo.getSelectedItem().toString();
+            		String cnh = campoTextoCnh.getText();
+            		String vencimentoCnh = campoTextoVencimentoCnh.getText();
+            		String bairroRua = campoTextoBairroRua.getText();
+            		int numero = Integer.parseInt(campoTextoNumero.getText());
+            		String cep = campoTextoCep.getText();
+            		String cidade = campoTextoCidade.getText();
+            		String estado = campoTextoEstado.getSelectedItem().toString();
+            		String telefone = campoTextoTelefone.getText();
+            		String email = campoTextoEmail.getText();
+            		
+            		ControladorControleAcesso controlador = new ControladorControleAcesso();
+            		controlador.registrarCliente(nomeCompleto,dataNascimento, cpf, sexo, cnh, vencimentoCnh, bairroRua, numero, cep, cidade, estado, telefone, email);
+            		
+            		JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        		} catch (Exception e1) {
+                    JOptionPane.showMessageDialog(null, "Erro ao cadastrar", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
         		
-        		String nomeCompleto = campoTextoNomeCompleto.getText();
-        		String dataNascimento = campoTextoDataNascimento.getText();
-        		String cpf = campoTextoCpf.getText();
-        		String sexo = campoTextoSexo.getSelectedItem().toString();
-        		String cnh = campoTextoCnh.getText();
-        		String vencimentoCnh = campoTextoVencimentoCnh.getText();
-        		String bairroRua = campoTextoBairroRua.getText();
-        		int numero = Integer.parseInt(campoTextoNumero.getText());
-        		String cep = campoTextoCep.getText();
-        		String cidade = campoTextoCidade.getText();
-        		String estado = campoTextoEstado.getSelectedItem().toString();
-        		String telefone = campoTextoTelefone.getText();
-        		String email = campoTextoEmail.getText();
-        		
-        		ControladorControleAcesso controlador = new ControladorControleAcesso();
-        		controlador.registrarCliente(nomeCompleto,dataNascimento, cpf, sexo, cnh, vencimentoCnh, bairroRua, numero, cep, cidade, estado, telefone, email);
-        		 		
         	}
         });
         botaoCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 20));

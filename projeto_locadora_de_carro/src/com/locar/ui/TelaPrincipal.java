@@ -5,7 +5,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import NovoVeiculoArquivo;
 import test1.TelaVeiculos;
 
@@ -65,14 +64,14 @@ public class TelaPrincipal extends JFrame {
 		
 		//Barra de Menu - Botão Arquivo
 		
-		JMenu menuArquivo = new JMenu("Arquivo");
+		JMenu menuArquivo = new JMenu("Cadastro");
 		menuBar.add(menuArquivo);
 		
 		JMenuItem novoClienteMenuItem = new JMenuItem("Novo Cliente");
 		menuArquivo.add(novoClienteMenuItem);
 		
 		novoClienteMenuItem.addActionListener(e -> {
-			NovoClienteArquivo telaNovoCliente = new NovoClienteArquivo();
+			InterfaceClientes telaNovoCliente = new InterfaceClientes();
 			telaNovoCliente.setVisible(true);
 		});
 		
