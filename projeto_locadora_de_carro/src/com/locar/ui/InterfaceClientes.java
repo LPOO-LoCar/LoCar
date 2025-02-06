@@ -104,7 +104,7 @@ public class InterfaceClientes {
         			textoCpf = textoCpf.substring(0,11) + "-" + textoCpf.substring(11);
         		}
         		
-        		if (textoCpf.length() >= 13) {
+        		if (textoCpf.length() >= 14) {
         			textoCpf = textoCpf.substring(0,14);
         		}
         		
@@ -273,6 +273,35 @@ public class InterfaceClientes {
         frame.getContentPane().add(separator_1_1);
         
         campoTextoTelefone = new JTextField();
+        campoTextoTelefone.addKeyListener(new KeyAdapter() {
+        	@Override
+        	public void keyReleased(KeyEvent e) {
+        		String textoTelefone = campoTextoTelefone.getText();
+        		textoTelefone = textoTelefone.replaceAll("[^0-9]", "");
+        		
+        		if (textoTelefone.length() >=1) {
+        			textoTelefone = "(" + textoTelefone.substring(0);
+        		}
+        		if (textoTelefone.length() >=3) {
+        			textoTelefone = textoTelefone.substring(0, 3) + ")" + textoTelefone.substring(3);
+        		}
+        		
+        		if (textoTelefone.length() >=4) {
+        			textoTelefone = textoTelefone.substring(0, 4) + " " + textoTelefone.substring(4);
+        		}
+        		
+        		if (textoTelefone.length() >=10) {
+        			textoTelefone = textoTelefone.substring(0, 10) + "-" + textoTelefone.substring(10);
+        		}
+        		
+        		if (textoTelefone.length() >=15) {
+        			textoTelefone = textoTelefone.substring(0, 15);
+        		}
+        		
+        		campoTextoTelefone.setText(textoTelefone);
+        		
+        		}
+        });
         campoTextoTelefone.setColumns(10);
         campoTextoTelefone.setBounds(89, 481, 205, 20);
         frame.getContentPane().add(campoTextoTelefone);
