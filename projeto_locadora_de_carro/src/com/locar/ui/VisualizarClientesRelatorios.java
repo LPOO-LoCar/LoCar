@@ -1,4 +1,4 @@
-package test5;
+package com.locar.ui;
 
 import java.awt.EventQueue;
 
@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class BuscarFuncionarioBuscar extends JFrame {
+public class VisualizarClientesRelatorios extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -18,7 +18,7 @@ public class BuscarFuncionarioBuscar extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BuscarFuncionarioBuscar frame = new BuscarFuncionarioBuscar();
+					VisualizarClientesRelatorios frame = new VisualizarClientesRelatorios();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,8 +30,8 @@ public class BuscarFuncionarioBuscar extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BuscarFuncionarioBuscar() {
-		setTitle("Buscar Funcionário");
+	public VisualizarClientesRelatorios() {
+		setTitle("Relatório de Clientes");
 		setSize(400,300);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);

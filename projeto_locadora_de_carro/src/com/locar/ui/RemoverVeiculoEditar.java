@@ -1,4 +1,4 @@
-package test5;
+package com.locar.ui;
 
 import java.awt.EventQueue;
 
@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class AgendarManutençãoVeicularEditar extends JFrame {
+public class RemoverVeiculoEditar extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -18,7 +18,7 @@ public class AgendarManutençãoVeicularEditar extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AgendarManutençãoVeicularEditar frame = new AgendarManutençãoVeicularEditar();
+					RemoverVeiculoEditar frame = new RemoverVeiculoEditar();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,8 +30,8 @@ public class AgendarManutençãoVeicularEditar extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AgendarManutençãoVeicularEditar() {
-		setTitle("Agendar Manutenção Veicular");
+	public RemoverVeiculoEditar() {
+		setTitle("Remover Veiculo");
 		setSize(400,300);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);

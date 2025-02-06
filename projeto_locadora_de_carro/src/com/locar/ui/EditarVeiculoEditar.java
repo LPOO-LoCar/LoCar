@@ -1,4 +1,4 @@
-package test5;
+package com.locar.ui;
 
 import java.awt.EventQueue;
 
@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class CancelarReservaEditar extends JFrame {
+public class EditarVeiculoEditar extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -18,7 +18,7 @@ public class CancelarReservaEditar extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CancelarReservaEditar frame = new CancelarReservaEditar();
+					EditarVeiculoEditar frame = new EditarVeiculoEditar();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,8 +30,8 @@ public class CancelarReservaEditar extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CancelarReservaEditar() {
-		setTitle("Cancelar Reserva");
+	public EditarVeiculoEditar() {
+		setTitle("Editar Veiculo");
 		setSize(400,300);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);

@@ -5,8 +5,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import NovoVeiculoArquivo;
-import test1.TelaVeiculos;
 
 import javax.swing.JLabel;
 import java.awt.Font;

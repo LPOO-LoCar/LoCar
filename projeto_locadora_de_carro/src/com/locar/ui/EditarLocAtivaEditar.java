@@ -1,4 +1,4 @@
-package test5;
+package com.locar.ui;
 
 import java.awt.EventQueue;
 
@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class EditarClienteEditar extends JFrame {
+public class EditarLocAtivaEditar extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -18,7 +18,7 @@ public class EditarClienteEditar extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EditarClienteEditar frame = new EditarClienteEditar();
+					EditarLocAtivaEditar frame = new EditarLocAtivaEditar();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,8 +30,8 @@ public class EditarClienteEditar extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EditarClienteEditar() {
-		setTitle("Editar Cliente");
+	public EditarLocAtivaEditar() {
+		setTitle("Editar Locação Ativa");
 		setSize(400,300);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
