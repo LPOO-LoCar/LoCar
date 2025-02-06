@@ -80,9 +80,9 @@ public class InterfaceInicial {
 		JButton btnNewButton = new JButton("Cadastrar cliente");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				InterfaceClientes interfaceClientes = new InterfaceClientes();
+//				InterfaceClientes interfaceClientes = new InterfaceClientes();
 				frame.dispose();
-				interfaceClientes.setVisible(true);
+//				interfaceClientes.setVisible(true);
 		        
 		        }
 		});
@@ -95,9 +95,9 @@ public class InterfaceInicial {
 		JButton btnCadastrarCarro = new JButton("Cadastrar veículo");
 		btnCadastrarCarro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				InterfaceCarro interfaceCarro = new InterfaceCarro();
+//				InterfaceCarro interfaceCarro = new InterfaceCarro();
 				frame.dispose();
-				interfaceCarro.setVisible(true);
+//				interfaceCarro.setVisible(true);
 			}
 		});
 		btnCadastrarCarro.setFont(new Font("Tahoma", Font.PLAIN, 18));
