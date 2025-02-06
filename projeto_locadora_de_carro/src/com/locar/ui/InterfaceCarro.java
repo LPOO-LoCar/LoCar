@@ -207,9 +207,9 @@ public class InterfaceCarro {
         frame.getContentPane().add(btnNewButton_2);
         btnNewButton_2.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
-			InterfaceInicial interfaceInicial = new InterfaceInicial();
+//			InterfaceInicial interfaceInicial = new InterfaceInicial();
 			frame.dispose();
-			interfaceInicial.setVisible(true);
+//			interfaceInicial.setVisible(true);
         }
         });
 	}

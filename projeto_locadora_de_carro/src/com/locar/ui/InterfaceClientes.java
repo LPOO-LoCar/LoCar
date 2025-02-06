@@ -410,9 +410,9 @@ public class InterfaceClientes {
 
         botaoVoltar.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
-			InterfaceInicial interfaceInicial = new InterfaceInicial();
+			TelaPrincipal telaPrincipal = new TelaPrincipal();
 			frame.dispose();
-			interfaceInicial.setVisible(true);
+			telaPrincipal.setVisible(true);
         }
 	});
 	}

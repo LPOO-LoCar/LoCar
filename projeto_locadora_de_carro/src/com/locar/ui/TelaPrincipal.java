@@ -70,6 +70,7 @@ public class TelaPrincipal extends JFrame {
 		
 		novoClienteMenuItem.addActionListener(e -> {
 			InterfaceClientes telaNovoCliente = new InterfaceClientes();
+			dispose();
 			telaNovoCliente.setVisible(true);
 		});
 		
