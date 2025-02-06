@@ -54,7 +54,7 @@ public class Login extends JFrame {
 	
 	public Login() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -62,46 +62,40 @@ public class Login extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel_1 = new JLabel("LoCar");
-		lblNewLabel_1.setBounds(156, 13, 80, 36);
-		lblNewLabel_1.setFont(new Font("Robotronica", Font.PLAIN, 30));
+		lblNewLabel_1.setBounds(226, 11, 164, 36);
+		lblNewLabel_1.setFont(new Font("Dialog", Font.PLAIN, 40));
 		lblNewLabel_1.setForeground(new Color(0, 0, 0));
 		contentPane.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel = new JLabel("LoCar");
-		lblNewLabel.setForeground(new Color(255, 0, 0));
-		lblNewLabel.setBounds(154, 11, 80, 36);
-		lblNewLabel.setFont(new Font("Robotronica", Font.PLAIN, 30));
-		contentPane.add(lblNewLabel);
-		
 		JLabel lblNewLabel_2 = new JLabel("Locadora de Veículos");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_2.setBounds(128, 31, 156, 27);
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblNewLabel_2.setBounds(143, 62, 322, 27);
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Usuário:");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_3.setBounds(176, 107, 56, 27);
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_3.setBounds(241, 137, 91, 27);
 		contentPane.add(lblNewLabel_3);
 		
 		textField = new JTextField();
-		textField.setBounds(143, 134, 124, 20);
+		textField.setBounds(143, 237, 276, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblNewLabel_4 = new JLabel("Fazer Login");
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_4.setBounds(166, 69, 87, 27);
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblNewLabel_4.setBounds(207, 96, 147, 36);
 		contentPane.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Senha:");
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_5.setBounds(180, 159, 47, 20);
+		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_5.setBounds(246, 206, 73, 20);
 		contentPane.add(lblNewLabel_5);
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		textField_1.setBounds(143, 182, 124, 20);
+		textField_1.setBounds(143, 175, 276, 20);
 		contentPane.add(textField_1);
 		
 		JButton btnNewButton = new JButton("Login");
@@ -119,8 +113,8 @@ public class Login extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnNewButton.setBounds(164, 213, 89, 23);
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnNewButton.setBounds(207, 278, 136, 36);
 		contentPane.add(btnNewButton);
 	}
 }
