@@ -15,7 +15,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import regras_negocio.FuncionarioRegras;
+import com.locar.regras_negocio.FuncionarioRegras;
 
 public class NovoFuncionarioArquivo extends JFrame {
 

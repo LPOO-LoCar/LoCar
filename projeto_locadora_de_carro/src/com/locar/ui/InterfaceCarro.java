@@ -232,6 +232,19 @@ public class InterfaceCarro {
 		frame.getContentPane().add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Limpar");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				campoTextoMarca.setText("");
+				campoTextoModelo.setText("");
+				campoTextoAno.setText("");
+				campoTextoCor.setText("");
+				campoTextoPlaca.setText("");
+				campoTextoNumMotor.setText("");
+				campoTextoChassi.setText("");
+				campoTextoKmRodados.setText("");
+				
+			}
+		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNewButton_1.setBounds(567, 414, 107, 36);
 		frame.getContentPane().add(btnNewButton_1);

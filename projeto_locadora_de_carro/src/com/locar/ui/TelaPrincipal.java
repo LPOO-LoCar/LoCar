@@ -88,6 +88,7 @@ public class TelaPrincipal extends JFrame {
 		
 		novoFuncionarioMenuItem.addActionListener (e -> {
 			NovoFuncionarioArquivo telaNovoFuncionario = new NovoFuncionarioArquivo();
+			dispose();
 			telaNovoFuncionario.setVisible(true);
 			
 		});

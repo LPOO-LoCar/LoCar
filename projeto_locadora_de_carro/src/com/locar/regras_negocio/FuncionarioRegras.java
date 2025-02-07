@@ -1,6 +1,6 @@
-package regras_negocio;
+package com.locar.regras_negocio;
 
-import dados.FuncionarioDAO;
+import com.locar.dados.FuncionarioDAO;
 
 public class FuncionarioRegras {
 

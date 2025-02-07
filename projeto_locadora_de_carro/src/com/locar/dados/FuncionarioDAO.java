@@ -1,4 +1,4 @@
-package acesso_dados;
+package com.locar.dados;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,15 +7,15 @@ import java.sql.SQLException;
 
 public class FuncionarioDAO {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/mydb-lpoo?useTimezone=true&serverTimezone=America/Recife";
+    private static final String URL = "jdbc:mysql://127.0.0.1:3306/locadora_de_carro";
     private static final String USER = "root";
-    private static final String PASSWORD = "1234";
+    private static final String PASSWORD = "192815Math@";
 
     public void inserirFuncionario(String nome, String cpf, String rg, String orgExp, String telefone, String email,
                                    String dataNascimento, String dataExp, String cnh, String validadeCNH, String cep,
                                    String rua, String numeroRua, String bairro, String cidade, String complemento,
                                    String senha) {
-        String sql = "INSERT INTO funcionarios (nome, cpf, rg, org_exp, telefone, email, data_nascimento, data_exp, " +
+        String sql = "INSERT INTO funcionario (nome, cpf, rg, org_exp, telefone, email, data_nascimento, data_exp, " +
                 "cnh, validade_cnh, cep, rua, numero_rua, bairro, cidade, complemento, senha) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
