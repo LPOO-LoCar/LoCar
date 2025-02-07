@@ -15,6 +15,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import regras_negocio.FuncionarioRegras;
 
 public class NovoFuncionarioArquivo extends JFrame {
 
@@ -225,6 +226,11 @@ public class NovoFuncionarioArquivo extends JFrame {
 		JButton funCadastrar_Button = new JButton("Cadastrar");
 		funCadastrar_Button.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		funCadastrar_Button.setBounds(456, 437, 121, 35);
+		funCadastrar_Button.addActionListener(new ActionListener () {
+			public void actionPerformed(ActionEvent e) {
+				cadastrarFuncionario();
+			}
+		});
 		contentPane.add(funCadastrar_Button);
 		
 		JLabel funDados_Label = new JLabel("Dados do Funcionario");
@@ -454,4 +460,31 @@ public class NovoFuncionarioArquivo extends JFrame {
 		funVoltar_Button.setBounds(10, 11, 92, 23);
 		contentPane.add(funVoltar_Button);
 	}
+	
+	private void cadastrarFuncionario() {
+        // Captura os dados dos campos
+        String nome = FunNome_textField.getText();
+        String cpf = funCPF_textField.getText();
+        String rg = funRG_textField.getText();
+        String orgExp = funOrgExp_textField.getText();
+        String telefone = funTelefone_textField.getText();
+        String email = funEmail_textField.getText();
+        String dataNascimento = funDataN_textField.getText();
+        String dataExp = funDataDeExp_textField.getText();
+        String cnh = funCNH_textField.getText();
+        String validadeCNH = funValidadeCNH_textField.getText();
+        String cep = funCep_textField.getText();
+        String rua = funRua_textField.getText();
+        String numeroRua = funNumeroRua_textField.getText();
+        String bairro = funBairro_textField.getText();
+        String cidade = funCidade_textField.getText();
+        String complemento = funComplemento_textField.getText();
+        String senha = funSenha_textField.getText();
+        String confirmacaoSenha = funConfirmacaoSenha_textField.getText();
+
+        // Chama a camada de regras de negócio
+        FuncionarioRegras regras = new FuncionarioRegras();
+        regras.cadastrarFuncionario(nome, cpf, rg, orgExp, telefone, email, dataNascimento, dataExp, cnh, validadeCNH,
+                cep, rua, numeroRua, bairro, cidade, complemento, senha, confirmacaoSenha);
+    }
 }
