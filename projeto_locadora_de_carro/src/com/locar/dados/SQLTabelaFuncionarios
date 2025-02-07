@@ -1,0 +1,21 @@
+CREATE TABLE `funcionarios` (
+  `idfuncionarios` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(255) DEFAULT NULL,
+  `cpf` varchar(45) DEFAULT NULL,
+  `rg` varchar(45) DEFAULT NULL,
+  `org_exp` varchar(45) DEFAULT NULL,
+  `telefone` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `data_nascimento` varchar(45) DEFAULT NULL,
+  `data_exp` varchar(45) DEFAULT NULL,
+  `cnh` varchar(25) DEFAULT NULL,
+  `validade_cnh` varchar(45) DEFAULT NULL,
+  `cep` varchar(45) DEFAULT NULL,
+  `rua` varchar(45) DEFAULT NULL,
+  `numero_rua` varchar(45) DEFAULT NULL,
+  `bairro` varchar(45) DEFAULT NULL,
+  `cidade` varchar(45) DEFAULT NULL,
+  `complemento` varchar(45) DEFAULT NULL,
+  `senha` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idfuncionarios`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
