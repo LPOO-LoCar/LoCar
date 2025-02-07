@@ -33,6 +33,12 @@ public class Cliente {
     	this.telefone = telefone;
     	this.email = email;
     }
+    
+    public Cliente(String nomeCompleto, String telefone, String email) {
+    	this.nomeCompleto = nomeCompleto;
+    	this.telefone = telefone;
+    	this.email = email;
+    }
 
     public long getId() {
         return id;

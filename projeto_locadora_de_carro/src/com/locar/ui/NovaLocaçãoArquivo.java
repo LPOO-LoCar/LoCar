@@ -6,11 +6,17 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.locar.dados.Repositorio;
+import com.locar.entidades.Cliente;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class NovaLocaçãoArquivo extends JFrame {
 
@@ -76,6 +82,17 @@ public class NovaLocaçãoArquivo extends JFrame {
 		contentPane.add(locCPF_Label);
 		
 		locCPF_textField = new JTextField();
+		locCPF_textField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		        String cpf = locCPF_textField.getText();
+		        Repositorio repositorio = new Repositorio();
+		        Cliente cliente = repositorio.buscarClientePorCPF(cpf);
+		            
+		        locNome_textField.setText(cliente.getNomeCompleto());
+		        locTelefone_textField.setText(cliente.getTelefone());
+		        locEmail_textField.setText(cliente.getEmail());
+			}
+		});
 		locCPF_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		locCPF_textField.setColumns(10);
 		locCPF_textField.setBounds(70, 76, 119, 24);

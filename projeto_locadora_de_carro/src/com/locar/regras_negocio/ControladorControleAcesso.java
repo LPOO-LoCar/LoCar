@@ -29,4 +29,6 @@ public class ControladorControleAcesso {
 		Repositorio repositorio = new Repositorio();
 		repositorio.registrarCarro(carro);
 	}
+	
+
 }

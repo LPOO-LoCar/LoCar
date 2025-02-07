@@ -2,6 +2,8 @@ package com.locar.dados;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -72,6 +74,19 @@ public class Repositorio {
 		
 	}
 	
-
-
+    public Cliente buscarClientePorCPF(String cpf) {
+        String sql = "SELECT nomeCompleto, telefone, email FROM cliente WHERE cpf = ?";
+        try (Connection conn = estabelecerConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, cpf);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                return new Cliente(rs.getString("nomeCompleto"), rs.getString("telefone"), rs.getString("email"));
+            }
+        } catch (SQLException e) {
+            // TODO tratar exeção
+        }
+        return null;
+    }
 }
