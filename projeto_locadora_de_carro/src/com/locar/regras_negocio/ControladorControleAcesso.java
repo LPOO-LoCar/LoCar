@@ -1,7 +1,7 @@
 package com.locar.regras_negocio;
 
 import com.locar.dados.Repositorio;
-import com.locar.entidades.Cliente;
+import com.locar.entidades.*;
 
 public class ControladorControleAcesso {
 	
@@ -18,4 +18,15 @@ public class ControladorControleAcesso {
 		
 	}
 	
+	public void registrarCarro ( String marca, String modelo, int ano, String cor, String placa, String numMotor,
+			String chassi, String combustivel, String transmissao, String categoria,String conservacao, String direcao,
+			String kmRodados, int numLugares, int numPortas) {
+		
+		// TODO validações
+		
+		Carro carro = new Carro(marca, modelo, ano, cor, placa, numMotor, chassi, combustivel, transmissao, categoria,
+				conservacao,  direcao, kmRodados, numLugares, numPortas);
+		Repositorio repositorio = new Repositorio();
+		repositorio.registrarCarro(carro);
+	}
 }

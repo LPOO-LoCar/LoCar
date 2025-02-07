@@ -46,7 +46,7 @@ public class Login extends JFrame {
 	 */
 	private void abrirTelaPrincipal() {
 		JFrame telaPrincipal = new TelaPrincipal();
-		telaPrincipal.setSize(500,400);
+		telaPrincipal.setSize(800,600);
 		telaPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		telaPrincipal.setVisible(true);
 	}

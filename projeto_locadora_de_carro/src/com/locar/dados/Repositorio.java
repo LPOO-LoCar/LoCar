@@ -5,9 +5,21 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.locar.entidades.Cliente;
+import com.locar.entidades.*;
 
 public class Repositorio {
+	
+	private Connection estabelecerConexao() {
+		Connection connection = null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/locadora_de_carro", "root", "192815Math@");
+            
+		} catch (Exception e1){
+			// TODO Tratar exceção
+		}
+		return connection;   
+	}
 	
 	public void registrarCliente (Cliente cliente) {
 		Connection connection = estabelecerConexao();
@@ -34,16 +46,32 @@ public class Repositorio {
 		
 	}
 	
-	private Connection estabelecerConexao() {
-		Connection connection = null;
+	public void registrarCarro (Carro carro) {
+		Connection connection = estabelecerConexao();
+		
+		Statement statement = null;
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/locadora_de_carro", "root", "192815Math@");
-            
-		} catch (Exception e1){
-			// TODO Tratar exceção
+		    statement = connection.createStatement();
+			statement.execute("INSERT INTO carro (marca, modelo, ano, cor, placa, numMotor, chassi, combustivel, transmissao, categoria,"
+					+ " conservacao, direcao, kmRodados, numLugares, numPortas) VALUES ('" + carro.getMarca() + "', '" + carro.getModelo()
+					+ "', '" + carro.getAno() + "', '" + carro.getCor() + "', '" + carro.getPlaca() + "', '" + carro.getNumMotor()
+					+ "', '" + carro.getChassi() + "', '" + carro.getCombustivel() + "', '" + carro.getTransmissao()
+					+ "', '" + carro.getCategoria() + "', '" + carro.getConservacao() + "', '" + carro.getDirecao()
+					+ "', '" + carro.getKmRodados() + "', '" + carro.getNumLugares() + "', '" + carro.getNumPortas() + "')");
+			
+		} catch (SQLException e) {
+			// TODO tratar exceção
+		} finally {
+			try {
+				connection.close();
+				statement.close();
+			} catch (Exception e) {
+				//TODO tratar exeção
+			}
 		}
-		return connection;   
+		
 	}
+	
+
 
 }

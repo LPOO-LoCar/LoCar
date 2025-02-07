@@ -78,7 +78,8 @@ public class TelaPrincipal extends JFrame {
 		menuArquivo.add(novoVeiculoMenuItem);
 		
 		novoVeiculoMenuItem.addActionListener(e -> {
-			NovoVeiculoArquivo telaNovoVeiculo = new NovoVeiculoArquivo();
+			InterfaceCarro telaNovoVeiculo = new InterfaceCarro();
+			dispose();
 			telaNovoVeiculo.setVisible(true);
 		});
 		

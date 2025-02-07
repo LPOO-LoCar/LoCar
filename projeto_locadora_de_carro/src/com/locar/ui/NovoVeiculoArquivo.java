@@ -14,6 +14,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.DefaultComboBoxModel;
 
 public class NovoVeiculoArquivo extends JFrame {
 
@@ -261,6 +262,7 @@ public class NovoVeiculoArquivo extends JFrame {
 		contentPane.add(direcao_Label);
 		
 		JComboBox direcao_comboBox = new JComboBox <> (new String [] {"Manual", "Hidraulica", "Eletrica"});
+		direcao_comboBox.setModel(new DefaultComboBoxModel(new String[] {"Manual", "Hidraulica", "Eletrica"}));
 		direcao_comboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		direcao_comboBox.setBounds(86, 229, 103, 23);
 		contentPane.add(direcao_comboBox);
