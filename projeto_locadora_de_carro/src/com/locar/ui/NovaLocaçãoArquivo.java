@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.locar.dados.Repositorio;
-import com.locar.entidades.Cliente;
+import com.locar.entidades.*;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -142,6 +142,18 @@ public class NovaLocaçãoArquivo extends JFrame {
 		contentPane.add(locPlaca_Label);
 		
 		locPlaca_textField = new JTextField();
+		locPlaca_textField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		        String placa = locPlaca_textField.getText();
+		        Repositorio repositorio = new Repositorio();
+		        Carro carro = repositorio.buscarCarroPorPlaca(placa);
+		            
+		        locMarca_textField.setText(carro.getMarca());
+		        locModelo_textField.setText(carro.getModelo());
+		        locAno_textField.setText(String.valueOf(carro.getAno()));
+		        locKM_textField.setText(carro.getKmRodados());
+			}
+		});
 		locPlaca_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		locPlaca_textField.setColumns(10);
 		locPlaca_textField.setBounds(79, 161, 119, 24);

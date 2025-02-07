@@ -89,4 +89,19 @@ public class Repositorio {
         }
         return null;
     }
+    public Carro buscarCarroPorPlaca(String placa) {
+        String sql = "SELECT modelo, marca, ano, kmRodados FROM carro WHERE placa = ?";
+        try (Connection conn = estabelecerConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, placa);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                return new Carro(rs.getString("modelo"), rs.getString("marca"), rs.getInt("ano"), rs.getString("kmRodados"));
+            }
+        } catch (SQLException e) {
+            // TODO tratar exeção
+        }
+        return null;
+    }
 }

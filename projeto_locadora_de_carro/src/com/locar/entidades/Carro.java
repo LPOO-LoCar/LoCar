@@ -38,7 +38,14 @@ public class Carro {
  this.numLugares = numLugares;
  this.numPortas = numPortas;
 }
-
+    
+    public Carro(String marca, String modelo, int ano, String kmRodados) {
+    	 this.marca = marca;
+    	 this.modelo = modelo;
+    	 this.ano = ano;
+    	 this.kmRodados = kmRodados;    	
+    }
+    
     public long getId() {
     	return id; 
     }
