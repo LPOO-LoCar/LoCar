@@ -6,6 +6,36 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.locar.ui.cadastro.NovoVeiculo;
+import com.locar.ui.editar.AgendarManutençãoVeicular;
+import com.locar.ui.editar.AgendarVistoriaVeicular;
+import com.locar.ui.editar.CancelarReserva;
+import com.locar.ui.editar.EditarLocAtiva;
+import com.locar.ui.editar.EditarLocInativa;
+import com.locar.ui.editar.EditarReservaAtiva;
+import com.locar.ui.editar.EditarVeiculo;
+import com.locar.ui.relatorios.LocaçoesAtivasRelatorios;
+import com.locar.ui.relatorios.LocaçoesRelatorios;
+import com.locar.ui.relatorios.ManutençaoVeicularRelatorios;
+import com.locar.ui.relatorios.ReservasRelatorios;
+import com.locar.ui.relatorios.VistoriasRelatorios;
+import com.locar.ui.relatorios.VisualizarClientesRelatorios;
+import com.locar.ui.relatorios.VisualizarFuncionariosRelatorios;
+import com.locar.ui.relatorios.VisualizarReservasRelatorios;
+import com.locar.ui.relatorios.VisualizarVeiculosRelatorios;
+import com.locar.ui.cadastro.NovoCliente;
+import com.locar.ui.ajuda.HelpMe;
+import com.locar.ui.ajuda.Sobre;
+import com.locar.ui.buscar.BuscarCliente;
+import com.locar.ui.buscar.BuscarFuncionario;
+import com.locar.ui.buscar.BuscarLocaçao;
+import com.locar.ui.buscar.BuscarReserva;
+import com.locar.ui.buscar.BuscarVeiculo;
+import com.locar.ui.cadastro.MudarSenha;
+import com.locar.ui.cadastro.NovaLocação;
+import com.locar.ui.cadastro.NovaReserva;
+import com.locar.ui.cadastro.NovoFuncionario;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.BorderLayout;
@@ -69,7 +99,7 @@ public class TelaPrincipal extends JFrame {
 		menuArquivo.add(novoClienteMenuItem);
 		
 		novoClienteMenuItem.addActionListener(e -> {
-			InterfaceClientes telaNovoCliente = new InterfaceClientes();
+			NovoCliente telaNovoCliente = new NovoCliente();
 			dispose();
 			telaNovoCliente.setVisible(true);
 		});
@@ -78,7 +108,7 @@ public class TelaPrincipal extends JFrame {
 		menuArquivo.add(novoVeiculoMenuItem);
 		
 		novoVeiculoMenuItem.addActionListener(e -> {
-			InterfaceCarro telaNovoVeiculo = new InterfaceCarro();
+			NovoVeiculo telaNovoVeiculo = new NovoVeiculo();
 			dispose();
 			telaNovoVeiculo.setVisible(true);
 		});
@@ -87,7 +117,7 @@ public class TelaPrincipal extends JFrame {
 		menuArquivo.add(novoFuncionarioMenuItem);
 		
 		novoFuncionarioMenuItem.addActionListener (e -> {
-			NovoFuncionarioArquivo telaNovoFuncionario = new NovoFuncionarioArquivo();
+			NovoFuncionario telaNovoFuncionario = new NovoFuncionario();
 			dispose();
 			telaNovoFuncionario.setVisible(true);
 			
@@ -97,7 +127,7 @@ public class TelaPrincipal extends JFrame {
 		menuArquivo.add(novaLocaçaoMenuItem);
 		
 		novaLocaçaoMenuItem.addActionListener(e ->{
-			NovaLocaçãoArquivo telaNovaLocaçao = new NovaLocaçãoArquivo();
+			NovaLocação telaNovaLocaçao = new NovaLocação();
 			telaNovaLocaçao.setVisible(true);
 		});
 		
@@ -105,7 +135,7 @@ public class TelaPrincipal extends JFrame {
 		menuArquivo.add(novaReservaArquivo);
 		
 		novaReservaArquivo.addActionListener(e -> {
-			NovaReservaArquivo telaNovaReserva = new NovaReservaArquivo();
+			NovaReserva telaNovaReserva = new NovaReserva();
 			telaNovaReserva.setVisible(true);
 		});
 		
@@ -113,7 +143,7 @@ public class TelaPrincipal extends JFrame {
 		menuArquivo.add(mudarSenhaMenuItem);
 		
 		mudarSenhaMenuItem.addActionListener(e -> {
-			MudarSenhaArquivo telaMudarSenha = new MudarSenhaArquivo();
+			MudarSenha telaMudarSenha = new MudarSenha();
 			telaMudarSenha.setVisible(true);
 		});
 		
@@ -162,7 +192,7 @@ public class TelaPrincipal extends JFrame {
 		submenuVeiculo.add(editarremoverVeiculo);
 		
 		editarremoverVeiculo.addActionListener(e -> {
-			EditarVeiculoEditar telaEditarVeiculo = new EditarVeiculoEditar();
+			EditarVeiculo telaEditarVeiculo = new EditarVeiculo();
 			telaEditarVeiculo.setVisible(true);
 		});
 		
@@ -170,7 +200,7 @@ public class TelaPrincipal extends JFrame {
 		submenuVeiculo.add(agendarManutençao);
 		
 		agendarManutençao.addActionListener(e ->{
-			AgendarManutençãoVeicularEditar telaAgendarManutençao = new AgendarManutençãoVeicularEditar();
+			AgendarManutençãoVeicular telaAgendarManutençao = new AgendarManutençãoVeicular();
 			telaAgendarManutençao.setVisible(true);
 		});
 		
@@ -178,7 +208,7 @@ public class TelaPrincipal extends JFrame {
 		submenuVeiculo.add(agendarVistoria);
 		
 		agendarVistoria.addActionListener(e -> {
-			AgendarVistoriaVeicularEditar telaAgendarVistoria = new AgendarVistoriaVeicularEditar();
+			AgendarVistoriaVeicular telaAgendarVistoria = new AgendarVistoriaVeicular();
 			telaAgendarVistoria.setVisible(true);
 		});
 		
@@ -193,7 +223,7 @@ public class TelaPrincipal extends JFrame {
 		submenuLocaçoes.add(editarLocaçoesAt);
 		
 		editarLocaçoesAt.addActionListener(e ->{
-			EditarLocAtivaEditar telaEditarLocaçaoAtiva = new EditarLocAtivaEditar();
+			EditarLocAtiva telaEditarLocaçaoAtiva = new EditarLocAtiva();
 			telaEditarLocaçaoAtiva.setVisible(true);
 		});
 		
@@ -201,7 +231,7 @@ public class TelaPrincipal extends JFrame {
 		submenuLocaçoes.add(editarLocaçoesIn);
 		
 		editarLocaçoesIn.addActionListener(e ->{
-			EditarLocInativaEditar telaEditarLocaçaoInativa = new EditarLocInativaEditar();
+			EditarLocInativa telaEditarLocaçaoInativa = new EditarLocInativa();
 			telaEditarLocaçaoInativa.setVisible(true);
 		});
 		
@@ -216,7 +246,7 @@ public class TelaPrincipal extends JFrame {
 		submenuReservas.add(editarReservasAt);
 		
 		editarReservasAt.addActionListener(e -> {
-			EditarReservaAtivaEditar telaEditarReservaAtiva = new EditarReservaAtivaEditar();
+			EditarReservaAtiva telaEditarReservaAtiva = new EditarReservaAtiva();
 			telaEditarReservaAtiva.setVisible(true);
 		});
 		
@@ -224,7 +254,7 @@ public class TelaPrincipal extends JFrame {
 		submenuReservas.add(cancelarReservas);
 		
 		cancelarReservas.addActionListener(e -> {
-			CancelarReservaEditar telaCancelarReserva = new CancelarReservaEditar();
+			CancelarReserva telaCancelarReserva = new CancelarReserva();
 			telaCancelarReserva.setVisible(true);
 		});
 		
@@ -239,7 +269,7 @@ public class TelaPrincipal extends JFrame {
 		menuBuscar.add(buscarCliente);
 		
 		buscarCliente.addActionListener(e -> {
-			BuscarClienteBuscar telaBuscarCliente = new BuscarClienteBuscar();
+			BuscarCliente telaBuscarCliente = new BuscarCliente();
 			telaBuscarCliente.setVisible(true);
 		});
 		
@@ -247,7 +277,7 @@ public class TelaPrincipal extends JFrame {
 		menuBuscar.add(buscarVeiculo);
 		
 		buscarVeiculo.addActionListener(e -> {
-			BuscarVeiculoBuscar telaBuscarVeiculo = new BuscarVeiculoBuscar();
+			BuscarVeiculo telaBuscarVeiculo = new BuscarVeiculo();
 			telaBuscarVeiculo.setVisible(true);
 		});
 		
@@ -255,7 +285,7 @@ public class TelaPrincipal extends JFrame {
 		menuBuscar.add(buscarFuncionario);
 		
 		buscarFuncionario.addActionListener(e -> {
-			BuscarFuncionarioBuscar telaBuscarFuncionario = new BuscarFuncionarioBuscar();
+			BuscarFuncionario telaBuscarFuncionario = new BuscarFuncionario();
 			telaBuscarFuncionario.setVisible(true);
 		});
 		
@@ -263,7 +293,7 @@ public class TelaPrincipal extends JFrame {
 		menuBuscar.add(buscarLocaçao);
 		
 		buscarLocaçao.addActionListener(e -> {
-			BuscarLocaçaoBuscar telaBuscarLocaçao = new BuscarLocaçaoBuscar();
+			BuscarLocaçao telaBuscarLocaçao = new BuscarLocaçao();
 			telaBuscarLocaçao.setVisible(true);
 		});
 		
@@ -271,7 +301,7 @@ public class TelaPrincipal extends JFrame {
 		menuBuscar.add(buscarReserva);
 		
 		buscarReserva.addActionListener(e ->{
-			BuscarReservaBuscar telaBuscarReserva = new BuscarReservaBuscar();
+			BuscarReserva telaBuscarReserva = new BuscarReserva();
 			telaBuscarReserva.setVisible(true);
 		});
 		
@@ -400,7 +430,7 @@ public class TelaPrincipal extends JFrame {
 		menuAjuda.add(menuHelpMe);
 		
 		menuHelpMe.addActionListener(e ->{
-			HelpMeAjuda telaHelpMe = new HelpMeAjuda();
+			HelpMe telaHelpMe = new HelpMe();
 			telaHelpMe.setVisible(true);
 		});
 		
@@ -409,7 +439,7 @@ public class TelaPrincipal extends JFrame {
 		
 				
 		menuSobre.addActionListener(e -> {
-			SobreAjuda telaAjuda = new SobreAjuda();
+			Sobre telaAjuda = new Sobre();
 			telaAjuda.setVisible(true);
 		});
 		
