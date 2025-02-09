@@ -1,29 +1,40 @@
 package com.locar.ui.cadastro;
 
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 import javax.swing.border.EmptyBorder;
+
+import com.locar.dados.Repositorio;
+import com.locar.entidades.Carro;
+import com.locar.entidades.Cliente;
+
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 
 public class NovaReserva extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField resCPF_textField;
-	private JTextField resNome_textField;
-	private JTextField resTelefone_textField;
-	private JTextField resEmail_textField;
-	private JTextField resModelo_textField;
-	private JTextField resMarca_textField;
-	private JTextField resPlaca_textField;
+	private JTextField locCPF_textField;
+	private JTextField locNome_textField;
+	private JTextField locTelefone_textField;
+	private JTextField locEmail_textField;
+	private JTextField locPlaca_textField;
+	private JTextField locModelo_textField;
+	private JTextField locMarca_textField;
 	private JTextField resDatadeRetirada_textField;
 	private JTextField resHoradeRetirada_textField;
 	private JTextField resDatadeEntrega_textField;
@@ -50,7 +61,7 @@ public class NovaReserva extends JFrame {
 	 */
 	public NovaReserva() {
 		setTitle("Nova Reserva");
-		setSize(600,430);
+		setSize(650,590);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		
@@ -61,174 +72,206 @@ public class NovaReserva extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel resTitulo_Label = new JLabel("Nova Reserva");
-		resTitulo_Label.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		resTitulo_Label.setBounds(198, 11, 182, 37);
+		resTitulo_Label.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		resTitulo_Label.setBounds(193, 11, 247, 37);
 		contentPane.add(resTitulo_Label);
 		
-		JLabel resCPF_Label = new JLabel("CPF:");
-		resCPF_Label.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		resCPF_Label.setBounds(35, 84, 33, 28);
-		contentPane.add(resCPF_Label);
+		JLabel locClienteTitulo_Label = new JLabel("Cliente");
+		locClienteTitulo_Label.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		locClienteTitulo_Label.setBounds(10, 50, 100, 28);
+		contentPane.add(locClienteTitulo_Label);
 		
-		resCPF_textField = new JTextField();
-		resCPF_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		resCPF_textField.setBounds(70, 86, 119, 24);
-		contentPane.add(resCPF_textField);
-		resCPF_textField.setColumns(10);
+		JLabel locCPF_Label = new JLabel("CPF:");
+		locCPF_Label.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		locCPF_Label.setBounds(10, 86, 67, 28);
+		contentPane.add(locCPF_Label);
 		
-		JLabel resNome_Label = new JLabel("Nome:");
-		resNome_Label.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		resNome_Label.setBounds(193, 84, 48, 28);
-		contentPane.add(resNome_Label);
+		locCPF_textField = new JTextField();
+		locCPF_textField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		        String cpf = locCPF_textField.getText();
+		        Repositorio repositorio = new Repositorio();
+		        Cliente cliente = repositorio.buscarClientePorCPF(cpf);
+		            
+		        locNome_textField.setText(cliente.getNomeCompleto());
+		        locTelefone_textField.setText(cliente.getTelefone());
+		        locEmail_textField.setText(cliente.getEmail());
+			}
+		});
+		locCPF_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		locCPF_textField.setColumns(10);
+		locCPF_textField.setBounds(10, 115, 213, 20);
+		contentPane.add(locCPF_textField);
 		
-		resNome_textField = new JTextField();
-		resNome_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		resNome_textField.setColumns(10);
-		resNome_textField.setBounds(240, 86, 324, 24);
-		contentPane.add(resNome_textField);
+		JLabel locNome_Label = new JLabel("Nome:");
+		locNome_Label.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		locNome_Label.setBounds(276, 86, 67, 28);
+		contentPane.add(locNome_Label);
 		
-		JLabel resTelefone_Label = new JLabel("Telefone:");
-		resTelefone_Label.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		resTelefone_Label.setBounds(35, 118, 67, 28);
-		contentPane.add(resTelefone_Label);
+		locNome_textField = new JTextField();
+		locNome_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		locNome_textField.setColumns(10);
+		locNome_textField.setBounds(276, 115, 253, 20);
+		contentPane.add(locNome_textField);
 		
-		resTelefone_textField = new JTextField();
-		resTelefone_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		resTelefone_textField.setColumns(10);
-		resTelefone_textField.setBounds(103, 121, 119, 24);
-		contentPane.add(resTelefone_textField);
+		JLabel locTelefone_Label = new JLabel("Telefone:");
+		locTelefone_Label.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		locTelefone_Label.setBounds(10, 141, 79, 28);
+		contentPane.add(locTelefone_Label);
 		
-		JLabel resEmail_Label = new JLabel("E-mail:");
-		resEmail_Label.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		resEmail_Label.setBounds(224, 118, 51, 28);
-		contentPane.add(resEmail_Label);
+		locTelefone_textField = new JTextField();
+		locTelefone_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		locTelefone_textField.setColumns(10);
+		locTelefone_textField.setBounds(10, 170, 213, 20);
+		contentPane.add(locTelefone_textField);
 		
-		resEmail_textField = new JTextField();
-		resEmail_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		resEmail_textField.setColumns(10);
-		resEmail_textField.setBounds(275, 121, 289, 24);
-		contentPane.add(resEmail_textField);
+		JLabel locEmail_Label = new JLabel("E-mail:");
+		locEmail_Label.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		locEmail_Label.setBounds(276, 141, 68, 28);
+		contentPane.add(locEmail_Label);
 		
-		JLabel resClienteTitulo_Label = new JLabel("Cliente");
-		resClienteTitulo_Label.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		resClienteTitulo_Label.setBounds(25, 56, 54, 28);
-		contentPane.add(resClienteTitulo_Label);
+		locEmail_textField = new JTextField();
+		locEmail_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		locEmail_textField.setColumns(10);
+		locEmail_textField.setBounds(276, 168, 253, 20);
+		contentPane.add(locEmail_textField);
 		
-		JLabel resVeiculoTitulo_Label = new JLabel("Veículo");
-		resVeiculoTitulo_Label.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		resVeiculoTitulo_Label.setBounds(25, 143, 77, 28);
-		contentPane.add(resVeiculoTitulo_Label);
+		JLabel locVeiculoTitulo_Label = new JLabel("Veículo");
+		locVeiculoTitulo_Label.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		locVeiculoTitulo_Label.setBounds(10, 199, 121, 28);
+		contentPane.add(locVeiculoTitulo_Label);
 		
-		JLabel resModelo_Label = new JLabel("Modelo:");
-		resModelo_Label.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		resModelo_Label.setBounds(218, 169, 57, 28);
-		contentPane.add(resModelo_Label);
+		JLabel locPlaca_Label = new JLabel("Placa:");
+		locPlaca_Label.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		locPlaca_Label.setBounds(10, 235, 48, 28);
+		contentPane.add(locPlaca_Label);
 		
-		resModelo_textField = new JTextField();
-		resModelo_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		resModelo_textField.setColumns(10);
-		resModelo_textField.setBounds(275, 169, 119, 24);
-		contentPane.add(resModelo_textField);
+		locPlaca_textField = new JTextField();
+		locPlaca_textField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		        String placa = locPlaca_textField.getText();
+		        Repositorio repositorio = new Repositorio();
+		        Carro carro = repositorio.buscarCarroPorPlaca(placa);
+		            
+		        locMarca_textField.setText(carro.getMarca());
+		        locModelo_textField.setText(carro.getModelo());
+			}
+		});
+		locPlaca_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		locPlaca_textField.setColumns(10);
+		locPlaca_textField.setBounds(10, 265, 165, 20);
+		contentPane.add(locPlaca_textField);
 		
-		JLabel resMarca_Label = new JLabel("Marca:");
-		resMarca_Label.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		resMarca_Label.setBounds(397, 169, 48, 28);
-		contentPane.add(resMarca_Label);
+		JLabel locModelo_Label = new JLabel("Marca:");
+		locModelo_Label.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		locModelo_Label.setBounds(209, 235, 83, 28);
+		contentPane.add(locModelo_Label);
 		
-		resMarca_textField = new JTextField();
-		resMarca_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		resMarca_textField.setColumns(10);
-		resMarca_textField.setBounds(445, 169, 119, 24);
-		contentPane.add(resMarca_textField);
+		locModelo_textField = new JTextField();
+		locModelo_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		locModelo_textField.setColumns(10);
+		locModelo_textField.setBounds(364, 265, 165, 20);
+		contentPane.add(locModelo_textField);
 		
-		JLabel resPlaca_Label = new JLabel("Placa:");
-		resPlaca_Label.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		resPlaca_Label.setBounds(45, 169, 48, 28);
-		contentPane.add(resPlaca_Label);
+		JLabel locMarca_Label = new JLabel("Modelo:");
+		locMarca_Label.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		locMarca_Label.setBounds(364, 235, 80, 28);
+		contentPane.add(locMarca_Label);
 		
-		resPlaca_textField = new JTextField();
-		resPlaca_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		resPlaca_textField.setColumns(10);
-		resPlaca_textField.setBounds(90, 169, 119, 24);
-		contentPane.add(resPlaca_textField);
+		locMarca_textField = new JTextField();
+		locMarca_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		locMarca_textField.setColumns(10);
+		locMarca_textField.setBounds(209, 265, 131, 20);
+		contentPane.add(locMarca_textField);
 		
-		JLabel resTipo_Label = new JLabel("Tipo:");
-		resTipo_Label.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		resTipo_Label.setBounds(45, 202, 38, 28);
-		contentPane.add(resTipo_Label);
+		JLabel locTipo_Label = new JLabel("Categoria:");
+		locTipo_Label.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		locTipo_Label.setBounds(10, 291, 100, 28);
+		contentPane.add(locTipo_Label);
 		
-		JComboBox resTipo_comboBox = new JComboBox <> (new String[] {"Hatch", "Sedan", "SUV", "Picape", "Minivan", "Outro"});
-		resTipo_comboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		resTipo_comboBox.setBounds(84, 205, 125, 24);
-		contentPane.add(resTipo_comboBox);
+		JComboBox locTipo_comboBox = new JComboBox <> (new String [] {"Hatch", "Sedan", "SUV", "Picape", "Minivan", "Outro"});
+		locTipo_comboBox.setModel(new DefaultComboBoxModel(new String[] {"Hatch", "Sedan", "SUV", "Picape", "Minivan", "Outro"}));
+		locTipo_comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		locTipo_comboBox.setBounds(10, 320, 165, 20);
+		contentPane.add(locTipo_comboBox);
 		
-		JLabel resTempoTitulo_Label = new JLabel("Periodo de Reserva");
-		resTempoTitulo_Label.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		resTempoTitulo_Label.setBounds(25, 228, 151, 28);
+		JSeparator separator = new JSeparator();
+		separator.setForeground(Color.BLACK);
+		separator.setBounds(0, 80, 634, 1);
+		contentPane.add(separator);
+		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setForeground(Color.BLACK);
+		separator_1.setBounds(0, 229, 634, 1);
+		contentPane.add(separator_1);
+		
+		JLabel resTempoTitulo_Label = new JLabel("Periodo e Status de Reserva");
+		resTempoTitulo_Label.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		resTempoTitulo_Label.setBounds(10, 349, 374, 28);
 		contentPane.add(resTempoTitulo_Label);
 		
 		JLabel resDatadeRetirada_Label = new JLabel("Data de Retirada:");
-		resDatadeRetirada_Label.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		resDatadeRetirada_Label.setBounds(45, 251, 124, 28);
+		resDatadeRetirada_Label.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		resDatadeRetirada_Label.setBounds(10, 385, 143, 28);
 		contentPane.add(resDatadeRetirada_Label);
 		
 		resDatadeRetirada_textField = new JTextField();
 		resDatadeRetirada_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		resDatadeRetirada_textField.setColumns(10);
-		resDatadeRetirada_textField.setBounds(170, 253, 119, 24);
+		resDatadeRetirada_textField.setBounds(10, 415, 165, 20);
 		contentPane.add(resDatadeRetirada_textField);
 		
 		JLabel resHoradeRetirada_Label = new JLabel("Hora de Retirada:");
-		resHoradeRetirada_Label.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		resHoradeRetirada_Label.setBounds(299, 251, 130, 28);
+		resHoradeRetirada_Label.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		resHoradeRetirada_Label.setBounds(10, 440, 143, 28);
 		contentPane.add(resHoradeRetirada_Label);
 		
 		resHoradeRetirada_textField = new JTextField();
 		resHoradeRetirada_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		resHoradeRetirada_textField.setColumns(10);
-		resHoradeRetirada_textField.setBounds(426, 253, 125, 24);
+		resHoradeRetirada_textField.setBounds(10, 470, 165, 20);
 		contentPane.add(resHoradeRetirada_textField);
 		
 		JLabel resDatadeEntrega_Label = new JLabel("Data de Entrega:");
-		resDatadeEntrega_Label.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		resDatadeEntrega_Label.setBounds(45, 278, 119, 28);
+		resDatadeEntrega_Label.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		resDatadeEntrega_Label.setBounds(276, 386, 143, 28);
 		contentPane.add(resDatadeEntrega_Label);
 		
 		resDatadeEntrega_textField = new JTextField();
 		resDatadeEntrega_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		resDatadeEntrega_textField.setColumns(10);
-		resDatadeEntrega_textField.setBounds(164, 282, 125, 24);
+		resDatadeEntrega_textField.setBounds(276, 415, 168, 20);
 		contentPane.add(resDatadeEntrega_textField);
 		
 		JLabel resHoradeEntrega_Label = new JLabel("Hora de Entrega:");
-		resHoradeEntrega_Label.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		resHoradeEntrega_Label.setBounds(299, 278, 124, 28);
+		resHoradeEntrega_Label.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		resHoradeEntrega_Label.setBounds(276, 440, 143, 28);
 		contentPane.add(resHoradeEntrega_Label);
 		
 		resHoradeEntrega_textField = new JTextField();
 		resHoradeEntrega_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		resHoradeEntrega_textField.setColumns(10);
-		resHoradeEntrega_textField.setBounds(421, 282, 130, 24);
+		resHoradeEntrega_textField.setBounds(276, 470, 168, 20);
 		contentPane.add(resHoradeEntrega_textField);
 		
-		JLabel resStatusTitulo_Label = new JLabel("Status de Reserva");
-		resStatusTitulo_Label.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		resStatusTitulo_Label.setBounds(25, 310, 151, 28);
-		contentPane.add(resStatusTitulo_Label);
-		
 		JLabel resStatusdeReserva_Label = new JLabel("Status de Reserva:");
-		resStatusdeReserva_Label.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		resStatusdeReserva_Label.setBounds(45, 337, 131, 28);
+		resStatusdeReserva_Label.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		resStatusdeReserva_Label.setBounds(10, 512, 165, 28);
 		contentPane.add(resStatusdeReserva_Label);
 		
 		JComboBox resStatusdeReserva_comboBox = new JComboBox <> (new String [] {"Ativa", "Cancelada", "Concluida"});
-		resStatusdeReserva_comboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		resStatusdeReserva_comboBox.setBounds(182, 342, 93, 24);
+		resStatusdeReserva_comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		resStatusdeReserva_comboBox.setBounds(174, 514, 93, 24);
 		contentPane.add(resStatusdeReserva_comboBox);
 		
 		JButton reservar_Button = new JButton("Reservar");
-		reservar_Button.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		reservar_Button.setBounds(445, 337, 119, 43);
+		reservar_Button.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		reservar_Button.setBounds(410, 501, 119, 43);
 		contentPane.add(reservar_Button);
+		
+		JSeparator separator_1_1 = new JSeparator();
+		separator_1_1.setForeground(Color.BLACK);
+		separator_1_1.setBounds(0, 379, 634, 1);
+		contentPane.add(separator_1_1);
 	}
 }

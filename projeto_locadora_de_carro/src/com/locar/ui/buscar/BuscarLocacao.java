@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class BuscarLocaçao extends JFrame {
+public class BuscarLocacao extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -18,7 +18,7 @@ public class BuscarLocaçao extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BuscarLocaçao frame = new BuscarLocaçao();
+					BuscarLocacao frame = new BuscarLocacao();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,7 +30,7 @@ public class BuscarLocaçao extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BuscarLocaçao() {
+	public BuscarLocacao() {
 		setTitle("Buscar Locaçao");
 		setSize(400,300);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

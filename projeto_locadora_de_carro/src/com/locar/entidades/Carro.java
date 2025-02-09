@@ -46,6 +46,10 @@ public class Carro {
     	 this.kmRodados = kmRodados;    	
     }
     
+    public Carro(Long id) {
+    	this.id = id;
+    }
+    
     public long getId() {
     	return id; 
     }

@@ -89,6 +89,23 @@ public class Repositorio {
         }
         return null;
     }
+    
+    public Cliente buscarIdPorCpf(String cpf) {
+        String sql = "SELECT id FROM cliente WHERE cpf = ?";
+        try (Connection conn = estabelecerConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, cpf);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                return new Cliente(rs.getLong("id"));
+            }
+        } catch (SQLException e) {
+            // TODO tratar exeção
+        }
+        return null;
+    }
+    
     public Carro buscarCarroPorPlaca(String placa) {
         String sql = "SELECT modelo, marca, ano, kmRodados FROM carro WHERE placa = ?";
         try (Connection conn = estabelecerConexao();
@@ -104,4 +121,44 @@ public class Repositorio {
         }
         return null;
     }
+    
+    public Carro buscarIdPorPlaca(String placa) {
+        String sql = "SELECT id FROM carro WHERE placa = ?";
+        try (Connection conn = estabelecerConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, placa);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                return new Carro(rs.getLong("id"));
+            }
+        } catch (SQLException e) {
+            // TODO tratar exeção
+        }
+        return null;
+    }
+    
+	public void registrarLocacao (Locacao locacao) {
+		Connection connection = estabelecerConexao();
+		
+		Statement statement = null;
+		try {
+		    statement = connection.createStatement();
+			statement.execute("INSERT INTO locacao (cliente_id, carro_id, valorDiaria, diasLocados, valorTotal, formaPagamento) "
+					+ " VALUES ('" + locacao.getCliente().getId() + "', '" + locacao.getCarro().getId() + "', '" 
+					+ locacao.getValorDiaria() + "', '" + locacao.getDiasLocados() + "', '" + locacao.getValorTotal() 
+					+ "', '" + locacao.getFormaPagamento() + "')");
+			
+		} catch (SQLException e) {
+			// TODO tratar exceção
+		} finally {
+			try {
+				connection.close();
+				statement.close();
+			} catch (Exception e) {
+				//TODO tratar exeção
+			}
+		}
+		
+	}
 }

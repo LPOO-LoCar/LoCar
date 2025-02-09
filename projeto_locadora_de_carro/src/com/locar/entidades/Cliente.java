@@ -39,6 +39,10 @@ public class Cliente {
     	this.telefone = telefone;
     	this.email = email;
     }
+    
+    public Cliente(Long id) {
+    	this.id = id;
+    }
 
     public long getId() {
         return id;

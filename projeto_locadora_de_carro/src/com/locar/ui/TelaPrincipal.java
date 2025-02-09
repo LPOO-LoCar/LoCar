@@ -28,7 +28,7 @@ import com.locar.ui.ajuda.HelpMe;
 import com.locar.ui.ajuda.Sobre;
 import com.locar.ui.buscar.BuscarCliente;
 import com.locar.ui.buscar.BuscarFuncionario;
-import com.locar.ui.buscar.BuscarLocaçao;
+import com.locar.ui.buscar.BuscarLocacao;
 import com.locar.ui.buscar.BuscarReserva;
 import com.locar.ui.buscar.BuscarVeiculo;
 import com.locar.ui.cadastro.MudarSenha;
@@ -293,7 +293,7 @@ public class TelaPrincipal extends JFrame {
 		menuBuscar.add(buscarLocaçao);
 		
 		buscarLocaçao.addActionListener(e -> {
-			BuscarLocaçao telaBuscarLocaçao = new BuscarLocaçao();
+			BuscarLocacao telaBuscarLocaçao = new BuscarLocacao();
 			telaBuscarLocaçao.setVisible(true);
 		});
 		

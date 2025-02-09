@@ -30,6 +30,16 @@ public class ControladorControleAcesso {
 		repositorio.registrarCarro(carro);
 	}
 	
+	public void registrarLocacao ( Cliente cliente, Carro carro, double valorDiaria, int diasLocados, double valorTotal, 
+			String formaPagamento) {
+		
+		// TODO validações
+		
+		Locacao locacao = new Locacao(cliente, carro, valorDiaria, diasLocados, valorTotal, formaPagamento);
+		Repositorio repositorio = new Repositorio();
+		repositorio.registrarLocacao(locacao);
+		
+	}
 	
 	
 

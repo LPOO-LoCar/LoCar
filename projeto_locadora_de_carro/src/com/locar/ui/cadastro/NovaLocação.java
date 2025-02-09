@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.locar.dados.Repositorio;
 import com.locar.entidades.*;
+import com.locar.regras_negocio.ControladorControleAcesso;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -281,6 +282,26 @@ public class NovaLocação extends JFrame {
 		contentPane.add(locFormaDePag_comboBox);
 		
 		JButton locLocar_Button = new JButton("LoCar!");
+		locLocar_Button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+	            String cpf = locCPF_textField.getText();
+	            String placa = locPlaca_textField.getText();
+
+	            Repositorio repositorio = new Repositorio();
+	            Cliente cliente = repositorio.buscarIdPorCpf(cpf);
+	            Carro carro = repositorio.buscarIdPorPlaca(placa);
+	            
+	            double valorDiaria = Double.parseDouble(locValorDaDiaria_textField.getText());
+	            int diasLocados = Integer.parseInt(locDiasLocados_textField.getText());
+	            double valorTotal =  Double.parseDouble(locValorTotal_textField.getText());
+	            String formaPagamento = locFormaDePag_comboBox.getSelectedItem().toString();
+	            
+	            
+	            
+	            ControladorControleAcesso controlador = new ControladorControleAcesso();
+	            controlador.registrarLocacao(cliente, carro, valorDiaria, diasLocados, valorTotal, formaPagamento);
+			}
+		});
 		locLocar_Button.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		locLocar_Button.setBounds(398, 462, 131, 38);
 		contentPane.add(locLocar_Button);
@@ -307,7 +328,7 @@ public class NovaLocação extends JFrame {
 	        int diasLocados = Integer.parseInt(locDiasLocados_textField.getText());
 	        double valorTotal = valorDiaria * diasLocados;
 	        
-	        locValorTotal_textField.setText(String.format("%.2f", valorTotal)); // Exibe com duas casas decimais
+	        locValorTotal_textField.setText(String.valueOf(valorTotal)); 
 	    } catch (NumberFormatException ex) {
 	        locValorTotal_textField.setText("Erro");
 	    }
