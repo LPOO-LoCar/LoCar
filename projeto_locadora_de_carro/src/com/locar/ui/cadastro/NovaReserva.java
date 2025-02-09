@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import com.locar.dados.Repositorio;
 import com.locar.entidades.Carro;
 import com.locar.entidades.Cliente;
+import com.locar.regras_negocio.ControladorControleAcesso;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -265,6 +266,25 @@ public class NovaReserva extends JFrame {
 		contentPane.add(resStatusdeReserva_comboBox);
 		
 		JButton reservar_Button = new JButton("Reservar");
+		reservar_Button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+	            String cpf = locCPF_textField.getText();
+	            String placa = locPlaca_textField.getText();
+
+	            Repositorio repositorio = new Repositorio();
+	            Cliente cliente = repositorio.buscarIdPorCpf(cpf);
+	            Carro carro = repositorio.buscarIdPorPlaca(placa);
+	            
+	            String dataRetirada = resDatadeRetirada_textField.getText();
+	            String horaRetirada = resHoradeRetirada_textField.getText();
+	            String dataEntrega = resDatadeEntrega_textField.getText();
+				String horaEntrega = resHoradeEntrega_textField.getText();
+				
+				ControladorControleAcesso controlador = new ControladorControleAcesso();
+				controlador.registrarReserva(cliente, carro, dataRetirada, horaRetirada,dataEntrega,horaEntrega);
+	            
+			}
+		});
 		reservar_Button.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		reservar_Button.setBounds(410, 501, 119, 43);
 		contentPane.add(reservar_Button);

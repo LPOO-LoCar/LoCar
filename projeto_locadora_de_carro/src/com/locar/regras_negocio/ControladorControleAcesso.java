@@ -41,6 +41,17 @@ public class ControladorControleAcesso {
 		
 	}
 	
+	public void registrarReserva ( Cliente cliente, Carro carro, String dataRetirada, String horaRetirada, String dataEntrega,
+			String horaEntrega) {
+		
+		// TODO validações
+		
+		Reserva reserva = new Reserva(cliente, carro, dataRetirada, horaRetirada,dataEntrega,horaEntrega);
+		Repositorio repositorio = new Repositorio();
+		repositorio.registrarReserva(reserva);
+		
+	}
+	
 	
 
 }

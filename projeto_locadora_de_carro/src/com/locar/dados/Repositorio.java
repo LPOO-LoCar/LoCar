@@ -74,70 +74,6 @@ public class Repositorio {
 		
 	}
 	
-    public Cliente buscarClientePorCPF(String cpf) {
-        String sql = "SELECT nomeCompleto, telefone, email FROM cliente WHERE cpf = ?";
-        try (Connection conn = estabelecerConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, cpf);
-            ResultSet rs = stmt.executeQuery();
-            
-            if (rs.next()) {
-                return new Cliente(rs.getString("nomeCompleto"), rs.getString("telefone"), rs.getString("email"));
-            }
-        } catch (SQLException e) {
-            // TODO tratar exeção
-        }
-        return null;
-    }
-    
-    public Cliente buscarIdPorCpf(String cpf) {
-        String sql = "SELECT id FROM cliente WHERE cpf = ?";
-        try (Connection conn = estabelecerConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, cpf);
-            ResultSet rs = stmt.executeQuery();
-            
-            if (rs.next()) {
-                return new Cliente(rs.getLong("id"));
-            }
-        } catch (SQLException e) {
-            // TODO tratar exeção
-        }
-        return null;
-    }
-    
-    public Carro buscarCarroPorPlaca(String placa) {
-        String sql = "SELECT modelo, marca, ano, kmRodados FROM carro WHERE placa = ?";
-        try (Connection conn = estabelecerConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, placa);
-            ResultSet rs = stmt.executeQuery();
-            
-            if (rs.next()) {
-                return new Carro(rs.getString("modelo"), rs.getString("marca"), rs.getInt("ano"), rs.getString("kmRodados"));
-            }
-        } catch (SQLException e) {
-            // TODO tratar exeção
-        }
-        return null;
-    }
-    
-    public Carro buscarIdPorPlaca(String placa) {
-        String sql = "SELECT id FROM carro WHERE placa = ?";
-        try (Connection conn = estabelecerConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, placa);
-            ResultSet rs = stmt.executeQuery();
-            
-            if (rs.next()) {
-                return new Carro(rs.getLong("id"));
-            }
-        } catch (SQLException e) {
-            // TODO tratar exeção
-        }
-        return null;
-    }
-    
 	public void registrarLocacao (Locacao locacao) {
 		Connection connection = estabelecerConexao();
 		
@@ -161,4 +97,94 @@ public class Repositorio {
 		}
 		
 	}
+	
+	public void registrarReserva (Reserva reserva) {
+		Connection connection = estabelecerConexao();
+		
+		Statement statement = null;
+		try {
+		    statement = connection.createStatement();
+			statement.execute("INSERT INTO reserva (cliente_id, carro_id, dataRetirada, horaRetirada,dataEntrega,horaEntrega) "
+					+ " VALUES ('" + reserva.getCliente().getId() + "', '" + reserva.getCarro().getId() + "', '" 
+					+ reserva.getDataRetirada() + "', '" + reserva.getHoraRetirada() + "', '" + reserva.getDataEntrega() 
+					+ "', '" + reserva.getHoraEntrega() + "')");
+			
+		} catch (SQLException e) {
+			// TODO tratar exceção
+		} finally {
+			try {
+				connection.close();
+				statement.close();
+			} catch (Exception e) {
+				//TODO tratar exeção
+			}
+		}
+		
+	}
+	
+    public Cliente buscarClientePorCPF(String cpf) {
+        String sql = "SELECT nomeCompleto, telefone, email FROM cliente WHERE cpf = ?";
+        try (Connection conn = estabelecerConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, cpf);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                return new Cliente(rs.getString("nomeCompleto"), rs.getString("telefone"), rs.getString("email"));
+            }
+        } catch (SQLException e) {
+            // TODO tratar exeção
+        }
+        return null;
+    }
+    
+    public Carro buscarCarroPorPlaca(String placa) {
+        String sql = "SELECT modelo, marca, ano, kmRodados FROM carro WHERE placa = ?";
+        try (Connection conn = estabelecerConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, placa);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                return new Carro(rs.getString("modelo"), rs.getString("marca"), rs.getInt("ano"), rs.getString("kmRodados"));
+            }
+        } catch (SQLException e) {
+            // TODO tratar exeção
+        }
+        return null;
+    }
+    
+    public Cliente buscarIdPorCpf(String cpf) {
+        String sql = "SELECT id FROM cliente WHERE cpf = ?";
+        try (Connection conn = estabelecerConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, cpf);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                return new Cliente(rs.getLong("id"));
+            }
+        } catch (SQLException e) {
+            // TODO tratar exeção
+        }
+        return null;
+    }
+    
+    public Carro buscarIdPorPlaca(String placa) {
+        String sql = "SELECT id FROM carro WHERE placa = ?";
+        try (Connection conn = estabelecerConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, placa);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                return new Carro(rs.getLong("id"));
+            }
+        } catch (SQLException e) {
+            // TODO tratar exeção
+        }
+        return null;
+    }
+    
+
 }
