@@ -334,7 +334,7 @@ public class NovaReserva extends JFrame {
 		resHoradeEntrega_textField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				String textoHoraEntrega = resHoradeEntrega_textField.getText();
+                String textoHoraEntrega = resHoradeEntrega_textField.getText();
                 textoHoraEntrega = textoHoraEntrega.replaceAll("[^0-9]", ""); 
 
                 if (textoHoraEntrega.length() >= 2) {
@@ -343,7 +343,7 @@ public class NovaReserva extends JFrame {
                 if (textoHoraEntrega.length() >= 5) {
                     textoHoraEntrega = textoHoraEntrega.substring(0, 5);
                 }
-                resHoradeRetirada_textField.setText(textoHoraEntrega);
+                resHoradeEntrega_textField.setText(textoHoraEntrega);
 			}
 		});
 		resHoradeEntrega_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
