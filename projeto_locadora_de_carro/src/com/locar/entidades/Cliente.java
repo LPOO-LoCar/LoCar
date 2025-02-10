@@ -40,6 +40,18 @@ public class Cliente {
     	this.email = email;
     }
     
+    public Cliente(String nomeCompleto, String dataNascimento, String telefone, String email, String sexo, String cnh,
+    		String vencimentoCnh) {
+    	this.nomeCompleto = nomeCompleto;
+    	this.dataNascimento = dataNascimento;
+    	this.telefone = telefone;
+    	this.email = email;
+    	this.sexo = sexo;
+    	this.cnh = cnh;
+    	this.vencimentoCnh = vencimentoCnh;
+    }
+    
+    
     public Cliente(Long id) {
     	this.id = id;
     }
