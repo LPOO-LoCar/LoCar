@@ -341,7 +341,7 @@ public class NovoCliente {
         	}
         });
         botaoCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        botaoCadastrar.setBounds(407, 520, 122, 34);
+        botaoCadastrar.setBounds(552, 520, 122, 34);
         frame.getContentPane().add(botaoCadastrar);
         
         JButton botaoLimpar = new JButton("Limpar");
@@ -361,7 +361,7 @@ public class NovoCliente {
         	}
         });
         botaoLimpar.setFont(new Font("Tahoma", Font.PLAIN, 25));
-        botaoLimpar.setBounds(552, 520, 122, 34);
+        botaoLimpar.setBounds(406, 518, 122, 34);
         frame.getContentPane().add(botaoLimpar);
         
         JButton botaoVoltar = new JButton("Voltar");

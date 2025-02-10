@@ -10,8 +10,11 @@ import javax.swing.border.EmptyBorder;
 import com.locar.dados.Repositorio;
 import com.locar.entidades.*;
 import com.locar.regras_negocio.ControladorControleAcesso;
+import com.locar.ui.TelaPrincipal;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -21,6 +24,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JSeparator;
 import java.awt.Color;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class NovaLocação extends JFrame {
 
@@ -86,6 +91,29 @@ public class NovaLocação extends JFrame {
 		contentPane.add(locCPF_Label);
 		
 		locCPF_textField = new JTextField();
+		locCPF_textField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+        		String textoCpf = locCPF_textField.getText();
+        		textoCpf = textoCpf.replaceAll("[^0-9]", ""); 
+        		
+        		if (textoCpf.length() >= 3) {
+        			textoCpf = textoCpf.substring(0,3) + "." + textoCpf.substring(3);
+        		}
+        		if (textoCpf.length() >= 7) {
+        			textoCpf = textoCpf.substring(0,7) + "." + textoCpf.substring(7);
+        		}
+        		if (textoCpf.length() >= 11) {
+        			textoCpf = textoCpf.substring(0,11) + "-" + textoCpf.substring(11);
+        		}
+        		
+        		if (textoCpf.length() >= 14) {
+        			textoCpf = textoCpf.substring(0,14);
+        		}
+        		
+        		locCPF_textField.setText(textoCpf);
+			}
+		});
 		locCPF_textField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 		        String cpf = locCPF_textField.getText();
@@ -284,6 +312,7 @@ public class NovaLocação extends JFrame {
 		JButton locLocar_Button = new JButton("LoCar!");
 		locLocar_Button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
 	            String cpf = locCPF_textField.getText();
 	            String placa = locPlaca_textField.getText();
 
@@ -296,14 +325,17 @@ public class NovaLocação extends JFrame {
 	            double valorTotal =  Double.parseDouble(locValorTotal_textField.getText());
 	            String formaPagamento = locFormaDePag_comboBox.getSelectedItem().toString();
 	            
-	            
-	            
 	            ControladorControleAcesso controlador = new ControladorControleAcesso();
 	            controlador.registrarLocacao(cliente, carro, valorDiaria, diasLocados, valorTotal, formaPagamento);
+	            
+				JOptionPane.showMessageDialog(null, "Locação cadastrada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception e1) {
+				JOptionPane.showMessageDialog(null, "Erro ao cadastrar", "Erro", JOptionPane.ERROR_MESSAGE);
+			}
 			}
 		});
 		locLocar_Button.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		locLocar_Button.setBounds(398, 462, 131, 38);
+		locLocar_Button.setBounds(515, 468, 109, 35);
 		contentPane.add(locLocar_Button);
 		
 		JSeparator separator = new JSeparator();
@@ -321,6 +353,23 @@ public class NovaLocação extends JFrame {
 		separator_1_1.setBounds(0, 379, 634, 1);
 		contentPane.add(separator_1_1);
 		
+		JButton btnNewButton = new JButton("Voltar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaPrincipal telaPrincipal = new TelaPrincipal();
+				dispose();
+				telaPrincipal.setVisible(true);
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton.setBounds(10, 11, 89, 35);
+		contentPane.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Limpar");
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton_1.setBounds(376, 468, 109, 35);
+		contentPane.add(btnNewButton_1);
+		
 	}
 	private void calcularValorTotal() {
 	    try {
@@ -333,5 +382,4 @@ public class NovaLocação extends JFrame {
 	        locValorTotal_textField.setText("Erro");
 	    }
 	}
-
 }

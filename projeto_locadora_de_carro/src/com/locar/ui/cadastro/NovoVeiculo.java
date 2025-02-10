@@ -7,6 +7,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -207,6 +209,7 @@ public class NovoVeiculo {
 		JButton btnNewButton = new JButton("Cadastrar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
 				String marca = campoTextoMarca.getText();
 				String modelo = campoTextoModelo.getText();
 				int ano = Integer.parseInt(campoTextoAno.getText());
@@ -226,6 +229,11 @@ public class NovoVeiculo {
 				ControladorControleAcesso controlador = new ControladorControleAcesso();
 				controlador.registrarCarro(marca, modelo, ano, cor, placa, numMotor, chassi, combustivel, transmissao, 
 						categoria, conservacao, direcao, kmRodados, numLugares, numPortas);
+				
+				JOptionPane.showMessageDialog(null, "Veiculo cadastrado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception e1) {
+				JOptionPane.showMessageDialog(null, "Erro ao cadastrar", "Erro", JOptionPane.ERROR_MESSAGE);
+			}
 			
 			}
 		});

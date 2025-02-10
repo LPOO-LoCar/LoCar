@@ -13,8 +13,11 @@ import com.locar.dados.Repositorio;
 import com.locar.entidades.Carro;
 import com.locar.entidades.Cliente;
 import com.locar.regras_negocio.ControladorControleAcesso;
+import com.locar.ui.TelaPrincipal;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,6 +27,8 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class NovaReserva extends JFrame {
 
@@ -88,6 +93,29 @@ public class NovaReserva extends JFrame {
 		contentPane.add(locCPF_Label);
 		
 		locCPF_textField = new JTextField();
+		locCPF_textField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+        		String textoCpf = locCPF_textField.getText();
+        		textoCpf = textoCpf.replaceAll("[^0-9]", ""); 
+        		
+        		if (textoCpf.length() >= 3) {
+        			textoCpf = textoCpf.substring(0,3) + "." + textoCpf.substring(3);
+        		}
+        		if (textoCpf.length() >= 7) {
+        			textoCpf = textoCpf.substring(0,7) + "." + textoCpf.substring(7);
+        		}
+        		if (textoCpf.length() >= 11) {
+        			textoCpf = textoCpf.substring(0,11) + "-" + textoCpf.substring(11);
+        		}
+        		
+        		if (textoCpf.length() >= 14) {
+        			textoCpf = textoCpf.substring(0,14);
+        		}
+        		
+        		locCPF_textField.setText(textoCpf);
+			}
+		});
 		locCPF_textField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 		        String cpf = locCPF_textField.getText();
@@ -217,6 +245,25 @@ public class NovaReserva extends JFrame {
 		contentPane.add(resDatadeRetirada_Label);
 		
 		resDatadeRetirada_textField = new JTextField();
+		resDatadeRetirada_textField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+                String textoDataNascimento = resDatadeRetirada_textField.getText();
+                textoDataNascimento = textoDataNascimento.replaceAll("[^0-9]", ""); 
+
+                if (textoDataNascimento.length() >= 2) {
+                    textoDataNascimento = textoDataNascimento.substring(0, 2) + "/" + textoDataNascimento.substring(2);
+                }
+                if (textoDataNascimento.length() >= 5) {
+                    textoDataNascimento = textoDataNascimento.substring(0, 5) + "/" + textoDataNascimento.substring(5);
+                }
+                if (textoDataNascimento.length() >= 10) {
+                    textoDataNascimento = textoDataNascimento.substring(0, 10);
+                }
+
+                resDatadeRetirada_textField.setText(textoDataNascimento);
+			}
+		});
 		resDatadeRetirada_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		resDatadeRetirada_textField.setColumns(10);
 		resDatadeRetirada_textField.setBounds(10, 415, 165, 20);
@@ -228,6 +275,21 @@ public class NovaReserva extends JFrame {
 		contentPane.add(resHoradeRetirada_Label);
 		
 		resHoradeRetirada_textField = new JTextField();
+		resHoradeRetirada_textField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+                String textoHoraRetirada = resHoradeRetirada_textField.getText();
+                textoHoraRetirada = textoHoraRetirada.replaceAll("[^0-9]", ""); 
+
+                if (textoHoraRetirada.length() >= 2) {
+                    textoHoraRetirada = textoHoraRetirada.substring(0, 2) + ":" + textoHoraRetirada.substring(2);
+                }
+                if (textoHoraRetirada.length() >= 5) {
+                    textoHoraRetirada = textoHoraRetirada.substring(0, 5);
+                }
+                resHoradeRetirada_textField.setText(textoHoraRetirada);
+			}
+		});
 		resHoradeRetirada_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		resHoradeRetirada_textField.setColumns(10);
 		resHoradeRetirada_textField.setBounds(10, 470, 165, 20);
@@ -239,6 +301,25 @@ public class NovaReserva extends JFrame {
 		contentPane.add(resDatadeEntrega_Label);
 		
 		resDatadeEntrega_textField = new JTextField();
+		resDatadeEntrega_textField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+                String textoDataNascimento = resDatadeEntrega_Label.getText();
+                textoDataNascimento = textoDataNascimento.replaceAll("[^0-9]", ""); 
+
+                if (textoDataNascimento.length() >= 2) {
+                    textoDataNascimento = textoDataNascimento.substring(0, 2) + "/" + textoDataNascimento.substring(2);
+                }
+                if (textoDataNascimento.length() >= 5) {
+                    textoDataNascimento = textoDataNascimento.substring(0, 5) + "/" + textoDataNascimento.substring(5);
+                }
+                if (textoDataNascimento.length() >= 10) {
+                    textoDataNascimento = textoDataNascimento.substring(0, 10);
+                }
+
+                resDatadeEntrega_Label.setText(textoDataNascimento);
+			}
+		});
 		resDatadeEntrega_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		resDatadeEntrega_textField.setColumns(10);
 		resDatadeEntrega_textField.setBounds(276, 415, 168, 20);
@@ -250,6 +331,21 @@ public class NovaReserva extends JFrame {
 		contentPane.add(resHoradeEntrega_Label);
 		
 		resHoradeEntrega_textField = new JTextField();
+		resHoradeEntrega_textField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				String textoHoraEntrega = resHoradeEntrega_textField.getText();
+                textoHoraEntrega = textoHoraEntrega.replaceAll("[^0-9]", ""); 
+
+                if (textoHoraEntrega.length() >= 2) {
+                    textoHoraEntrega = textoHoraEntrega.substring(0, 2) + ":" + textoHoraEntrega.substring(2);
+                }
+                if (textoHoraEntrega.length() >= 5) {
+                    textoHoraEntrega = textoHoraEntrega.substring(0, 5);
+                }
+                resHoradeRetirada_textField.setText(textoHoraEntrega);
+			}
+		});
 		resHoradeEntrega_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		resHoradeEntrega_textField.setColumns(10);
 		resHoradeEntrega_textField.setBounds(276, 470, 168, 20);
@@ -268,6 +364,7 @@ public class NovaReserva extends JFrame {
 		JButton reservar_Button = new JButton("Reservar");
 		reservar_Button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
 	            String cpf = locCPF_textField.getText();
 	            String placa = locPlaca_textField.getText();
 
@@ -282,16 +379,37 @@ public class NovaReserva extends JFrame {
 				
 				ControladorControleAcesso controlador = new ControladorControleAcesso();
 				controlador.registrarReserva(cliente, carro, dataRetirada, horaRetirada,dataEntrega,horaEntrega);
-	            
+				
+				JOptionPane.showMessageDialog(null, "Reserva cadastrada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Erro ao cadastrar", "Erro", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
-		reservar_Button.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		reservar_Button.setBounds(410, 501, 119, 43);
+		reservar_Button.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		reservar_Button.setBounds(505, 508, 119, 35);
 		contentPane.add(reservar_Button);
 		
 		JSeparator separator_1_1 = new JSeparator();
 		separator_1_1.setForeground(Color.BLACK);
 		separator_1_1.setBounds(0, 379, 634, 1);
 		contentPane.add(separator_1_1);
+		
+		JButton btnNewButton = new JButton("Voltar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaPrincipal telaPrincipal = new TelaPrincipal();
+				dispose();
+				telaPrincipal.setVisible(true);
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton.setBounds(10, 11, 89, 35);
+		contentPane.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Limpar");
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton_1.setBounds(384, 508, 100, 35);
+		contentPane.add(btnNewButton_1);
 	}
 }
