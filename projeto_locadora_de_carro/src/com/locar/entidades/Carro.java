@@ -46,6 +46,16 @@ public class Carro {
     	 this.kmRodados = kmRodados;    	
     }
     
+    public Carro(String marca, String modelo, int ano, String cor, String placa, String numMotor, String chassi ) {
+   	 this.marca = marca;
+   	 this.modelo = modelo;
+   	 this.ano = ano;
+   	 this.cor = cor;
+   	 this.placa = placa;
+   	 this.numMotor = numMotor;
+   	 this.chassi = chassi;
+   }
+    
     public Carro(Long id) {
     	this.id = id;
     }

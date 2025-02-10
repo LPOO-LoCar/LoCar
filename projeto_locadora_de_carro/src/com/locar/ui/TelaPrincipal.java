@@ -128,6 +128,7 @@ public class TelaPrincipal extends JFrame {
 		
 		novaLocaçaoMenuItem.addActionListener(e ->{
 			NovaLocação telaNovaLocaçao = new NovaLocação();
+			dispose();
 			telaNovaLocaçao.setVisible(true);
 		});
 		
@@ -136,6 +137,7 @@ public class TelaPrincipal extends JFrame {
 		
 		novaReservaArquivo.addActionListener(e -> {
 			NovaReserva telaNovaReserva = new NovaReserva();
+			dispose();
 			telaNovaReserva.setVisible(true);
 		});
 		
@@ -144,6 +146,7 @@ public class TelaPrincipal extends JFrame {
 		
 		mudarSenhaMenuItem.addActionListener(e -> {
 			MudarSenha telaMudarSenha = new MudarSenha();
+			dispose();
 			telaMudarSenha.setVisible(true);
 		});
 		
@@ -193,6 +196,7 @@ public class TelaPrincipal extends JFrame {
 		
 		editarremoverVeiculo.addActionListener(e -> {
 			EditarVeiculo telaEditarVeiculo = new EditarVeiculo();
+			dispose();
 			telaEditarVeiculo.setVisible(true);
 		});
 		
@@ -201,6 +205,7 @@ public class TelaPrincipal extends JFrame {
 		
 		agendarManutençao.addActionListener(e ->{
 			AgendarManutençãoVeicular telaAgendarManutençao = new AgendarManutençãoVeicular();
+			dispose();
 			telaAgendarManutençao.setVisible(true);
 		});
 		
@@ -270,6 +275,7 @@ public class TelaPrincipal extends JFrame {
 		
 		buscarCliente.addActionListener(e -> {
 			BuscarCliente telaBuscarCliente = new BuscarCliente();
+			dispose();
 			telaBuscarCliente.setVisible(true);
 		});
 		
@@ -278,6 +284,7 @@ public class TelaPrincipal extends JFrame {
 		
 		buscarVeiculo.addActionListener(e -> {
 			BuscarVeiculo telaBuscarVeiculo = new BuscarVeiculo();
+			dispose();
 			telaBuscarVeiculo.setVisible(true);
 		});
 		
@@ -286,6 +293,7 @@ public class TelaPrincipal extends JFrame {
 		
 		buscarFuncionario.addActionListener(e -> {
 			BuscarFuncionario telaBuscarFuncionario = new BuscarFuncionario();
+			dispose();
 			telaBuscarFuncionario.setVisible(true);
 		});
 		
@@ -294,6 +302,7 @@ public class TelaPrincipal extends JFrame {
 		
 		buscarLocaçao.addActionListener(e -> {
 			BuscarLocacao telaBuscarLocaçao = new BuscarLocacao();
+			dispose();
 			telaBuscarLocaçao.setVisible(true);
 		});
 		
@@ -302,6 +311,7 @@ public class TelaPrincipal extends JFrame {
 		
 		buscarReserva.addActionListener(e ->{
 			BuscarReserva telaBuscarReserva = new BuscarReserva();
+			dispose();
 			telaBuscarReserva.setVisible(true);
 		});
 		

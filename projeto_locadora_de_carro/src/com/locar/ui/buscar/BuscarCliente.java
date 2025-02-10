@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.locar.dados.Repositorio;
 import com.locar.entidades.Cliente;
+import com.locar.ui.TelaPrincipal;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -142,6 +143,18 @@ public class BuscarCliente extends JFrame {
         JScrollPane scrollPane = new JScrollPane(tabela);
         scrollPane.setBounds(10, 191, 764, 359);
         contentPane.add(scrollPane);
+        
+        JButton btnNewButton_1 = new JButton("Voltar");
+        btnNewButton_1.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+    			TelaPrincipal telaPrincipal = new TelaPrincipal();
+    			dispose();
+    			telaPrincipal.setVisible(true);
+        	}
+        });
+        btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        btnNewButton_1.setBounds(10, 11, 89, 35);
+        contentPane.add(btnNewButton_1);
         
 	}
     private void buscarCliente() {
