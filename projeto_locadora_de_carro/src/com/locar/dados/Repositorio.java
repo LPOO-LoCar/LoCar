@@ -281,6 +281,49 @@ public class Repositorio {
         return null;
     }
     
+    public Cliente buscarClientePorId(long id) {
+        String sql = "SELECT id , nomeCompleto, dataNascimento, telefone, email, sexo, cnh, vencimentoCnh " +
+                     "FROM cliente WHERE id = ?";
+        try (Connection conn = estabelecerConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+            	Cliente cliente = new Cliente(rs.getString("nomeCompleto"), rs.getString("dataNascimento"), 
+                                   rs.getString("telefone"), rs.getString("email"), 
+                                   rs.getString("sexo"), rs.getString("cnh"), 
+                                   rs.getString("vencimentoCnh"));
+                cliente.setId(rs.getLong("id")); // Define o ID corretamente
+                return cliente;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); 
+        }
+        return null;
+    }
+
+    public Carro buscarCarroPorId(long id) {
+        String sql = "SELECT id, marca, modelo, ano, cor, placa, numMotor, chassi FROM carro WHERE id = ?";
+        try (Connection conn = estabelecerConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+            	Carro carro = new Carro(rs.getString("marca"), rs.getString("modelo"), rs.getInt("ano"), 
+                                 rs.getString("cor"), rs.getString("placa"), rs.getString("numMotor"), 
+                                 rs.getString("chassi"));
+                carro.setId(rs.getLong("id"));
+                return carro;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); 
+        }
+        return null;
+    }
+
+    
     public Locacao buscarLocacao(String cpf, String placa) {
         String sql = "SELECT cliente_id, carro_id, valorDiaria, diasLocados, valorTotal, formaPagamento FROM locacao "
         		+ " WHERE cliente_id = (SELECT id FROM cliente WHERE cpf = ?) AND carro_id = (SELECT id FROM carro WHERE placa = ?)";
@@ -291,8 +334,10 @@ public class Repositorio {
             ResultSet rs = stmt.executeQuery();
             
             if (rs.next()) {
-            	Cliente cliente = buscarIdPorCpf(rs.getString("cliente_id"));
-            	Carro carro = buscarIdPorPlaca(rs.getString("carro_id"));
+            	long clienteId = rs.getLong("cliente_id");
+                long carroId = rs.getLong("carro_id");
+            	Cliente cliente = buscarClientePorId(clienteId);
+            	Carro carro = buscarCarroPorId(carroId);
                 return new Locacao(cliente, carro, rs.getDouble("valorDiaria"), rs.getInt("diasLocados"), rs.getDouble("valorTotal"), rs.getString("formaPagamento"));
             }
         } catch (SQLException e) {
