@@ -1,6 +1,6 @@
 package com.locar.dados;
 
-import entidades.Funcionario;
+import com.locar.entidades.Funcionario;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

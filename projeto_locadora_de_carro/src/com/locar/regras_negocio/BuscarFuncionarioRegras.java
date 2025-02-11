@@ -1,7 +1,7 @@
 package com.locar.regras_negocio;
 
-import acesso_dados.DadosFuncionarioBuscar;
-import entidades.Funcionario;
+import com.locar.dados.DadosFuncionarioBuscar;
+import com.locar.entidades.Funcionario;
 import java.util.List;
 
 public class BuscarFuncionarioRegras {

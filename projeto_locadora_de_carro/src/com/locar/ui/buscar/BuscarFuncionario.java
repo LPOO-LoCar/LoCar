@@ -5,9 +5,9 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
-import acesso_dados.DadosFuncionarioBuscar;
-import entidades.Funcionario;
-import regras_negocio.BuscarFuncionarioRegras;
+import com.locar.dados.DadosFuncionarioBuscar;
+import com.locar.entidades.Funcionario;
+import com.locar.regras_negocio.BuscarFuncionarioRegras;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -18,7 +18,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class BuscarFuncionarioBuscar extends JFrame {
+public class BuscarFuncionario extends JFrame {
     private static final long serialVersionUID = 1L;
     private JTextField txtCPF;
     private JTextField txtNome;
@@ -27,7 +27,7 @@ public class BuscarFuncionarioBuscar extends JFrame {
     private DefaultTableModel modeloTabela;
     private BuscarFuncionarioRegras regras;
     
-    public BuscarFuncionarioBuscar() {
+    public BuscarFuncionario() {
         setTitle("Buscar Funcionários");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -128,7 +128,7 @@ public class BuscarFuncionarioBuscar extends JFrame {
                         funcionario.getCnh()
                     });
                 } else {
-                    JOptionPane.showMessageDialog(BuscarFuncionarioBuscar.this, "Funcionário não cadastrado...", "Erro", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(BuscarFuncionario.this, "Funcionário não cadastrado...", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -162,6 +162,6 @@ public class BuscarFuncionarioBuscar extends JFrame {
     }
     
     public static void main(String[] args) {
-        new BuscarFuncionarioBuscar();
+        new BuscarFuncionario();
     }
 }

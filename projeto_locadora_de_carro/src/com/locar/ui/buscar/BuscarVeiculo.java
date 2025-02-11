@@ -21,6 +21,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class BuscarVeiculo extends JFrame {
@@ -28,8 +29,8 @@ public class BuscarVeiculo extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField campoTextoPlaca;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField campoTextoMarca;
+	private JTextField campoTextoModelo;
 	private JTable tabela;
 	private DefaultTableModel modelo;
 
@@ -70,7 +71,7 @@ public class BuscarVeiculo extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel = new JLabel("Busca de veículo");
-		lblNewLabel.setBounds(271, 10, 293, 49);
+		lblNewLabel.setBounds(259, 10, 293, 49);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		contentPane.add(lblNewLabel);
 		
@@ -89,20 +90,33 @@ public class BuscarVeiculo extends JFrame {
 		lblNewLabel_1_1_1.setBounds(567, 92, 70, 14);
 		contentPane.add(lblNewLabel_1_1_1);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(286, 117, 207, 20);
-		contentPane.add(textField_1);
+		campoTextoMarca = new JTextField();
+		campoTextoMarca.setColumns(10);
+		campoTextoMarca.setBounds(286, 117, 207, 20);
+		contentPane.add(campoTextoMarca);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(567, 117, 207, 20);
-		contentPane.add(textField_2);
+		campoTextoModelo = new JTextField();
+		campoTextoModelo.setColumns(10);
+		campoTextoModelo.setBounds(567, 117, 207, 20);
+		contentPane.add(campoTextoModelo);
 		
 		JButton btnNewButton = new JButton("Buscar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				buscarCarro();
+		        String marca = campoTextoMarca.getText();
+		        String modelo = campoTextoModelo.getText();
+		        String placa = campoTextoPlaca.getText();
+
+		        if (!placa.isEmpty() && marca.isEmpty() && modelo.isEmpty()) {
+		            buscarCarro();  // Busca sem filtro
+		        } 
+		        else if (!marca.isEmpty() && modelo.isEmpty() && placa.isEmpty()) {
+		            buscarCarroPorMarca();  // Busca apenas por marca
+		        } 
+		        else {
+		            buscarCarroPorModelo();  // Busca por modelo ou outras combinações
+		        }
+
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 25));
@@ -141,7 +155,7 @@ public class BuscarVeiculo extends JFrame {
         Repositorio repositorio = new Repositorio();
         Carro carro = repositorio.buscarCarro(placa);
         
-        modelo.setRowCount(0); // Limpa os resultados anteriores
+        modelo.setRowCount(0); 
         if (carro != null) {
             modelo.addRow(new Object[]{carro.getMarca(),carro.getModelo(), carro.getAno(), carro.getCor(),
             		carro.getPlaca(), carro.getNumMotor(), carro.getChassi()});
@@ -149,4 +163,53 @@ public class BuscarVeiculo extends JFrame {
             JOptionPane.showMessageDialog(this, "Veículo não encontrado.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    private void buscarCarroPorMarca() {
+        String marca = campoTextoMarca.getText();
+        Repositorio repositorio = new Repositorio();
+        List<Carro> carros = repositorio.buscarCarrosPorMarca(marca);
+        
+        modelo.setRowCount(0); 
+
+        if (carros.isEmpty()) { 
+            JOptionPane.showMessageDialog(this, "Veículo não encontrado.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            for (Carro carro : carros) { 
+                modelo.addRow(new Object[]{
+                    carro.getMarca(), 
+                    carro.getModelo(), 
+                    carro.getAno(), 
+                    carro.getCor(),
+                    carro.getPlaca(), 
+                    carro.getNumMotor(), 
+                    carro.getChassi()
+                });
+            }
+        }
+    }
+    
+    private void buscarCarroPorModelo() {
+        String modeloCarro = campoTextoModelo.getText();
+        Repositorio repositorio = new Repositorio();
+        List<Carro> carros = repositorio.buscarCarrosPorModelo(modeloCarro);
+        
+        modelo.setRowCount(0); 
+
+        if (carros.isEmpty()) { 
+            JOptionPane.showMessageDialog(this, "Veículo não encontrado.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            for (Carro carro : carros) { 
+                modelo.addRow(new Object[]{
+                    carro.getMarca(), 
+                    carro.getModelo(), 
+                    carro.getAno(), 
+                    carro.getCor(),
+                    carro.getPlaca(), 
+                    carro.getNumMotor(), 
+                    carro.getChassi()
+                });
+            }
+        }
+    }
+   
 }

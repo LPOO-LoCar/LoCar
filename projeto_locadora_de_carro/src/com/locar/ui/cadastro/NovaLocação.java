@@ -118,7 +118,7 @@ public class NovaLocação extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 		        String cpf = locCPF_textField.getText();
 		        Repositorio repositorio = new Repositorio();
-		        Cliente cliente = repositorio.buscarClientePorCPF(cpf);
+		        Cliente cliente = repositorio.buscarClientePorCpf(cpf);
 		            
 		        locNome_textField.setText(cliente.getNomeCompleto());
 		        locTelefone_textField.setText(cliente.getTelefone());

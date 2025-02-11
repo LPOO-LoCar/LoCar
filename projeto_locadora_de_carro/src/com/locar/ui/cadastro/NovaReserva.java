@@ -120,7 +120,7 @@ public class NovaReserva extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 		        String cpf = locCPF_textField.getText();
 		        Repositorio repositorio = new Repositorio();
-		        Cliente cliente = repositorio.buscarClientePorCPF(cpf);
+		        Cliente cliente = repositorio.buscarClientePorCpf(cpf);
 		            
 		        locNome_textField.setText(cliente.getNomeCompleto());
 		        locTelefone_textField.setText(cliente.getTelefone());
@@ -304,7 +304,7 @@ public class NovaReserva extends JFrame {
 		resDatadeEntrega_textField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-                String textoDataNascimento = resDatadeEntrega_Label.getText();
+                String textoDataNascimento = resDatadeEntrega_textField.getText();
                 textoDataNascimento = textoDataNascimento.replaceAll("[^0-9]", ""); 
 
                 if (textoDataNascimento.length() >= 2) {
@@ -317,7 +317,7 @@ public class NovaReserva extends JFrame {
                     textoDataNascimento = textoDataNascimento.substring(0, 10);
                 }
 
-                resDatadeEntrega_Label.setText(textoDataNascimento);
+                resDatadeEntrega_textField.setText(textoDataNascimento);
 			}
 		});
 		resDatadeEntrega_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));

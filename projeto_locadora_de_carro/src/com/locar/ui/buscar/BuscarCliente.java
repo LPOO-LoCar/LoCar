@@ -29,8 +29,6 @@ public class BuscarCliente extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JTextField locCPF_textField;
 	private JTextField locNome_textField;
-	private JTextField locTelefone_textField;
-	private JTextField locEmail_textField;
 	private JTable tabela;
 	private DefaultTableModel modelo;
 	private JPanel contentPane;
@@ -123,7 +121,12 @@ public class BuscarCliente extends JFrame {
 		JButton btnNewButton = new JButton("Buscar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				buscarCliente();
+				if (locCPF_textField.getText() != null && !locCPF_textField.getText().isEmpty()) {
+					buscarClientePorCpf();
+				}
+				else {
+					buscarClientePorNomeCompleto();
+				}
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 25));
@@ -157,12 +160,25 @@ public class BuscarCliente extends JFrame {
         contentPane.add(btnNewButton_1);
         
 	}
-    private void buscarCliente() {
+    private void buscarClientePorCpf() {
         String cpf = locCPF_textField.getText();
         Repositorio repositorio = new Repositorio();
-        Cliente cliente = repositorio.buscarCliente(cpf);
+        Cliente cliente = repositorio.buscarClientePorCpf(cpf);
         
-        modelo.setRowCount(0); // Limpa os resultados anteriores
+        modelo.setRowCount(0); 
+        if (cliente != null) {
+            modelo.addRow(new Object[]{cliente.getNomeCompleto(),cliente.getDataNascimento(), cliente.getTelefone(), cliente.getEmail(),
+            		cliente.getSexo(), cliente.getCnh(), cliente.getVencimentoCnh()});
+        } else {
+            JOptionPane.showMessageDialog(this, "Cliente não encontrado.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    private void buscarClientePorNomeCompleto() {
+        String nomeCompleto = locNome_textField.getText();
+        Repositorio repositorio = new Repositorio();
+        Cliente cliente = repositorio.buscarClientePorNomeCompleto(nomeCompleto);
+        
+        modelo.setRowCount(0); 
         if (cliente != null) {
             modelo.addRow(new Object[]{cliente.getNomeCompleto(),cliente.getDataNascimento(), cliente.getTelefone(), cliente.getEmail(),
             		cliente.getSexo(), cliente.getCnh(), cliente.getVencimentoCnh()});
