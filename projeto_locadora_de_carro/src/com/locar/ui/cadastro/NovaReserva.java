@@ -13,6 +13,7 @@ import com.locar.dados.Repositorio;
 import com.locar.entidades.Carro;
 import com.locar.entidades.Cliente;
 import com.locar.regras_negocio.ControladorControleAcesso;
+import com.locar.regras_negocio.EnviarEmail;
 import com.locar.ui.TelaPrincipal;
 
 import javax.swing.JLabel;
@@ -379,6 +380,8 @@ public class NovaReserva extends JFrame {
 				
 				ControladorControleAcesso controlador = new ControladorControleAcesso();
 				controlador.registrarReserva(cliente, carro, dataRetirada, horaRetirada,dataEntrega,horaEntrega);
+				
+// 				EnviarEmail.enviarEmailReserva(cliente.getEmail(), cliente.getNomeCompleto(), dataRetirada, horaRetirada);
 				
 				JOptionPane.showMessageDialog(null, "Reserva cadastrada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 				} catch (Exception e1) {
