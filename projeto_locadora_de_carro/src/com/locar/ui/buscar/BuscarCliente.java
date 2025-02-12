@@ -22,6 +22,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.List;
+
 import javax.swing.JButton;
 
 public class BuscarCliente extends JFrame {
@@ -159,7 +161,20 @@ public class BuscarCliente extends JFrame {
         btnNewButton_1.setBounds(10, 11, 89, 35);
         contentPane.add(btnNewButton_1);
         
+        buscarTodosClientes();
+        
 	}
+	
+    private void buscarTodosClientes() {
+        Repositorio repositorio = new Repositorio();
+        List<Cliente> clientes = repositorio.buscarTodosClientes();
+        
+        modelo.setRowCount(0); 
+        for (Cliente cliente : clientes) {
+            modelo.addRow(new Object[]{cliente.getNomeCompleto(),cliente.getDataNascimento(), cliente.getTelefone(), cliente.getEmail(),
+            		cliente.getSexo(), cliente.getCnh(), cliente.getVencimentoCnh()});
+        }
+    }
     private void buscarClientePorCpf() {
         String cpf = locCPF_textField.getText();
         Repositorio repositorio = new Repositorio();

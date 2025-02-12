@@ -124,6 +124,33 @@ public class Repositorio {
 		
 	}
 	
+    public List<Cliente> buscarTodosClientes() {
+        String sql = "SELECT nomeCompleto, dataNascimento, telefone, email , sexo, cnh, vencimentoCnh FROM cliente";
+        List<Cliente> clientes = new ArrayList<>();
+        
+        try (Connection conn = estabelecerConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) { 
+                Cliente cliente = new Cliente(
+                    rs.getString("nomeCompleto"),
+                    rs.getString("dataNascimento"),
+                    rs.getString("telefone"),
+                    rs.getString("email"),
+                    rs.getString("sexo"),
+                    rs.getString("cnh"),
+                    rs.getString("vencimentoCnh")
+                );
+                clientes.add(cliente); 
+            }
+        } catch (SQLException e) {
+            // TODO: Tratar exceção 
+
+        }
+        return clientes;
+    }
+	
     public Cliente buscarClientePorCpf(String cpf) {
         String sql = "SELECT nomeCompleto, dataNascimento, telefone, email , sexo, cnh, vencimentoCnh FROM cliente WHERE cpf = ?";
         try (Connection conn = estabelecerConexao();
@@ -156,6 +183,33 @@ public class Repositorio {
             // TODO tratar exeção
         }
         return null;
+    }
+    
+    public List<Carro> buscarTodosCarros() {
+        String sql = "SELECT marca, modelo, ano, cor, placa, numMotor, chassi FROM carro ";
+        List<Carro> carros = new ArrayList<>();
+        
+        try (Connection conn = estabelecerConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) { 
+                Carro carro = new Carro(
+                    rs.getString("marca"),
+                    rs.getString("modelo"),
+                    rs.getInt("ano"),
+                    rs.getString("cor"),
+                    rs.getString("placa"),
+                    rs.getString("numMotor"),
+                    rs.getString("chassi")
+                );
+                carros.add(carro); 
+            }
+        } catch (SQLException e) {
+            // TODO: Tratar exceção 
+
+        }
+        return carros;
     }
     
     public Carro buscarCarro(String placa) {
@@ -322,28 +376,237 @@ public class Repositorio {
         }
         return null;
     }
-
     
-    public Locacao buscarLocacao(String cpf, String placa) {
-        String sql = "SELECT cliente_id, carro_id, valorDiaria, diasLocados, valorTotal, formaPagamento FROM locacao "
-        		+ " WHERE cliente_id = (SELECT id FROM cliente WHERE cpf = ?) AND carro_id = (SELECT id FROM carro WHERE placa = ?)";
+    public List<Locacao> buscarTodasLocacoes() {
+        String sqlLocacao = "SELECT cliente_id, carro_id, valorDiaria, diasLocados, valorTotal, formaPagamento FROM locacao";
+        List<Locacao> locacoes = new ArrayList<>();
+
         try (Connection conn = estabelecerConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, cpf);
-            stmt.setString(2, placa);
-            ResultSet rs = stmt.executeQuery();
-            
-            if (rs.next()) {
-            	long clienteId = rs.getLong("cliente_id");
-                long carroId = rs.getLong("carro_id");
-            	Cliente cliente = buscarClientePorId(clienteId);
-            	Carro carro = buscarCarroPorId(carroId);
-                return new Locacao(cliente, carro, rs.getDouble("valorDiaria"), rs.getInt("diasLocados"), rs.getDouble("valorTotal"), rs.getString("formaPagamento"));
+             PreparedStatement stmtLocacao = conn.prepareStatement(sqlLocacao);
+             ResultSet rsLocacao = stmtLocacao.executeQuery()) {
+
+            while (rsLocacao.next()) { 
+                long clienteId = rsLocacao.getLong("cliente_id");
+                Cliente cliente = buscarClientePorId(clienteId);
+
+                long carroId = rsLocacao.getLong("carro_id");
+                Carro carro = buscarCarroPorId(carroId);
+
+                Locacao locacao = new Locacao(
+                        cliente, 
+                        carro, 
+                        rsLocacao.getDouble("valorDiaria"), 
+                        rsLocacao.getInt("diasLocados"), 
+                        rsLocacao.getDouble("valorTotal"), 
+                        rsLocacao.getString("formaPagamento")
+                );
+                locacoes.add(locacao);
             }
         } catch (SQLException e) {
-            // TODO tratar exeção
+            e.printStackTrace(); // Substitua por um logger em produção
         }
-        return null;
-    } 
+
+        return locacoes;
+    }
+   
+    public List<Locacao> buscarLocacaoPorCpf(String cpf) {
+        String sqlCliente = "SELECT id FROM cliente WHERE cpf = ?";
+        String sqlLocacao = "SELECT carro_id, valorDiaria, diasLocados, valorTotal, formaPagamento FROM locacao WHERE cliente_id = ?";
+        List<Locacao> locacoes = new ArrayList<>();
+
+        try (Connection conn = estabelecerConexao();
+             PreparedStatement stmtCliente = conn.prepareStatement(sqlCliente)) {
+
+            stmtCliente.setString(1, cpf);
+            ResultSet rsCliente = stmtCliente.executeQuery();
+
+            if (rsCliente.next()) {
+                long clienteId = rsCliente.getLong("id");
+                Cliente cliente = buscarClientePorId(clienteId);
+
+                try (PreparedStatement stmtLocacao = conn.prepareStatement(sqlLocacao)) {
+                    stmtLocacao.setLong(1, clienteId);
+                    ResultSet rsLocacao = stmtLocacao.executeQuery();
+
+                    while (rsLocacao.next()) { 
+                        long carroId = rsLocacao.getLong("carro_id");
+                        Carro carro = buscarCarroPorId(carroId);
+
+                        Locacao locacao = new Locacao(
+                                cliente, 
+                                carro, 
+                                rsLocacao.getDouble("valorDiaria"), 
+                                rsLocacao.getInt("diasLocados"), 
+                                rsLocacao.getDouble("valorTotal"), 
+                                rsLocacao.getString("formaPagamento")
+                        );
+                        locacoes.add(locacao);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Ou use um Logger
+        }
+
+        return locacoes;
+    }
+    
+    public List<Locacao> buscarLocacaoPorPlaca(String placa) {
+        String sqlCarro = "SELECT id FROM carro WHERE placa = ?";
+        String sqlLocacao = "SELECT cliente_id, valorDiaria, diasLocados, valorTotal, formaPagamento FROM locacao WHERE carro_id = ?";
+        List<Locacao> locacoes = new ArrayList<>();
+
+        try (Connection conn = estabelecerConexao();
+             PreparedStatement stmtCarro = conn.prepareStatement(sqlCarro)) {
+
+            stmtCarro.setString(1, placa);
+            ResultSet rsCarro = stmtCarro.executeQuery();
+
+            if (rsCarro.next()) {
+                long carroId = rsCarro.getLong("id");
+                Carro carro = buscarCarroPorId(carroId);
+
+                try (PreparedStatement stmtLocacao = conn.prepareStatement(sqlLocacao)) {
+                    stmtLocacao.setLong(1, carroId);
+                    ResultSet rsLocacao = stmtLocacao.executeQuery();
+
+                    while (rsLocacao.next()) { 
+                        long clienteId = rsLocacao.getLong("cliente_id");
+                        Cliente cliente = buscarClientePorId(clienteId);
+
+                        Locacao locacao = new Locacao(
+                                cliente, 
+                                carro, 
+                                rsLocacao.getDouble("valorDiaria"), 
+                                rsLocacao.getInt("diasLocados"), 
+                                rsLocacao.getDouble("valorTotal"), 
+                                rsLocacao.getString("formaPagamento")
+                        );
+                        locacoes.add(locacao);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Ou use um logger
+        }
+
+        return locacoes;
+    }
+    
+    public List<Reserva> buscarTodasReservas() {
+        String sqlReserva = "SELECT cliente_id, carro_id, dataRetirada, HoraRetirada, dataEntrega, horaEntrega FROM reserva";
+        List<Reserva> reservas = new ArrayList<>();
+
+        try (Connection conn = estabelecerConexao();
+             PreparedStatement stmtLocacao = conn.prepareStatement(sqlReserva);
+             ResultSet rsLocacao = stmtLocacao.executeQuery()) {
+
+            while (rsLocacao.next()) { 
+                long clienteId = rsLocacao.getLong("cliente_id");
+                Cliente cliente = buscarClientePorId(clienteId);
+
+                long carroId = rsLocacao.getLong("carro_id");
+                Carro carro = buscarCarroPorId(carroId);
+
+                Reserva reserva = new Reserva(
+                        cliente, 
+                        carro, 
+                        rsLocacao.getString("dataRetirada"), 
+                        rsLocacao.getString("HoraRetirada"), 
+                        rsLocacao.getString("dataEntrega"), 
+                        rsLocacao.getString("horaEntrega")
+                );
+                reservas.add(reserva);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Substitua por um logger em produção
+        }
+
+        return reservas;
+    }
+    
+    public List<Reserva> buscarReservaPorCpf(String cpf) {
+        String sqlCliente = "SELECT id FROM cliente WHERE cpf = ?";
+        String sqlLocacao = "SELECT carro_id, dataRetirada, HoraRetirada, dataEntrega, horaEntrega FROM reserva WHERE cliente_id = ?";
+        List<Reserva> reservas = new ArrayList<>();
+
+        try (Connection conn = estabelecerConexao();
+             PreparedStatement stmtCliente = conn.prepareStatement(sqlCliente)) {
+
+            stmtCliente.setString(1, cpf);
+            ResultSet rsCliente = stmtCliente.executeQuery();
+
+            if (rsCliente.next()) {
+                long clienteId = rsCliente.getLong("id");
+                Cliente cliente = buscarClientePorId(clienteId);
+
+                try (PreparedStatement stmtLocacao = conn.prepareStatement(sqlLocacao)) {
+                    stmtLocacao.setLong(1, clienteId);
+                    ResultSet rsLocacao = stmtLocacao.executeQuery();
+
+                    while (rsLocacao.next()) { 
+                        long carroId = rsLocacao.getLong("carro_id");
+                        Carro carro = buscarCarroPorId(carroId);
+
+                        Reserva reserva = new Reserva(
+                                cliente, 
+                                carro, 
+                                rsLocacao.getString("dataRetirada"), 
+                                rsLocacao.getString("HoraRetirada"), 
+                                rsLocacao.getString("dataEntrega"), 
+                                rsLocacao.getString("horaEntrega")
+                        );
+                       reservas.add(reserva);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); 
+        }
+        
+        return reservas;
+    }
+    
+    public List<Reserva> buscarReservaPorPlaca(String placa) {
+        String sqlCarro = "SELECT id FROM carro WHERE placa = ?";
+        String sqlLocacao = "SELECT cliente_id, dataRetirada, HoraRetirada, dataEntrega, horaEntrega FROM reserva WHERE carro_id = ?";
+        List<Reserva> reservas = new ArrayList<>();
+
+        try (Connection conn = estabelecerConexao();
+             PreparedStatement stmtCarro = conn.prepareStatement(sqlCarro)) {
+
+            stmtCarro.setString(1, placa);
+            ResultSet rsCarro = stmtCarro.executeQuery();
+
+            if (rsCarro.next()) {
+                long carroId = rsCarro.getLong("id");
+                Carro carro = buscarCarroPorId(carroId);
+
+                try (PreparedStatement stmtLocacao = conn.prepareStatement(sqlLocacao)) {
+                    stmtLocacao.setLong(1, carroId);
+                    ResultSet rsLocacao = stmtLocacao.executeQuery();
+
+                    while (rsLocacao.next()) { 
+                        long clienteId = rsLocacao.getLong("cliente_id");
+                        Cliente cliente = buscarClientePorId(clienteId);
+
+                        Reserva reserva = new Reserva(
+                                cliente, 
+                                carro, 
+                                rsLocacao.getString("dataRetirada"), 
+                                rsLocacao.getString("HoraRetirada"), 
+                                rsLocacao.getString("dataEntrega"), 
+                                rsLocacao.getString("horaEntrega")
+                        );
+                        reservas.add(reserva);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return reservas;
+    }
 
 }

@@ -148,7 +148,32 @@ public class BuscarVeiculo extends JFrame {
         btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
         btnNewButton_1.setBounds(10, 10, 89, 35);
         contentPane.add(btnNewButton_1);
+        
+        buscarTodosCarros();
 	}
+	
+    private void buscarTodosCarros() {
+        Repositorio repositorio = new Repositorio();
+        List<Carro> carros = repositorio.buscarTodosCarros();
+        
+        modelo.setRowCount(0); 
+
+        if (carros.isEmpty()) { 
+            JOptionPane.showMessageDialog(this, "Veículo não encontrado.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            for (Carro carro : carros) { 
+                modelo.addRow(new Object[]{
+                    carro.getMarca(), 
+                    carro.getModelo(), 
+                    carro.getAno(), 
+                    carro.getCor(),
+                    carro.getPlaca(), 
+                    carro.getNumMotor(), 
+                    carro.getChassi()
+                });
+            }
+        }
+    }
 	
     private void buscarCarro() {
         String placa = campoTextoPlaca.getText();

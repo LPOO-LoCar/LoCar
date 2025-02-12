@@ -25,6 +25,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 public class BuscarLocacao extends JFrame {
 
@@ -124,7 +125,12 @@ public class BuscarLocacao extends JFrame {
 		JButton btnNewButton = new JButton("Buscar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				buscarLocacao();
+				if (locCPF_textField.getText() != null && !locCPF_textField.getText().isEmpty()) {
+					buscarLocacaoPorCpf();
+				}
+				else {
+					buscarLocacaoPorPlaca();
+			}
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 25));
@@ -156,20 +162,62 @@ public class BuscarLocacao extends JFrame {
         btnNewButton_1.setBounds(10, 11, 89, 35);
         contentPane.add(btnNewButton_1);
         
-	}
-    private void buscarLocacao() {
-        String cpf = locCPF_textField.getText();
-        String placa = locPlaca_textField.getText();
-        Repositorio repositorio = new Repositorio();
-        Locacao locacao = repositorio.buscarLocacao(cpf, placa);
+        buscarTodasLocacoes();
         
-        modelo.setRowCount(0); 
-        if (locacao != null) {
-            modelo.addRow(new Object[]{locacao.getCliente().getId(), locacao.getCarro().getId(), locacao.getValorDiaria(), locacao.getDiasLocados(),
-            		locacao.getValorTotal(), locacao.getFormaPagamento()});
-        } else {
+	}
+	
+    private void buscarTodasLocacoes() {
+        Repositorio repositorio = new Repositorio();
+        List<Locacao> locacoes = repositorio.buscarTodasLocacoes();
+        
+        modelo.setRowCount(0);
+        
+        if (locacoes.isEmpty()) { 
             JOptionPane.showMessageDialog(this, "Locação não encontrada.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            for (Locacao locacao : locacoes) { 
+                modelo.addRow(new Object[]{
+                		locacao.getCliente().getId(), locacao.getCarro().getId(), locacao.getValorDiaria(), locacao.getDiasLocados(),
+                		locacao.getValorTotal(), locacao.getFormaPagamento()
+                });
+            }
         }
     }
-	
+    private void buscarLocacaoPorCpf() {
+        String cpf = locCPF_textField.getText();
+        Repositorio repositorio = new Repositorio();
+        List<Locacao> locacoes = repositorio.buscarLocacaoPorCpf(cpf);
+        
+        modelo.setRowCount(0);
+        
+        if (locacoes.isEmpty()) { 
+            JOptionPane.showMessageDialog(this, "Locação não encontrada.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            for (Locacao locacao : locacoes) { 
+                modelo.addRow(new Object[]{
+                		locacao.getCliente().getId(), locacao.getCarro().getId(), locacao.getValorDiaria(), locacao.getDiasLocados(),
+                		locacao.getValorTotal(), locacao.getFormaPagamento()
+                });
+            }
+        }
+    }
+    
+    private void buscarLocacaoPorPlaca() {
+        String placa = locPlaca_textField.getText();
+        Repositorio repositorio = new Repositorio();
+        List<Locacao> locacoes = repositorio.buscarLocacaoPorPlaca(placa);
+        
+        modelo.setRowCount(0); 
+        
+        if (locacoes.isEmpty()) { 
+            JOptionPane.showMessageDialog(this, "Locação não encontrada.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            for (Locacao locacao : locacoes) { 
+                modelo.addRow(new Object[]{
+                		locacao.getCliente().getId(), locacao.getCarro().getId(), locacao.getValorDiaria(), locacao.getDiasLocados(),
+                		locacao.getValorTotal(), locacao.getFormaPagamento()
+                });
+            }
+        }
+    }
 }
