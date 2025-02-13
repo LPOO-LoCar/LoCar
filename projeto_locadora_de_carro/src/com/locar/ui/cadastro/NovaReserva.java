@@ -365,29 +365,33 @@ public class NovaReserva extends JFrame {
 		JButton reservar_Button = new JButton("Reservar");
 		reservar_Button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-	            String cpf = locCPF_textField.getText();
-	            String placa = locPlaca_textField.getText();
+		        try {
+		            String cpf = locCPF_textField.getText().trim();
+		            String placa = locPlaca_textField.getText().trim();
 
-	            Repositorio repositorio = new Repositorio();
-	            Cliente cliente = repositorio.buscarIdPorCpf(cpf);
-	            Carro carro = repositorio.buscarIdPorPlaca(placa);
-	            
-	            String dataRetirada = resDatadeRetirada_textField.getText();
-	            String horaRetirada = resHoradeRetirada_textField.getText();
-	            String dataEntrega = resDatadeEntrega_textField.getText();
-				String horaEntrega = resHoradeEntrega_textField.getText();
-				
-				ControladorControleAcesso controlador = new ControladorControleAcesso();
-				controlador.registrarReserva(cliente, carro, dataRetirada, horaRetirada,dataEntrega,horaEntrega);
-				
-// 				EnviarEmail.enviarEmailReserva(cliente.getEmail(), cliente.getNomeCompleto(), dataRetirada, horaRetirada);
-				
-				JOptionPane.showMessageDialog(null, "Reserva cadastrada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-				} catch (Exception e1) {
-					JOptionPane.showMessageDialog(null, "Erro ao cadastrar", "Erro", JOptionPane.ERROR_MESSAGE);
-				}
-			}
+		            Repositorio repositorio = new Repositorio();
+		            Cliente cliente = repositorio.buscarIdPorCpf(cpf);
+		            Carro carro = repositorio.buscarIdPorPlaca(placa);
+		            
+		            String email = locEmail_textField.getText();
+		            String nome = locNome_textField.getText();
+
+		            String dataRetirada = resDatadeRetirada_textField.getText().trim();
+		            String horaRetirada = resHoradeRetirada_textField.getText().trim();
+		            String dataEntrega = resDatadeEntrega_textField.getText().trim();
+		            String horaEntrega = resHoradeEntrega_textField.getText().trim();
+
+		            ControladorControleAcesso controlador = new ControladorControleAcesso();
+		            controlador.registrarReserva(cliente, carro, dataRetirada, horaRetirada, dataEntrega, horaEntrega);
+
+		            EnviarEmail.enviarEmailReserva(email, nome, dataRetirada, horaRetirada);
+		            EnviarEmail.agendarEmailLembrete(email, nome, dataRetirada, horaRetirada);
+
+		            JOptionPane.showMessageDialog(null, "Reserva cadastrada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+		        } catch (Exception e1) {
+		            JOptionPane.showMessageDialog(null, "Erro ao cadastrar reserva", "Erro", JOptionPane.ERROR_MESSAGE);
+		        }
+		    }
 		});
 		reservar_Button.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		reservar_Button.setBounds(505, 508, 119, 35);
