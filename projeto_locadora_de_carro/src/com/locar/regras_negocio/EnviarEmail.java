@@ -1,7 +1,7 @@
 package com.locar.regras_negocio;
 
 import jakarta.mail.*;
-import jakarta.mail.internet.*;
+import jakarta.mail.internet.*; 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -83,16 +83,10 @@ public class EnviarEmail {
             long delay = lembrete.getTime() - System.currentTimeMillis();
 
             if (delay > 0) {
-                scheduler.schedule(() -> enviarEmailLembrete(destinatario, nomeCliente, dataRetirada, horaRetirada), delay, TimeUnit.MILLISECONDS);
+                scheduler.schedule(() -> enviarEmailAgendado(destinatario, nomeCliente, dataRetirada, horaRetirada), delay, TimeUnit.MILLISECONDS);
             }
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
-
-    private static void enviarEmailLembrete(String destinatario, String nomeCliente, String dataRetirada, String horaRetirada) {
-        enviarEmailAgendado(destinatario, nomeCliente, dataRetirada, horaRetirada);
-    }
 }
-
-

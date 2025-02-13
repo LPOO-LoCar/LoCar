@@ -105,6 +105,7 @@ public class TelaPrincipal extends JFrame {
 		menuBar.add(menuArquivo);
 		
 		JMenuItem novoClienteMenuItem = new JMenuItem("Novo Cliente");
+		novoClienteMenuItem.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuArquivo.add(novoClienteMenuItem);
 		
 		novoClienteMenuItem.addActionListener(e -> {
@@ -114,6 +115,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		
 		JMenuItem novoVeiculoMenuItem = new JMenuItem("Novo Veículo");
+		novoVeiculoMenuItem.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuArquivo.add(novoVeiculoMenuItem);
 		
 		novoVeiculoMenuItem.addActionListener(e -> {
@@ -123,6 +125,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		
 		JMenuItem novoFuncionarioMenuItem = new JMenuItem("Novo Funcionário");
+		novoFuncionarioMenuItem.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuArquivo.add(novoFuncionarioMenuItem);
 		
 		novoFuncionarioMenuItem.addActionListener (e -> {
@@ -133,6 +136,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		
 		JMenuItem novaLocaçaoMenuItem = new JMenuItem("Nova Locação");
+		novaLocaçaoMenuItem.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuArquivo.add(novaLocaçaoMenuItem);
 		
 		novaLocaçaoMenuItem.addActionListener(e ->{
@@ -142,6 +146,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		
 		JMenuItem novaReservaArquivo = new JMenuItem("Nova Reserva");
+		novaReservaArquivo.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuArquivo.add(novaReservaArquivo);
 		
 		novaReservaArquivo.addActionListener(e -> {
@@ -151,6 +156,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		
 		JMenuItem mudarSenhaMenuItem = new JMenuItem("Mudar Senha");
+		mudarSenhaMenuItem.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuArquivo.add(mudarSenhaMenuItem);
 		
 		mudarSenhaMenuItem.addActionListener(e -> {
@@ -160,6 +166,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		
 		JMenuItem fazerLogoutMenuItem = new JMenuItem("Fazer logout");
+		fazerLogoutMenuItem.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuArquivo.add(fazerLogoutMenuItem);
 		
 		fazerLogoutMenuItem.addActionListener(e -> {
@@ -177,6 +184,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		
 		JMenuItem sairMenuItem = new JMenuItem("Sair");
+		sairMenuItem.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		sairMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			int confirmacao = JOptionPane.showConfirmDialog(
@@ -206,8 +214,10 @@ public class TelaPrincipal extends JFrame {
 		menuBar.add(menuEditar);
 		
 		JMenu submenuVeiculo = new JMenu("Gerenciar Veículo");
+		submenuVeiculo.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		
 		JMenuItem editarremoverVeiculo = new JMenuItem("Editar/Remover Veículo");
+		editarremoverVeiculo.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		submenuVeiculo.add(editarremoverVeiculo);
 		
 		editarremoverVeiculo.addActionListener(e -> {
@@ -217,6 +227,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		
 		JMenuItem agendarManutençao = new JMenuItem("Agendar Manutenção Veicular");
+		agendarManutençao.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		submenuVeiculo.add(agendarManutençao);
 		
 		agendarManutençao.addActionListener(e ->{
@@ -226,6 +237,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		
 		JMenuItem agendarVistoria = new JMenuItem("Agendar Vistoria Veicular");
+		agendarVistoria.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		submenuVeiculo.add(agendarVistoria);
 		
 		agendarVistoria.addActionListener(e -> {
@@ -234,13 +246,16 @@ public class TelaPrincipal extends JFrame {
 		});
 		
 		JMenuItem editarGerenciarCliente = new JMenuItem("Gerenciar Cliente");
+		editarGerenciarCliente.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuEditar.add(editarGerenciarCliente);
 		
 		menuEditar.add(submenuVeiculo);
 		
 		JMenu submenuLocaçoes = new JMenu("Locações");
+		submenuLocaçoes.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		
 		JMenuItem editarLocaçoesAt = new JMenuItem ("Editar Locações Ativas");
+		editarLocaçoesAt.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		submenuLocaçoes.add(editarLocaçoesAt);
 		
 		editarLocaçoesAt.addActionListener(e ->{
@@ -249,6 +264,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		
 		JMenuItem editarLocaçoesIn = new JMenuItem ("Editar Locações Inativas");
+		editarLocaçoesIn.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		submenuLocaçoes.add(editarLocaçoesIn);
 		
 		editarLocaçoesIn.addActionListener(e ->{
@@ -257,13 +273,16 @@ public class TelaPrincipal extends JFrame {
 		});
 		
 		JMenuItem editarGerenciarFuncionario = new JMenuItem("Gerenciar Funcionario");
+		editarGerenciarFuncionario.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuEditar.add(editarGerenciarFuncionario);
 		
 		menuEditar.add(submenuLocaçoes);
 		
 		JMenu submenuReservas = new JMenu("Reservas");
+		submenuReservas.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		
 		JMenuItem editarReservasAt = new JMenuItem ("Editar Reservas Ativas");
+		editarReservasAt.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		submenuReservas.add(editarReservasAt);
 		
 		editarReservasAt.addActionListener(e -> {
@@ -272,6 +291,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		
 		JMenuItem cancelarReservas = new JMenuItem ("Cancelar Reserva");
+		cancelarReservas.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		submenuReservas.add(cancelarReservas);
 		
 		cancelarReservas.addActionListener(e -> {
@@ -294,6 +314,7 @@ public class TelaPrincipal extends JFrame {
 		menuBar.add(menuBuscar);
 		
 		JMenuItem buscarCliente = new JMenuItem("Buscar Cliente");
+		buscarCliente.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuBuscar.add(buscarCliente);
 		
 		buscarCliente.addActionListener(e -> {
@@ -303,6 +324,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		
 		JMenuItem buscarVeiculo = new JMenuItem("Buscar Veículo");
+		buscarVeiculo.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuBuscar.add(buscarVeiculo);
 		
 		buscarVeiculo.addActionListener(e -> {
@@ -312,6 +334,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		
 		JMenuItem buscarFuncionario = new JMenuItem("Buscar Funcionário");
+		buscarFuncionario.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuBuscar.add(buscarFuncionario);
 		
 		buscarFuncionario.addActionListener(e -> {
@@ -321,6 +344,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		
 		JMenuItem buscarLocaçao = new JMenuItem("Buscar Locação");
+		buscarLocaçao.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuBuscar.add(buscarLocaçao);
 		
 		buscarLocaçao.addActionListener(e -> {
@@ -330,6 +354,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		
 		JMenuItem buscarReserva = new JMenuItem("Buscar Reserva");
+		buscarReserva.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuBuscar.add(buscarReserva);
 		
 		buscarReserva.addActionListener(e ->{
@@ -349,18 +374,23 @@ public class TelaPrincipal extends JFrame {
 		menuBar.add(menuPagamentos);
 		
 		JMenuItem pagamentosPagar = new JMenuItem("Pagar");
+		pagamentosPagar.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuPagamentos.add(pagamentosPagar);
 		
 		JMenu submenuRegistroDePagamentos = new JMenu("Registro de Pagamentos");
+		submenuRegistroDePagamentos.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuPagamentos.add(submenuRegistroDePagamentos);
 		
 		JMenuItem pagRegistroPendente = new JMenuItem("Pendentes");
+		pagRegistroPendente.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		submenuRegistroDePagamentos.add(pagRegistroPendente);
 		
 		JMenuItem pagRegistroQuitados = new JMenuItem("Quitados");
+		pagRegistroQuitados.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		submenuRegistroDePagamentos.add(pagRegistroQuitados);
 		
 		JMenuItem pagamentosSimulador = new JMenuItem("Simulador de Pagamentos");
+		pagamentosSimulador.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuPagamentos.add(pagamentosSimulador);
 		
 		JSeparator separator_3 = new JSeparator();
@@ -376,6 +406,7 @@ public class TelaPrincipal extends JFrame {
 		menuBar.add(menuRelatorios);
 		
 		JMenu menuVisualizar = new JMenu("Visualizar");
+		menuVisualizar.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuRelatorios.add(menuVisualizar);
 		
 		JMenuItem relLocaçoesAtivas = new JMenuItem("Locações Ativas");
@@ -419,6 +450,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		
 		JMenu menuGerarRelatorios = new JMenu("Gerar Relatórios");
+		menuGerarRelatorios.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuRelatorios.add(menuGerarRelatorios);
 		
 		JMenu relReceita = new JMenu("Receita"); //Conversar sobre isso
@@ -481,6 +513,7 @@ public class TelaPrincipal extends JFrame {
 		menuBar.add(menuAjuda);
 		
 		JMenuItem menuHelpMe = new JMenuItem("Help-me!");
+		menuHelpMe.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuAjuda.add(menuHelpMe);
 		
 		menuHelpMe.addActionListener(e ->{
@@ -489,6 +522,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		
 		JMenuItem menuSobre = new JMenuItem("Sobre");
+		menuSobre.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuAjuda.add(menuSobre);
 		
 				
