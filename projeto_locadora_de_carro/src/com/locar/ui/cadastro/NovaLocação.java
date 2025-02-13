@@ -366,6 +366,22 @@ public class NovaLocação extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Limpar");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				locCPF_textField.setText("");	
+				locNome_textField.setText("");
+				locTelefone_textField.setText("");
+				locEmail_textField.setText("");
+				locPlaca_textField.setText("");
+				locModelo_textField.setText("");
+				locMarca_textField.setText("");
+				locAno_textField.setText("");
+				locKM_textField.setText("");
+				locValorDaDiaria_textField.setText("");
+				locDiasLocados_textField.setText("");
+				locValorTotal_textField.setText("");
+			}
+		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNewButton_1.setBounds(376, 468, 109, 35);
 		contentPane.add(btnNewButton_1);

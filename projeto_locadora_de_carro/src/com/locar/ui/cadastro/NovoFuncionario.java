@@ -537,6 +537,29 @@ public class NovoFuncionario extends JFrame {
 		contentPane.add(funConfirmacaoSenha_textField);
 		
 		JButton funLimpar_Button = new JButton("Limpar");
+		funLimpar_Button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		        FunNome_textField.setText("");
+		        funCPF_textField.setText("");
+		        funRG_textField.setText("");
+		        funOrgExp_textField.setText("");
+		        funTelefone_textField.setText("");
+		        funEmail_textField.setText("");
+		        funDataN_textField.setText("");
+		        funDataDeExp_textField.setText("");
+		        funCNH_textField.setText("");
+		        funValidadeCNH_textField.setText("");
+		        funCep_textField.setText("");
+		        funRua_textField.setText("");
+		        funNumeroRua_textField.setText("");
+		        funBairro_textField.setText("");
+		        funCidade_textField.setText("");
+		        funComplemento_textField.setText("");
+		        funSenha_textField.setText("");
+		        funConfirmacaoSenha_textField.setText("");
+				
+			}
+		});
 		funLimpar_Button.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		funLimpar_Button.setBounds(408, 625, 121, 35);
 		contentPane.add(funLimpar_Button);

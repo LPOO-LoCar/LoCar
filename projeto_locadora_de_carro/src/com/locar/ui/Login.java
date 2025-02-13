@@ -55,6 +55,7 @@ public class Login extends JFrame {
 	public Login() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -105,11 +106,11 @@ public class Login extends JFrame {
 				String senha = campoTextoSenha.getText();
 				
 				if (usuario.equals("admin") && senha.equals("1234")) {
-					JOptionPane.showMessageDialog(null, "Login bem-sucedido!");
+					JOptionPane.showMessageDialog(Login.this, "Login bem-sucedido!");
 					dispose();
 					abrirTelaPrincipal();
 				} else {
-					JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(Login.this, "Usuário ou senha incorretos", "Erro", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

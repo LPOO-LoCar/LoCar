@@ -48,6 +48,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JSlider;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
+import java.awt.Insets;
 
 public class TelaPrincipal extends JFrame {
 
@@ -77,6 +81,7 @@ public class TelaPrincipal extends JFrame {
 		setTitle("Locar - Locadora de Veiculos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -86,13 +91,17 @@ public class TelaPrincipal extends JFrame {
 		//Barra de Menu
 		
 		JMenuBar menuBar = new JMenuBar();
+		menuBar.setMargin(new Insets(1, 1, 1, 1));
+		menuBar.setForeground(Color.BLACK);
 		menuBar.setBackground(new Color(240, 240, 240));
-		menuBar.setBounds(0, 0, 774, 22);
+		menuBar.setBounds(0, 0, 774, 31);
 		contentPane.add(menuBar);
 		
 		//Barra de Menu - Botão Arquivo
 		
 		JMenu menuArquivo = new JMenu("Cadastro");
+		menuArquivo.setForeground(Color.BLACK);
+		menuArquivo.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuBar.add(menuArquivo);
 		
 		JMenuItem novoClienteMenuItem = new JMenuItem("Novo Cliente");
@@ -184,9 +193,16 @@ public class TelaPrincipal extends JFrame {
 				
 		menuArquivo.add(sairMenuItem);
 		
+		JSeparator separator = new JSeparator();
+		separator.setForeground(Color.BLACK);
+		separator.setOrientation(SwingConstants.VERTICAL);
+		menuBar.add(separator);
+		
 		//Barra de Menu - Botão Editar
 		
 		JMenu menuEditar = new JMenu("Editar");
+		menuEditar.setForeground(Color.BLACK);
+		menuEditar.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuBar.add(menuEditar);
 		
 		JMenu submenuVeiculo = new JMenu("Gerenciar Veículo");
@@ -265,9 +281,16 @@ public class TelaPrincipal extends JFrame {
 		
 		menuEditar.add(submenuReservas);
 		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setForeground(Color.BLACK);
+		separator_1.setOrientation(SwingConstants.VERTICAL);
+		menuBar.add(separator_1);
+		
 		//Barra de Menu - Botão Buscar
 		
 		JMenu menuBuscar = new JMenu("Buscar");
+		menuBuscar.setForeground(Color.BLACK);
+		menuBuscar.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuBar.add(menuBuscar);
 		
 		JMenuItem buscarCliente = new JMenuItem("Buscar Cliente");
@@ -315,7 +338,14 @@ public class TelaPrincipal extends JFrame {
 			telaBuscarReserva.setVisible(true);
 		});
 		
+		JSeparator separator_2 = new JSeparator();
+		separator_2.setForeground(Color.BLACK);
+		separator_2.setOrientation(SwingConstants.VERTICAL);
+		menuBar.add(separator_2);
+		
 		JMenu menuPagamentos = new JMenu("Pagamentos");
+		menuPagamentos.setForeground(Color.BLACK);
+		menuPagamentos.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuBar.add(menuPagamentos);
 		
 		JMenuItem pagamentosPagar = new JMenuItem("Pagar");
@@ -333,9 +363,16 @@ public class TelaPrincipal extends JFrame {
 		JMenuItem pagamentosSimulador = new JMenuItem("Simulador de Pagamentos");
 		menuPagamentos.add(pagamentosSimulador);
 		
+		JSeparator separator_3 = new JSeparator();
+		separator_3.setForeground(Color.BLACK);
+		separator_3.setOrientation(SwingConstants.VERTICAL);
+		menuBar.add(separator_3);
+		
 		//Barra de Menu - Botão Relatórios
 		
 		JMenu menuRelatorios = new JMenu("Relatórios");
+		menuRelatorios.setForeground(Color.BLACK);
+		menuRelatorios.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuBar.add(menuRelatorios);
 		
 		JMenu menuVisualizar = new JMenu("Visualizar");
@@ -431,9 +468,16 @@ public class TelaPrincipal extends JFrame {
 			telaReservas.setVisible(true);
 		});
 		
+		JSeparator separator_4 = new JSeparator();
+		separator_4.setForeground(Color.BLACK);
+		separator_4.setOrientation(SwingConstants.VERTICAL);
+		menuBar.add(separator_4);
+		
 		//Barra de Menu - Botão Ajuda
 		
 		JMenu menuAjuda = new JMenu("Ajuda");
+		menuAjuda.setForeground(Color.BLACK);
+		menuAjuda.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuBar.add(menuAjuda);
 		
 		JMenuItem menuHelpMe = new JMenuItem("Help-me!");

@@ -75,6 +75,7 @@ public class NovoCliente {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 700, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
 		
 		
