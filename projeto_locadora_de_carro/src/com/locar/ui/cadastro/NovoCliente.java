@@ -423,4 +423,3 @@ public class NovoCliente {
 		frame.setVisible(b);
 	}
 }
-    

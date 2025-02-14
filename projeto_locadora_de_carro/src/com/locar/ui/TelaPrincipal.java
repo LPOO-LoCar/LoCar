@@ -10,6 +10,7 @@ import com.locar.ui.cadastro.NovoVeiculo;
 import com.locar.ui.editar.AgendarManutençãoVeicular;
 import com.locar.ui.editar.AgendarVistoriaVeicular;
 import com.locar.ui.editar.CancelarReserva;
+import com.locar.ui.editar.EditarCliente;
 import com.locar.ui.editar.EditarLocAtiva;
 import com.locar.ui.editar.EditarLocInativa;
 import com.locar.ui.editar.EditarReservaAtiva;
@@ -242,10 +243,16 @@ public class TelaPrincipal extends JFrame {
 		
 		agendarVistoria.addActionListener(e -> {
 			AgendarVistoriaVeicular telaAgendarVistoria = new AgendarVistoriaVeicular();
+			dispose();
 			telaAgendarVistoria.setVisible(true);
 		});
 		
 		JMenuItem editarGerenciarCliente = new JMenuItem("Gerenciar Cliente");
+		editarGerenciarCliente.addActionListener(e -> {
+			EditarCliente telaEditarCliente = new EditarCliente();
+			dispose();
+			telaEditarCliente.setVisible(true);
+		});
 		editarGerenciarCliente.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuEditar.add(editarGerenciarCliente);
 		
@@ -260,6 +267,7 @@ public class TelaPrincipal extends JFrame {
 		
 		editarLocaçoesAt.addActionListener(e ->{
 			EditarLocAtiva telaEditarLocaçaoAtiva = new EditarLocAtiva();
+			dispose();
 			telaEditarLocaçaoAtiva.setVisible(true);
 		});
 		
@@ -269,6 +277,7 @@ public class TelaPrincipal extends JFrame {
 		
 		editarLocaçoesIn.addActionListener(e ->{
 			EditarLocInativa telaEditarLocaçaoInativa = new EditarLocInativa();
+			dispose();
 			telaEditarLocaçaoInativa.setVisible(true);
 		});
 		

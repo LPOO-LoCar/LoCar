@@ -18,6 +18,19 @@ public class ControladorControleAcesso {
 		
 	}
 	
+	public void EditarCliente (String nomeCompleto, String dataNascimento, String cpf, String sexo, String cnh,
+			String vencimentoCnh, String bairroRua, int numero, String cep, String cidade, String estado, 
+			String telefone, String email) {
+		
+		// TODO validações
+		
+		Cliente cliente = new Cliente(nomeCompleto, dataNascimento, cpf, sexo, cnh, vencimentoCnh,
+				bairroRua, numero, cep, cidade, estado, telefone, email);
+		Repositorio repositorio = new Repositorio();
+		repositorio.EditarCliente(cliente);
+		
+	}
+	
 	public void registrarCarro ( String marca, String modelo, int ano, String cor, String placa, String numMotor,
 			String chassi, String combustivel, String transmissao, String categoria,String conservacao, String direcao,
 			String kmRodados, int numLugares, int numPortas) {

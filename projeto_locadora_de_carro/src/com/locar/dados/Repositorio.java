@@ -50,6 +50,61 @@ public class Repositorio {
 		
 	}
 	
+	public void EditarCliente (Cliente cliente) {
+		Connection connection = estabelecerConexao();
+		
+		Statement statement = null;
+		try {
+		    statement = connection.createStatement();
+			statement.execute("UPDATE cliente SET " +
+                    "nomeCompleto = '" + cliente.getNomeCompleto() + "', " +
+                    "dataNascimento = '" + cliente.getDataNascimento() + "', " +
+                    "sexo = '" + cliente.getSexo() + "', " +
+                    "cnh = '" + cliente.getCnh() + "', " +
+                    "vencimentoCnh = '" + cliente.getVencimentoCnh() + "', " +
+                    "bairroRua = '" + cliente.getBairroRua() + "', " +
+                    "numero = '" + cliente.getNumero() + "', " +
+                    "cep = '" + cliente.getCep() + "', " +
+                    "cidade = '" + cliente.getCidade() + "', " +
+                    "estado = '" + cliente.getEstado() + "', " +
+                    "telefone = '" + cliente.getTelefone() + "', " +
+                    "email = '" + cliente.getEmail() + "' " +
+                    "WHERE cpf = '" + cliente.getCpf() + "'");
+			
+		} catch (SQLException e) {
+			// TODO tratar exceção
+		} finally {
+			try {
+				connection.close();
+				statement.close();
+			} catch (Exception e) {
+				//TODO tratar exeção
+			}
+		}
+		
+	}
+	
+	public void excluirCliente (String cpf) {
+		Connection connection = estabelecerConexao();
+		
+		Statement statement = null;
+		try {
+		    statement = connection.createStatement();
+			statement.execute("DELETE FROM cliente WHERE cpf = '" + cpf + "'");
+			
+		} catch (SQLException e) {
+			// TODO tratar exceção
+		} finally {
+			try {
+				connection.close();
+				statement.close();
+			} catch (Exception e) {
+				//TODO tratar exeção
+			}
+		}
+		
+	}
+	
 	public void registrarCarro (Carro carro) {
 		Connection connection = estabelecerConexao();
 		
@@ -149,6 +204,26 @@ public class Repositorio {
 
         }
         return clientes;
+    }
+    
+    public Cliente buscarDadosCliente(String cpf) {
+        String sql = "SELECT nomeCompleto, dataNascimento, sexo, cnh, vencimentoCnh, bairroRua, numero, "
+        		+ " cep, cidade, estado, telefone, email FROM cliente WHERE cpf = ?";
+        try (Connection conn = estabelecerConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, cpf);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                return new Cliente(rs.getString("nomeCompleto"),rs.getString("dataNascimento"), rs.getString("sexo"),
+                		rs.getString("cnh"), rs.getString("vencimentoCnh"), rs.getString("bairroRua"), rs.getInt("numero"),
+                		rs.getString("cep"), rs.getString("cidade"), rs.getString("estado"), rs.getString("telefone")
+                		,rs.getString("email"));
+            }
+        } catch (SQLException e) {
+            // TODO tratar exeção
+        }
+        return null;
     }
 	
     public Cliente buscarClientePorCpf(String cpf) {
