@@ -39,6 +39,25 @@ public class Carro {
  this.numPortas = numPortas;
 }
     
+    public Carro(String marca, String modelo, int ano, String cor, String numMotor,
+            String chassi, String combustivel, String transmissao, String categoria, String conservacao,
+            String direcao, String kmRodados, int numLugares, int numPortas) {
+ this.marca = marca;
+ this.modelo = modelo;
+ this.ano = ano;
+ this.cor = cor;
+ this.numMotor = numMotor;
+ this.chassi = chassi;
+ this.combustivel = combustivel;
+ this.transmissao = transmissao;
+ this.categoria = categoria;
+ this.conservacao = conservacao;
+ this.direcao = direcao;
+ this.kmRodados = kmRodados;
+ this.numLugares = numLugares;
+ this.numPortas = numPortas;
+}
+    
     public Carro(String marca, String modelo, int ano, String kmRodados) {
     	 this.marca = marca;
     	 this.modelo = modelo;

@@ -105,6 +105,8 @@ public class Repositorio {
 		
 	}
 	
+	
+	
 	public void registrarCarro (Carro carro) {
 		Connection connection = estabelecerConexao();
 		
@@ -117,6 +119,81 @@ public class Repositorio {
 					+ "', '" + carro.getChassi() + "', '" + carro.getCombustivel() + "', '" + carro.getTransmissao()
 					+ "', '" + carro.getCategoria() + "', '" + carro.getConservacao() + "', '" + carro.getDirecao()
 					+ "', '" + carro.getKmRodados() + "', '" + carro.getNumLugares() + "', '" + carro.getNumPortas() + "')");
+			
+		} catch (SQLException e) {
+			// TODO tratar exceção
+		} finally {
+			try {
+				connection.close();
+				statement.close();
+			} catch (Exception e) {
+				//TODO tratar exeção
+			}
+		}
+		
+	}
+	
+	public Carro buscarDadosCarro(String placa) {
+	    String sql = "SELECT marca, modelo, ano, cor, numMotor, chassi, combustivel, transmissao, categoria, " +
+	                 "conservacao, direcao, kmRodados, numLugares, numPortas FROM carro WHERE placa = ?";
+	    try (Connection conn = estabelecerConexao();
+	         PreparedStatement stmt = conn.prepareStatement(sql)) {
+	        stmt.setString(1, placa);
+	        ResultSet rs = stmt.executeQuery();
+	        
+	        if (rs.next()) {
+	            return new Carro(rs.getString("marca"), rs.getString("modelo"), rs.getInt("ano"), rs.getString("cor"),
+	                             rs.getString("numMotor"), rs.getString("chassi"), rs.getString("combustivel"),
+	                             rs.getString("transmissao"), rs.getString("categoria"), rs.getString("conservacao"),
+	                             rs.getString("direcao"), rs.getString("kmRodados"), rs.getInt("numLugares"),
+	                             rs.getInt("numPortas"));
+	        }
+	    } catch (SQLException e) {
+	        // TODO tratar exceção
+	    }
+	    return null;
+	}
+	
+	public void editarCarro(Carro carro) {
+	    Connection connection = estabelecerConexao();
+	    Statement statement = null;
+	    try {
+	        statement = connection.createStatement();
+	        statement.execute("UPDATE carro SET " +
+	                "marca = '" + carro.getMarca() + "', " +
+	                "modelo = '" + carro.getModelo() + "', " +
+	                "ano = '" + carro.getAno() + "', " +
+	                "cor = '" + carro.getCor() + "', " +
+	                "numMotor = '" + carro.getNumMotor() + "', " +
+	                "chassi = '" + carro.getChassi() + "', " +
+	                "combustivel = '" + carro.getCombustivel() + "', " +
+	                "transmissao = '" + carro.getTransmissao() + "', " +
+	                "categoria = '" + carro.getCategoria() + "', " +
+	                "conservacao = '" + carro.getConservacao() + "', " +
+	                "direcao = '" + carro.getDirecao() + "', " +
+	                "kmRodados = '" + carro.getKmRodados() + "', " +
+	                "numLugares = '" + carro.getNumLugares() + "', " +
+	                "numPortas = '" + carro.getNumPortas() + "' " +
+	                "WHERE placa = '" + carro.getPlaca() + "'");
+	    } catch (SQLException e) {
+	        // TODO tratar exceção
+	    } finally {
+	        try {
+	            statement.close();
+	            connection.close();
+	        } catch (Exception e) {
+	            // TODO tratar exceção
+	        }
+	    }
+	}
+	
+	public void excluirCarro (String placa) {
+		Connection connection = estabelecerConexao();
+		
+		Statement statement = null;
+		try {
+		    statement = connection.createStatement();
+			statement.execute("DELETE FROM carro WHERE placa = '" + placa + "'");
 			
 		} catch (SQLException e) {
 			// TODO tratar exceção

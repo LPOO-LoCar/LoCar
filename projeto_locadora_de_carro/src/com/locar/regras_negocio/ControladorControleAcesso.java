@@ -43,6 +43,18 @@ public class ControladorControleAcesso {
 		repositorio.registrarCarro(carro);
 	}
 	
+	public void editarCarro ( String marca, String modelo, int ano, String cor, String placa, String numMotor,
+			String chassi, String combustivel, String transmissao, String categoria,String conservacao, String direcao,
+			String kmRodados, int numLugares, int numPortas) {
+		
+		// TODO validações
+		
+		Carro carro = new Carro(marca, modelo, ano, cor, placa, numMotor, chassi, combustivel, transmissao, categoria,
+				conservacao,  direcao, kmRodados, numLugares, numPortas);
+		Repositorio repositorio = new Repositorio();
+		repositorio.editarCarro(carro);
+	}
+	
 	public void registrarLocacao ( Cliente cliente, Carro carro, double valorDiaria, int diasLocados, double valorTotal, 
 			String formaPagamento) {
 		
