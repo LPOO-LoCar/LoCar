@@ -173,6 +173,12 @@ public class NovaLocação extends JFrame {
 		locPlaca_Label.setBounds(10, 235, 48, 28);
 		contentPane.add(locPlaca_Label);
 		
+		JComboBox locTipo_comboBox = new JComboBox <> (new String [] {"Hatch", "Sedan", "SUV", "Picape", "Minivan", "Outro"});
+		locTipo_comboBox.setModel(new DefaultComboBoxModel(new String[] {"Hatch", "Sedan", "SUV", "Picape", "Minivan", "Outro"}));
+		locTipo_comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		locTipo_comboBox.setBounds(10, 320, 165, 20);
+		contentPane.add(locTipo_comboBox);
+		
 		locPlaca_textField = new JTextField();
 		locPlaca_textField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -184,6 +190,7 @@ public class NovaLocação extends JFrame {
 		        locModelo_textField.setText(carro.getModelo());
 		        locAno_textField.setText(String.valueOf(carro.getAno()));
 		        locKM_textField.setText(carro.getKmRodados());
+		        locTipo_comboBox.setSelectedItem(carro.getCategoria());
 			}
 		});
 		locPlaca_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -217,12 +224,6 @@ public class NovaLocação extends JFrame {
 		locTipo_Label.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		locTipo_Label.setBounds(10, 291, 100, 28);
 		contentPane.add(locTipo_Label);
-		
-		JComboBox locTipo_comboBox = new JComboBox <> (new String [] {"Hatch", "Sedan", "SUV", "Picape", "Minivan", "Outro"});
-		locTipo_comboBox.setModel(new DefaultComboBoxModel(new String[] {"Hatch", "Sedan", "SUV", "Picape", "Minivan", "Outro"}));
-		locTipo_comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		locTipo_comboBox.setBounds(10, 320, 165, 20);
-		contentPane.add(locTipo_comboBox);
 		
 		JLabel locAno_Label = new JLabel("Ano:");
 		locAno_Label.setFont(new Font("Tahoma", Font.PLAIN, 18));

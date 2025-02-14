@@ -5,8 +5,14 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.locar.ui.TelaPrincipal;
+
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JSeparator;
 import java.awt.Color;
 import javax.swing.JTextField;
@@ -193,5 +199,17 @@ public class AgendarVistoriaVeicular extends JFrame {
 		btnLimpar.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnLimpar.setBounds(424, 515, 107, 35);
 		contentPane.add(btnLimpar);
+		
+		JButton btnNewButton_1 = new JButton("Voltar");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaPrincipal telaPrincipal = new TelaPrincipal();
+				dispose();
+				telaPrincipal.setVisible(true);
+			}
+		});
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton_1.setBounds(10, 11, 89, 35);
+		contentPane.add(btnNewButton_1);
 	}
 }

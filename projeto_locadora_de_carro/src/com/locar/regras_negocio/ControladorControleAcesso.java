@@ -77,6 +77,18 @@ public class ControladorControleAcesso {
 		
 	}
 	
+	public void registrarAgendamentoManuntencao (Carro carro, String tipoManuntencao, String dataManuntencao, 
+			String hora, String observacao) {
+		
+		// TODO validações
+		
+		AgendamentoManuntencao agendamentoManuntencao = new AgendamentoManuntencao(carro, tipoManuntencao, dataManuntencao , 
+				hora ,observacao);
+		Repositorio repositorio = new Repositorio();
+		repositorio.registrarAgendamentoManuntencao(agendamentoManuntencao);
+		
+	}
+	
 	
 	
 	

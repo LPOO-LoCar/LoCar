@@ -108,13 +108,16 @@ public class BuscarVeiculo extends JFrame {
 		        String placa = campoTextoPlaca.getText();
 
 		        if (!placa.isEmpty() && marca.isEmpty() && modelo.isEmpty()) {
-		            buscarCarro();  // Busca sem filtro
+		            buscarCarro();  
 		        } 
 		        else if (!marca.isEmpty() && modelo.isEmpty() && placa.isEmpty()) {
-		            buscarCarroPorMarca();  // Busca apenas por marca
+		            buscarCarroPorMarca();  
 		        } 
+		        else if (!modelo.isEmpty() && marca.isEmpty() && placa.isEmpty()) {
+		        	buscarCarroPorModelo(); 
+		        }
 		        else {
-		            buscarCarroPorModelo();  // Busca por modelo ou outras combinações
+		            buscarTodosCarros();  
 		        }
 
 			}

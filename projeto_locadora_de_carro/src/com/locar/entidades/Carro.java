@@ -58,11 +58,12 @@ public class Carro {
  this.numPortas = numPortas;
 }
     
-    public Carro(String marca, String modelo, int ano, String kmRodados) {
+    public Carro(String marca, String modelo, int ano, String kmRodados, String categoria) {
     	 this.marca = marca;
     	 this.modelo = modelo;
     	 this.ano = ano;
     	 this.kmRodados = kmRodados;    	
+    	 this.categoria = categoria;
     }
     
     public Carro(String marca, String modelo, int ano, String cor, String placa, String numMotor, String chassi ) {

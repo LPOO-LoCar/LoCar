@@ -256,6 +256,30 @@ public class Repositorio {
 		
 	}
 	
+	public void registrarAgendamentoManuntencao (AgendamentoManuntencao agendamentoManuntencao) {
+		Connection connection = estabelecerConexao();
+		
+		Statement statement = null;
+		try {
+		    statement = connection.createStatement();
+			statement.execute("INSERT INTO agendamentomanuntencao (id_carro, tipoManuntencao, dataManuntencao,hora, observacao) "
+					+ " VALUES ('" + agendamentoManuntencao.getCarro().getId() + "', '" 
+					+ agendamentoManuntencao.getTipoManuntencao() + "', '" + agendamentoManuntencao.getDataManuntencao() + "', '"
+					+ agendamentoManuntencao.getHora() + "', '" + agendamentoManuntencao.getObservacao() + "')");
+			
+		} catch (SQLException e) {
+			// TODO tratar exceção
+		} finally {
+			try {
+				connection.close();
+				statement.close();
+			} catch (Exception e) {
+				//TODO tratar exeção
+			}
+		}
+		
+	}
+	
     public List<Cliente> buscarTodosClientes() {
         String sql = "SELECT nomeCompleto, dataNascimento, telefone, email , sexo, cnh, vencimentoCnh FROM cliente";
         List<Cliente> clientes = new ArrayList<>();
@@ -438,14 +462,15 @@ public class Repositorio {
     }
     
     public Carro buscarCarroPorPlaca(String placa) {
-        String sql = "SELECT marca, modelo, ano, kmRodados FROM carro WHERE placa = ?";
+        String sql = "SELECT marca, modelo, ano, kmRodados, categoria FROM carro WHERE placa = ?";
         try (Connection conn = estabelecerConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, placa);
             ResultSet rs = stmt.executeQuery();
             
             if (rs.next()) {
-                return new Carro(rs.getString("marca"), rs.getString("modelo"), rs.getInt("ano"), rs.getString("kmRodados"));
+                return new Carro(rs.getString("marca"), rs.getString("modelo"), rs.getInt("ano"), rs.getString("kmRodados"),
+                		rs.getString("categoria"));
             }
         } catch (SQLException e) {
             // TODO tratar exeção

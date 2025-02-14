@@ -123,12 +123,16 @@ public class BuscarCliente extends JFrame {
 		JButton btnNewButton = new JButton("Buscar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (locCPF_textField.getText() != null && !locCPF_textField.getText().isEmpty()) {
-					buscarClientePorCpf();
-				}
-				else {
-					buscarClientePorNomeCompleto();
-				}
+		        String cpf = locCPF_textField.getText().trim();
+		        String nome = locNome_textField.getText().trim();
+		        
+		        if (!cpf.isEmpty()) {
+		            buscarClientePorCpf();
+		        } else if (!nome.isEmpty()) {
+		            buscarClientePorNomeCompleto();
+		        } else {
+		            buscarTodosClientes(); 
+		        }
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 25));
