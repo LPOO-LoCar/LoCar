@@ -280,6 +280,88 @@ public class Repositorio {
 		
 	}
 	
+	public void registrarAgendamentoVistoria (AgendamentoVistoria agendamentoVistoria) {
+		Connection connection = estabelecerConexao();
+		
+		Statement statement = null;
+		try {
+		    statement = connection.createStatement();
+			statement.execute("INSERT INTO agendamentovistoria (id_carro, tipoManuntencao, dataManuntencao,hora, observacao) "
+					+ " VALUES ('" + agendamentoVistoria.getCarro().getId() + "', '" 
+					+ agendamentoVistoria.getTipoManuntencao() + "', '" + agendamentoVistoria.getDataManuntencao() + "', '"
+					+ agendamentoVistoria.getHora() + "', '" + agendamentoVistoria.getObservacao() + "')");
+			
+		} catch (SQLException e) {
+			// TODO tratar exceção
+		} finally {
+			try {
+				connection.close();
+				statement.close();
+			} catch (Exception e) {
+				//TODO tratar exeção
+			}
+		}
+		
+	}
+	
+    public List<AgendamentoManuntencao> buscarTodosAgendamentosManuntencao() {
+        String sqlAgendamentoManuntencao = "SELECT id_carro, tipoManuntencao, dataManuntencao, hora, observacao FROM agendamentomanuntencao";
+        List<AgendamentoManuntencao> agendamentosManuntencao = new ArrayList<>();
+
+        try (Connection conn = estabelecerConexao();
+             PreparedStatement stmtAgendamentoManuntencao = conn.prepareStatement(sqlAgendamentoManuntencao);
+             ResultSet rsAgendamentoManuntencao = stmtAgendamentoManuntencao.executeQuery()) {
+
+            while (rsAgendamentoManuntencao.next()) { 
+
+                long carroId = rsAgendamentoManuntencao.getLong("id_carro");
+                Carro carro = buscarCarroPorId(carroId);
+
+                AgendamentoManuntencao agendamentoManuntencao = new AgendamentoManuntencao( 
+                        carro, 
+                        rsAgendamentoManuntencao.getString("tipoManuntencao"), 
+                        rsAgendamentoManuntencao.getString("dataManuntencao"), 
+                        rsAgendamentoManuntencao.getString("hora"), 
+                        rsAgendamentoManuntencao.getString("observacao")
+                );
+                agendamentosManuntencao.add(agendamentoManuntencao);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); 
+        }
+
+        return agendamentosManuntencao;
+    }
+    
+    public List<AgendamentoVistoria> buscarTodosAgendamentosVistoria() {
+        String sqlAgendamentoVistoria = "SELECT id_carro, tipoManuntencao, dataManuntencao, hora, observacao FROM agendamentovistoria";
+        List<AgendamentoVistoria> agendamentosVistoria = new ArrayList<>();
+
+        try (Connection conn = estabelecerConexao();
+             PreparedStatement stmtAgendamentoVistoria = conn.prepareStatement(sqlAgendamentoVistoria);
+             ResultSet rsAgendamentoVistoria = stmtAgendamentoVistoria.executeQuery()) {
+
+            while (rsAgendamentoVistoria.next()) { 
+
+                long carroId = rsAgendamentoVistoria.getLong("id_carro");
+                Carro carro = buscarCarroPorId(carroId);
+
+                AgendamentoVistoria agendamentoVistoria = new AgendamentoVistoria( 
+                        carro, 
+                        rsAgendamentoVistoria.getString("tipoManuntencao"), 
+                        rsAgendamentoVistoria.getString("dataManuntencao"), 
+                        rsAgendamentoVistoria.getString("hora"), 
+                        rsAgendamentoVistoria.getString("observacao")
+                );
+                agendamentosVistoria.add(agendamentoVistoria);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); 
+        }
+
+        return agendamentosVistoria;
+    }
+	
     public List<Cliente> buscarTodosClientes() {
         String sql = "SELECT nomeCompleto, dataNascimento, telefone, email , sexo, cnh, vencimentoCnh FROM cliente";
         List<Cliente> clientes = new ArrayList<>();

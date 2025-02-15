@@ -4,10 +4,14 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import com.locar.dados.Repositorio;
+import com.locar.entidades.AgendamentoManuntencao;
 import com.locar.entidades.Carro;
+import com.locar.entidades.Cliente;
 import com.locar.regras_negocio.ControladorControleAcesso;
 import com.locar.ui.TelaPrincipal;
 
@@ -16,6 +20,8 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.JSeparator;
+import javax.swing.JTable;
+
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -23,7 +29,10 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class AgendarManutençãoVeicular extends JFrame {
 
@@ -36,6 +45,8 @@ public class AgendarManutençãoVeicular extends JFrame {
 	private JTextField campoTextoKmRodados;
 	private JTextField campoTextoData;
 	private JTextField campoTextoHora;
+	private JTable tabela;
+	private DefaultTableModel modelo;
 
 	/**
 	 * Launch the application.
@@ -58,7 +69,7 @@ public class AgendarManutençãoVeicular extends JFrame {
 	 */
 	public AgendarManutençãoVeicular() {
 		setTitle("Agendar Manutenção Veicular");
-		setSize(700,600);
+		setSize(700,700);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		
@@ -189,22 +200,56 @@ public class AgendarManutençãoVeicular extends JFrame {
 		contentPane.add(lblNewLabel_1_3_1_1);
 		
 		campoTextoData = new JTextField();
+		campoTextoData.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+                String textoData = campoTextoData.getText();
+                textoData = textoData.replaceAll("[^0-9]", ""); 
+
+                if (textoData.length() >= 2) {
+                    textoData = textoData.substring(0, 2) + "/" + textoData.substring(2);
+                }
+                if (textoData.length() >= 5) {
+                    textoData = textoData.substring(0, 5) + "/" + textoData.substring(5);
+                }
+                if (textoData.length() >= 10) {
+                    textoData = textoData.substring(0, 10);
+                }
+
+                campoTextoData.setText(textoData);
+			}
+		});
 		campoTextoData.setColumns(10);
 		campoTextoData.setBounds(242, 282, 176, 20);
 		contentPane.add(campoTextoData);
 		
 		campoTextoHora = new JTextField();
+		campoTextoHora.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+                String textoHora = campoTextoHora.getText();
+                textoHora = textoHora.replaceAll("[^0-9]", ""); 
+
+                if (textoHora.length() >= 2) {
+                    textoHora = textoHora.substring(0, 2) + ":" + textoHora.substring(2);
+                }
+                if (textoHora.length() >= 5) {
+                    textoHora = textoHora.substring(0, 5);
+                }
+                campoTextoHora.setText(textoHora);
+			}
+		});
 		campoTextoHora.setColumns(10);
 		campoTextoHora.setBounds(464, 282, 176, 20);
 		contentPane.add(campoTextoHora);
 		
 		JLabel textoObservacoes = new JLabel("Observações:");
 		textoObservacoes.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		textoObservacoes.setBounds(10, 323, 191, 20);
+		textoObservacoes.setBounds(10, 311, 191, 20);
 		contentPane.add(textoObservacoes);
 		
 		JTextArea campoTextoObservacao = new JTextArea();
-		campoTextoObservacao.setBounds(10, 356, 469, 45);
+		campoTextoObservacao.setBounds(10, 342, 482, 35);
 		contentPane.add(campoTextoObservacao);
 		
 		JButton btnNewButton = new JButton("Agendar");
@@ -231,12 +276,24 @@ public class AgendarManutençãoVeicular extends JFrame {
 				
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnNewButton.setBounds(545, 515, 116, 35);
+		btnNewButton.setBounds(558, 615, 116, 35);
 		contentPane.add(btnNewButton);
 		
 		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				campoTextoPlaca.setText("");
+				campoTextoMarca.setText("");
+				campoTextoModelo.setText("");
+				campoTextoAno.setText("");
+				campoTextoKmRodados.setText("");
+				campoTextoData.setText("");
+				campoTextoHora.setText("");
+				campoTextoObservacao.setText("");
+			}
+		});
 		btnLimpar.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnLimpar.setBounds(424, 515, 107, 35);
+		btnLimpar.setBounds(440, 615, 107, 35);
 		contentPane.add(btnLimpar);
 		
 		JButton btnNewButton_1 = new JButton("Voltar");
@@ -253,7 +310,33 @@ public class AgendarManutençãoVeicular extends JFrame {
 		
 		JLabel lblNewLabel_3_1 = new JLabel("Manuntenções anteriores");
 		lblNewLabel_3_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblNewLabel_3_1.setBounds(10, 412, 348, 31);
+		lblNewLabel_3_1.setBounds(10, 388, 348, 31);
 		contentPane.add(lblNewLabel_3_1);
+		
+        modelo = new DefaultTableModel();
+        modelo.addColumn("Id do carro");
+        modelo.addColumn("Tipo");
+        modelo.addColumn("Data");
+        modelo.addColumn("Hora");
+        modelo.addColumn("Observação");
+
+        tabela = new JTable(modelo);
+        JScrollPane scrollPane = new JScrollPane(tabela);
+        scrollPane.setBounds(10, 430, 664, 178);
+        contentPane.add(scrollPane);
+        
+        buscarTodosAgendamentoManuntencao();
 	}
+	
+    private void buscarTodosAgendamentoManuntencao() {
+        Repositorio repositorio = new Repositorio();
+        List<AgendamentoManuntencao> agendamentosManuntencao = repositorio.buscarTodosAgendamentosManuntencao();
+        
+        modelo.setRowCount(0); 
+        for (AgendamentoManuntencao agendamentoManuntencao : agendamentosManuntencao) {
+            modelo.addRow(new Object[]{agendamentoManuntencao.getCarro().getId(), agendamentoManuntencao.getTipoManuntencao(),
+            		agendamentoManuntencao.getDataManuntencao(), agendamentoManuntencao.getHora(),
+            		agendamentoManuntencao.getObservacao()});
+        }
+    }
 }

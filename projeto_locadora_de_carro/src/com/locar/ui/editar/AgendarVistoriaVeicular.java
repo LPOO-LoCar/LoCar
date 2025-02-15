@@ -4,34 +4,50 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
+import com.locar.dados.Repositorio;
+import com.locar.entidades.AgendamentoManuntencao;
+import com.locar.entidades.AgendamentoVistoria;
+import com.locar.entidades.Carro;
+import com.locar.regras_negocio.ControladorControleAcesso;
 import com.locar.ui.TelaPrincipal;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JSeparator;
+import javax.swing.JTable;
+
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class AgendarVistoriaVeicular extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
+	private JTextField campoTextoPlaca;
+	private JTextField campoTextoMarca;
+	private JTextField campoTextoModelo;
+	private JTextField campoTextoAno;
+	private JTextField campoTextoKmRodados;
+	private JTextField campoTextoData;
+	private JTextField campoTextoHora;
+	private JTable tabela;
+	private DefaultTableModel modelo;
 
 	/**
 	 * Launch the application.
@@ -54,7 +70,7 @@ public class AgendarVistoriaVeicular extends JFrame {
 	 */
 	public AgendarVistoriaVeicular() {
 		setTitle("Agendar Manutenção Veicular");
-		setSize(700,600);
+		setSize(700,700);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		
@@ -94,20 +110,39 @@ public class AgendarVistoriaVeicular extends JFrame {
 		separator.setBounds(0, 82, 684, 2);
 		contentPane.add(separator);
 		
-		textField = new JTextField();
-		textField.setBounds(10, 120, 176, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		JComboBox campoTextoCategoria = new JComboBox();
+		campoTextoCategoria.setModel(new DefaultComboBoxModel(new String[] {"Hatch", "Sedan", "SUV", "Picape", "Minivan", "Outro"}));
+		campoTextoCategoria.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		campoTextoCategoria.setBounds(10, 174, 176, 22);
+		contentPane.add(campoTextoCategoria);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(242, 120, 176, 20);
-		contentPane.add(textField_1);
+		campoTextoPlaca = new JTextField();
+		campoTextoPlaca.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		        String placa = campoTextoPlaca.getText();
+		        Repositorio repositorio = new Repositorio();
+		        Carro carro = repositorio.buscarCarroPorPlaca(placa);
+		            
+		        campoTextoMarca.setText(carro.getMarca());
+		        campoTextoModelo.setText(carro.getModelo());
+		        campoTextoAno.setText(String.valueOf(carro.getAno()));
+		        campoTextoKmRodados.setText(carro.getKmRodados());
+		        campoTextoCategoria.setSelectedItem(carro.getCategoria());
+			}
+		});
+		campoTextoPlaca.setBounds(10, 120, 176, 20);
+		contentPane.add(campoTextoPlaca);
+		campoTextoPlaca.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(464, 120, 176, 20);
-		contentPane.add(textField_2);
+		campoTextoMarca = new JTextField();
+		campoTextoMarca.setColumns(10);
+		campoTextoMarca.setBounds(242, 120, 176, 20);
+		contentPane.add(campoTextoMarca);
+		
+		campoTextoModelo = new JTextField();
+		campoTextoModelo.setColumns(10);
+		campoTextoModelo.setBounds(464, 120, 176, 20);
+		contentPane.add(campoTextoModelo);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("Categoria:");
 		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -124,21 +159,15 @@ public class AgendarVistoriaVeicular extends JFrame {
 		lblNewLabel_1_2_1_1.setBounds(464, 146, 175, 25);
 		contentPane.add(lblNewLabel_1_2_1_1);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(242, 175, 176, 20);
-		contentPane.add(textField_3);
+		campoTextoAno = new JTextField();
+		campoTextoAno.setColumns(10);
+		campoTextoAno.setBounds(242, 175, 176, 20);
+		contentPane.add(campoTextoAno);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(464, 175, 176, 20);
-		contentPane.add(textField_4);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Hatch", "Sedan", "SUV", "Picape", "Minivan", "Outro"}));
-		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		comboBox.setBounds(10, 174, 176, 22);
-		contentPane.add(comboBox);
+		campoTextoKmRodados = new JTextField();
+		campoTextoKmRodados.setColumns(10);
+		campoTextoKmRodados.setBounds(464, 175, 176, 20);
+		contentPane.add(campoTextoKmRodados);
 		
 		JLabel lblNewLabel_3 = new JLabel("Detalhes");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -155,11 +184,11 @@ public class AgendarVistoriaVeicular extends JFrame {
 		lblNewLabel_1_3.setBounds(10, 249, 191, 20);
 		contentPane.add(lblNewLabel_1_3);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Inicial", "Periódica", "De entrega"}));
-		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		comboBox_1.setBounds(10, 278, 176, 22);
-		contentPane.add(comboBox_1);
+		JComboBox campoTextoTipo = new JComboBox();
+		campoTextoTipo.setModel(new DefaultComboBoxModel(new String[] {"Inicial", "Periódica", "De entrega"}));
+		campoTextoTipo.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		campoTextoTipo.setBounds(10, 278, 176, 22);
+		contentPane.add(campoTextoTipo);
 		
 		JLabel lblNewLabel_1_3_1 = new JLabel("Data:");
 		lblNewLabel_1_3_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -171,33 +200,100 @@ public class AgendarVistoriaVeicular extends JFrame {
 		lblNewLabel_1_3_1_1.setBounds(464, 249, 60, 20);
 		contentPane.add(lblNewLabel_1_3_1_1);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(242, 282, 176, 20);
-		contentPane.add(textField_5);
+		campoTextoData = new JTextField();
+		campoTextoData.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+                String textoData = campoTextoData.getText();
+                textoData = textoData.replaceAll("[^0-9]", ""); 
+
+                if (textoData.length() >= 2) {
+                    textoData = textoData.substring(0, 2) + "/" + textoData.substring(2);
+                }
+                if (textoData.length() >= 5) {
+                    textoData = textoData.substring(0, 5) + "/" + textoData.substring(5);
+                }
+                if (textoData.length() >= 10) {
+                    textoData = textoData.substring(0, 10);
+                }
+
+                campoTextoData.setText(textoData);
+			}
+		});
+		campoTextoData.setColumns(10);
+		campoTextoData.setBounds(242, 282, 176, 20);
+		contentPane.add(campoTextoData);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(464, 282, 176, 20);
-		contentPane.add(textField_6);
+		campoTextoHora = new JTextField();
+		campoTextoHora.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+                String textoHora = campoTextoHora.getText();
+                textoHora = textoHora.replaceAll("[^0-9]", ""); 
+
+                if (textoHora.length() >= 2) {
+                    textoHora = textoHora.substring(0, 2) + ":" + textoHora.substring(2);
+                }
+                if (textoHora.length() >= 5) {
+                    textoHora = textoHora.substring(0, 5);
+                }
+                campoTextoHora.setText(textoHora);
+			}
+		});
+		campoTextoHora.setColumns(10);
+		campoTextoHora.setBounds(464, 282, 176, 20);
+		contentPane.add(campoTextoHora);
 		
 		JLabel lblNewLabel_1_3_2 = new JLabel("Observações:");
 		lblNewLabel_1_3_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_1_3_2.setBounds(10, 323, 191, 20);
+		lblNewLabel_1_3_2.setBounds(10, 311, 191, 20);
 		contentPane.add(lblNewLabel_1_3_2);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(10, 356, 408, 64);
-		contentPane.add(textArea);
+		JTextArea campoTextoObservacao = new JTextArea();
+		campoTextoObservacao.setBounds(10, 342, 458, 43);
+		contentPane.add(campoTextoObservacao);
 		
 		JButton btnNewButton = new JButton("Agendar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+				String placa = campoTextoPlaca.getText();
+				Repositorio repositorio = new Repositorio();
+				Carro carro = repositorio.buscarIdPorPlaca(placa);
+				
+				String tipoManuntencao = campoTextoTipo.getSelectedItem().toString();
+				String data = campoTextoData.getText();
+				String hora = campoTextoHora.getText();
+				String observacao = campoTextoObservacao.getText();
+				
+	            ControladorControleAcesso controlador = new ControladorControleAcesso();
+	            controlador.registrarAgendamentoVistoria(carro, tipoManuntencao, data, hora, observacao);
+	            
+				JOptionPane.showMessageDialog(null, "Agendamento de vistoria feita com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception e1) {
+				JOptionPane.showMessageDialog(null, "Erro ao agendar", "Erro", JOptionPane.ERROR_MESSAGE);
+			}
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnNewButton.setBounds(545, 515, 107, 35);
+		btnNewButton.setBounds(556, 615, 118, 35);
 		contentPane.add(btnNewButton);
 		
 		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				campoTextoPlaca.setText("");
+				campoTextoMarca.setText("");
+				campoTextoModelo.setText("");
+				campoTextoAno.setText("");
+				campoTextoKmRodados.setText("");
+				campoTextoData.setText("");
+				campoTextoHora.setText("");
+				campoTextoObservacao.setText("");
+			}
+		});
 		btnLimpar.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnLimpar.setBounds(424, 515, 107, 35);
+		btnLimpar.setBounds(432, 615, 107, 35);
 		contentPane.add(btnLimpar);
 		
 		JButton btnNewButton_1 = new JButton("Voltar");
@@ -211,5 +307,36 @@ public class AgendarVistoriaVeicular extends JFrame {
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNewButton_1.setBounds(10, 11, 89, 35);
 		contentPane.add(btnNewButton_1);
+		
+        modelo = new DefaultTableModel();
+        modelo.addColumn("Id do carro");
+        modelo.addColumn("Tipo");
+        modelo.addColumn("Data");
+        modelo.addColumn("Hora");
+        modelo.addColumn("Observação");
+
+        tabela = new JTable(modelo);
+        JScrollPane scrollPane = new JScrollPane(tabela);
+        scrollPane.setBounds(10, 430, 664, 178);
+        contentPane.add(scrollPane);
+        
+        JLabel lblNewLabel_3_1 = new JLabel("Vistorias anteriores");
+        lblNewLabel_3_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
+        lblNewLabel_3_1.setBounds(10, 388, 330, 31);
+        contentPane.add(lblNewLabel_3_1);
+        
+        buscarTodosAgendamentoVistoria();
 	}
+	
+    private void buscarTodosAgendamentoVistoria() {
+        Repositorio repositorio = new Repositorio();
+        List<AgendamentoVistoria> agendamentosVistoria= repositorio.buscarTodosAgendamentosVistoria();
+        
+        modelo.setRowCount(0); 
+        for (AgendamentoVistoria agendamentoVistoria : agendamentosVistoria) {
+            modelo.addRow(new Object[]{agendamentoVistoria.getCarro().getId(), agendamentoVistoria.getTipoManuntencao(),
+            		agendamentoVistoria.getDataManuntencao(), agendamentoVistoria.getHora(),
+            		agendamentoVistoria.getObservacao()});
+        }
+    }
 }

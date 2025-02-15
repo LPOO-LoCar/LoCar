@@ -17,13 +17,14 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 
 public class Login extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField campoTextoSenha;
 	private JTextField campoTextoUsuario;
+	private JPasswordField campoTextoSenha;
 
 	/**
 	 * Launch the application.
@@ -78,11 +79,6 @@ public class Login extends JFrame {
 		lblNewLabel_3.setBounds(241, 137, 91, 27);
 		contentPane.add(lblNewLabel_3);
 		
-		campoTextoSenha = new JTextField();
-		campoTextoSenha.setBounds(143, 237, 276, 20);
-		contentPane.add(campoTextoSenha);
-		campoTextoSenha.setColumns(10);
-		
 		JLabel lblNewLabel_4 = new JLabel("Fazer Login");
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 25));
@@ -106,7 +102,6 @@ public class Login extends JFrame {
 				String senha = campoTextoSenha.getText();
 				
 				if (usuario.equals("admin") && senha.equals("1234")) {
-					JOptionPane.showMessageDialog(Login.this, "Login bem-sucedido!");
 					dispose();
 					abrirTelaPrincipal();
 				} else {
@@ -117,6 +112,10 @@ public class Login extends JFrame {
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnNewButton.setBounds(207, 278, 136, 36);
 		contentPane.add(btnNewButton);
+		
+		campoTextoSenha = new JPasswordField();
+		campoTextoSenha.setBounds(143, 236, 276, 20);
+		contentPane.add(campoTextoSenha);
 	}
 }
 
