@@ -55,6 +55,21 @@ public class ControladorControleAcesso {
 		repositorio.editarCarro(carro);
 	}
 	
+	public void editarFuncionario(String nome, String cpf, String rg, String orgExp, String telefone, String email,
+            String dataNascimento, String dataExp, String cnh, String validadeCNH, String cep,
+            String rua, String numeroRua, String bairro, String cidade, String complemento,
+            String senha) {
+
+// TODO: Implementar validações
+
+Funcionario funcionario = new Funcionario(nome, cpf, rg, orgExp, telefone, email, dataNascimento, dataExp, cnh,
+                               validadeCNH, cep, rua, numeroRua, bairro, cidade, complemento, senha);
+
+Repositorio repositorio = new Repositorio();
+repositorio.editarFuncionario(funcionario);
+}
+
+	
 	public void registrarLocacao ( Cliente cliente, Carro carro, double valorDiaria, int diasLocados, double valorTotal, 
 			String formaPagamento) {
 		

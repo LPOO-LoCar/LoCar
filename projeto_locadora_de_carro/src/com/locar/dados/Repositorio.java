@@ -208,6 +208,91 @@ public class Repositorio {
 		
 	}
 	
+	public void editarFuncionario(Funcionario funcionario) {
+	    Connection connection = estabelecerConexao();
+	    PreparedStatement preparedStatement = null;
+	    
+	    try {
+	        String sql = "UPDATE funcionario SET nome = ?, rg = ?, org_exp = ?, telefone = ?, email = ?, " +
+	                     "data_nascimento = ?, data_exp = ?, cnh = ?, validade_cnh = ?, cep = ?, rua = ?, " +
+	                     "numero_rua = ?, bairro = ?, cidade = ?, complemento = ?, senha = ? WHERE cpf = ?";
+	        
+	        preparedStatement = connection.prepareStatement(sql);
+	        preparedStatement.setString(1, funcionario.getNome());
+	        preparedStatement.setString(2, funcionario.getRg());
+	        preparedStatement.setString(3, funcionario.getOrgExp());
+	        preparedStatement.setString(4, funcionario.getTelefone());
+	        preparedStatement.setString(5, funcionario.getEmail());
+	        preparedStatement.setString(6, funcionario.getDataNascimento());
+	        preparedStatement.setString(7, funcionario.getDataExp());
+	        preparedStatement.setString(8, funcionario.getCnh());
+	        preparedStatement.setString(9, funcionario.getValidadeCNH());
+	        preparedStatement.setString(10, funcionario.getCep());
+	        preparedStatement.setString(11, funcionario.getRua());
+	        preparedStatement.setString(12, funcionario.getNumeroRua());
+	        preparedStatement.setString(13, funcionario.getBairro());
+	        preparedStatement.setString(14, funcionario.getCidade());
+	        preparedStatement.setString(15, funcionario.getComplemento());
+	        preparedStatement.setString(16, funcionario.getSenha());
+	        preparedStatement.setString(17, funcionario.getCpf());
+	        
+	        preparedStatement.executeUpdate();
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace(); // TODO: Tratar exceção corretamente
+	    } finally {
+	        try {
+	            preparedStatement.close();
+	            connection.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace(); // TODO: Tratar exceção corretamente
+	        }
+	    }
+	}
+	
+	public void excluirFuncionario (String cpf) {
+		Connection connection = estabelecerConexao();
+		
+		Statement statement = null;
+		try {
+		    statement = connection.createStatement();
+			statement.execute("DELETE FROM funcionario WHERE cpf = '" + cpf + "'");
+			
+		} catch (SQLException e) {
+			// TODO tratar exceção
+		} finally {
+			try {
+				connection.close();
+				statement.close();
+			} catch (Exception e) {
+				//TODO tratar exeção
+			}
+		}
+		
+	}
+	
+	public Funcionario buscarDadosFuncionario(String cpf) {
+	    String sql = "SELECT nome, rg, org_exp, telefone, email, data_nascimento, data_exp, cnh, validade_cnh, cep, rua, " +
+	                 "numero_rua, bairro, cidade, complemento, senha FROM funcionario WHERE cpf = ?";
+	    try (Connection conn = estabelecerConexao();
+	         PreparedStatement stmt = conn.prepareStatement(sql)) {
+	        stmt.setString(1, cpf);
+	        ResultSet rs = stmt.executeQuery();
+	        
+	        if (rs.next()) {
+	            return new Funcionario(rs.getString("nome"), rs.getString("rg"), rs.getString("org_exp"),
+	                                   rs.getString("telefone"), rs.getString("email"), rs.getString("data_nascimento"),
+	                                   rs.getString("data_exp"), rs.getString("cnh"), rs.getString("validade_cnh"),
+	                                   rs.getString("cep"), rs.getString("rua"), rs.getString("numero_rua"),
+	                                   rs.getString("bairro"), rs.getString("cidade"), rs.getString("complemento"),
+	                                   rs.getString("senha"));
+	        }
+	    } catch (SQLException e) {
+	        // TODO tratar exceção
+	    }
+	    return null;
+	}
+
 	public void registrarLocacao (Locacao locacao) {
 		Connection connection = estabelecerConexao();
 		

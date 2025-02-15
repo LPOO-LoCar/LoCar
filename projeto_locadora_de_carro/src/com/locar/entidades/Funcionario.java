@@ -39,6 +39,26 @@ public class Funcionario {
 			this.setComplemento(complemento);
 			this.setSenha(senha);
 	}
+	
+	public Funcionario (String nome, String rg, String orgExp, String telefone, String email, String dataNascimento, String dataExp,
+			String cnh, String validadeCNH, String cep, String rua, String numeroRua, String bairro, String cidade, String complemento, String senha) {
+			this.setNome(nome);
+			this.setRg(rg);
+			this.setOrgExp(orgExp);
+			this.setTelefone(telefone);
+			this.setEmail(email);
+			this.setDataNascimento(dataNascimento);
+			this.setDataExp(dataExp);
+			this.setCnh(cnh);
+			this.setValidadeCNH(validadeCNH);
+			this.setCep(cep);
+			this.setRua(rua);
+			this.setNumeroRua(numeroRua);
+			this.setBairro(bairro);
+			this.setCidade(cidade);
+			this.setComplemento(complemento);
+			this.setSenha(senha);
+	}
 	public Funcionario (String cpf, String nome, String telefone) {
 		this.nome = nome;
 		this.cpf = cpf;

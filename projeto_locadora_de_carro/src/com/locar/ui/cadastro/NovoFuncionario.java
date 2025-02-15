@@ -304,12 +304,19 @@ public class NovoFuncionario extends JFrame {
 		funCadastrar_Button.setBounds(553, 625, 121, 35);
 		funCadastrar_Button.addActionListener(new ActionListener () {
 			public void actionPerformed(ActionEvent e) {
-				try {
-				cadastrarFuncionario();
-				JOptionPane.showMessageDialog(null, "Funcionario cadastrado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-				} catch (Exception e1){
-					JOptionPane.showMessageDialog(null, "Erro ao cadastrar", "Erro", JOptionPane.ERROR_MESSAGE);
-				}
+		        try {
+		            String senha = funSenha_textField.getText();
+		            String confirmacaoSenha = funConfirmacaoSenha_textField.getText();
+		            
+		            FuncionarioRegras funcionarioRegras = new FuncionarioRegras();
+
+		            if (funcionarioRegras.validarSenhas(senha, confirmacaoSenha)) {
+		                cadastrarFuncionario();
+		                JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+		            }
+		        } catch (Exception e1) {
+		            JOptionPane.showMessageDialog(null, "Erro ao cadastrar", "Erro", JOptionPane.ERROR_MESSAGE);
+		        }
 			}
 		});
 		contentPane.add(funCadastrar_Button);

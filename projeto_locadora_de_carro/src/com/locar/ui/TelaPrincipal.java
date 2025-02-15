@@ -11,6 +11,7 @@ import com.locar.ui.editar.AgendarManutençãoVeicular;
 import com.locar.ui.editar.AgendarVistoriaVeicular;
 import com.locar.ui.editar.CancelarReserva;
 import com.locar.ui.editar.EditarCliente;
+import com.locar.ui.editar.EditarFuncionario;
 import com.locar.ui.editar.EditarLocAtiva;
 import com.locar.ui.editar.EditarLocInativa;
 import com.locar.ui.editar.EditarReservaAtiva;
@@ -298,6 +299,12 @@ public class TelaPrincipal extends JFrame {
 		editarGerenciarFuncionario.setForeground(Color.BLACK);
 		editarGerenciarFuncionario.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuEditar.add(editarGerenciarFuncionario);
+		
+		editarGerenciarFuncionario.addActionListener(e -> {
+			EditarFuncionario telaEditarFuncionario = new EditarFuncionario();
+			dispose();
+			telaEditarFuncionario.setVisible(true);
+		});
 		
 		menuEditar.add(submenuLocaçoes);
 		
