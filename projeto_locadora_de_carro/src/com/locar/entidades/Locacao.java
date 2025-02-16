@@ -8,16 +8,26 @@ public class Locacao {
     private int diasLocados;
     private double valorTotal;
     private String formaPagamento;
+    private String status;
 
     
-    public Locacao(Cliente cliente, Carro carro,  double valorDiaria, int diasLocados, double valorTotal, String formaPagamento) {
+    public Locacao(Cliente cliente, Carro carro,  double valorDiaria, int diasLocados, double valorTotal, String formaPagamento, String status) {
         this.cliente = cliente;
         this.carro = carro;
         this.diasLocados = diasLocados;
         this.valorDiaria = valorDiaria;
         this.valorTotal = valorTotal;
         this.formaPagamento = formaPagamento;
-    }
+        this.status = status;
+        }
+
+	public Locacao(double valorDiaria, int diasLocados, double valorTotal, String formaPagamento, String status) {
+        this.diasLocados = diasLocados;
+        this.valorDiaria = valorDiaria;
+        this.valorTotal = valorTotal;
+        this.formaPagamento = formaPagamento;
+        this.status = status;
+	}
 
 	public long getId() {
         return id;
@@ -74,6 +84,14 @@ public class Locacao {
     public void setFormaPagamento(String formaPagamento) {
         this.formaPagamento = formaPagamento;
     }
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 
 }

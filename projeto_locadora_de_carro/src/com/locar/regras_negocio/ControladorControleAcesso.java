@@ -71,13 +71,24 @@ repositorio.editarFuncionario(funcionario);
 
 	
 	public void registrarLocacao ( Cliente cliente, Carro carro, double valorDiaria, int diasLocados, double valorTotal, 
-			String formaPagamento) {
+			String formaPagamento, String status) {
 		
 		// TODO validações
 		
-		Locacao locacao = new Locacao(cliente, carro, valorDiaria, diasLocados, valorTotal, formaPagamento);
+		Locacao locacao = new Locacao(cliente, carro, valorDiaria, diasLocados, valorTotal, formaPagamento, status);
 		Repositorio repositorio = new Repositorio();
 		repositorio.registrarLocacao(locacao);
+		
+	}
+	
+	public void editarLocacao (Cliente cliente, Carro carro, double valorDiaria, int diasLocados, double valorTotal, 
+			String formaPagamento, String status) {
+		
+		// TODO validações
+		
+		Locacao locacao = new Locacao(cliente, carro, valorDiaria, diasLocados, valorTotal, formaPagamento, status);
+		Repositorio repositorio = new Repositorio();
+		repositorio.editarLocacao(locacao);
 		
 	}
 	

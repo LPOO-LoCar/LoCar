@@ -271,6 +271,100 @@ public class Repositorio {
 		
 	}
 	
+	public void editarLocacao(Locacao locacao) {
+	    Connection connection = estabelecerConexao();
+	    PreparedStatement preparedStatement = null;
+	    
+	    try {
+	        String sql = "UPDATE locacao SET cliente_id = ?, carro_id = ?, valorDiaria = ?, diasLocados = ?, " +
+	                     "valorTotal = ?, formaPagamento = ?, status = ? WHERE cliente_id = ? AND carro_id = ?";
+	        
+	        preparedStatement = connection.prepareStatement(sql);
+	        preparedStatement.setLong(1, locacao.getCliente().getId()); 
+	        preparedStatement.setLong(2, locacao.getCarro().getId()); 
+	        preparedStatement.setDouble(3, locacao.getValorDiaria());
+	        preparedStatement.setInt(4, locacao.getDiasLocados());
+	        preparedStatement.setDouble(5, locacao.getValorTotal());
+	        preparedStatement.setString(6, locacao.getFormaPagamento());
+	        preparedStatement.setString(7, locacao.getStatus());
+	        preparedStatement.setLong(8, locacao.getCliente().getId()); 
+	        preparedStatement.setLong(9, locacao.getCarro().getId());
+	        
+	        preparedStatement.executeUpdate();
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace(); // TODO: Tratar exceção corretamente
+	    } finally {
+	        try {
+	            if (preparedStatement != null) {
+	                preparedStatement.close();
+	            }
+	            if (connection != null) {
+	                connection.close();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace(); // TODO: Tratar exceção corretamente
+	        }
+	    }
+	}
+	
+	public void excluirLocacao(String cpf, String placa) {
+	    Connection connection = estabelecerConexao();
+	    PreparedStatement preparedStatement = null;
+	    ResultSet resultSet = null;
+
+	    try {
+	        // Primeiro, buscar o cliente_id com base no cpf
+	        String sqlCliente = "SELECT id FROM cliente WHERE cpf = ?";
+	        preparedStatement = connection.prepareStatement(sqlCliente);
+	        preparedStatement.setString(1, cpf);
+	        resultSet = preparedStatement.executeQuery();
+
+	        if (resultSet.next()) {
+	            Long clienteId = resultSet.getLong("id");
+
+	            // Agora, buscar o carro_id com base na placa
+	            String sqlCarro = "SELECT id FROM carro WHERE placa = ?";
+	            preparedStatement = connection.prepareStatement(sqlCarro);
+	            preparedStatement.setString(1, placa);
+	            resultSet = preparedStatement.executeQuery();
+
+	            if (resultSet.next()) {
+	                Long carroId = resultSet.getLong("id");
+
+	                // Agora, excluir a locação com base no cliente_id e carro_id
+	                String sqlExcluir = "DELETE FROM locacao WHERE cliente_id = ? AND carro_id = ?";
+	                preparedStatement = connection.prepareStatement(sqlExcluir);
+	                preparedStatement.setLong(1, clienteId);
+	                preparedStatement.setLong(2, carroId);
+	                preparedStatement.executeUpdate();
+	            } else {
+	                System.out.println("Carro não encontrado com a placa: " + placa);
+	            }
+	        } else {
+	            System.out.println("Cliente não encontrado com o CPF: " + cpf);
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace(); // TODO: Tratar exceção adequadamente
+	    } finally {
+	        try {
+	            if (resultSet != null) {
+	                resultSet.close();
+	            }
+	            if (preparedStatement != null) {
+	                preparedStatement.close();
+	            }
+	            if (connection != null) {
+	                connection.close();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace(); // TODO: Tratar exceção adequadamente
+	        }
+	    }
+	}
+
+
 	public Funcionario buscarDadosFuncionario(String cpf) {
 	    String sql = "SELECT nome, rg, org_exp, telefone, email, data_nascimento, data_exp, cnh, validade_cnh, cep, rua, " +
 	                 "numero_rua, bairro, cidade, complemento, senha FROM funcionario WHERE cpf = ?";
@@ -292,6 +386,48 @@ public class Repositorio {
 	    }
 	    return null;
 	}
+	
+	public Locacao buscarDadosLocacao(String cpf, String placa) {
+	    String sqlCliente = "SELECT id FROM cliente WHERE cpf = ?";
+	    String sqlCarro = "SELECT id FROM carro WHERE placa = ?";
+	    String sqlLocacao = "SELECT valorDiaria, diasLocados, valorTotal, formaPagamento, status FROM locacao WHERE cliente_id = ? AND carro_id = ?";
+	    
+	    try (Connection conn = estabelecerConexao();
+	         PreparedStatement stmtCliente = conn.prepareStatement(sqlCliente);
+	         PreparedStatement stmtCarro = conn.prepareStatement(sqlCarro)) {
+	        
+	        stmtCliente.setString(1, cpf);
+	        ResultSet rsCliente = stmtCliente.executeQuery();
+	        
+	        if (!rsCliente.next()) {
+	            return null;
+	        }
+	        int clienteId = rsCliente.getInt("id");
+	        
+	        stmtCarro.setString(1, placa);
+	        ResultSet rsCarro = stmtCarro.executeQuery();
+	        
+	        if (!rsCarro.next()) {
+	            return null;
+	        }
+	        int carroId = rsCarro.getInt("id");
+	        
+	        try (PreparedStatement stmtLocacao = conn.prepareStatement(sqlLocacao)) {
+	            stmtLocacao.setInt(1, clienteId);
+	            stmtLocacao.setInt(2, carroId);
+	            ResultSet rsLocacao = stmtLocacao.executeQuery();
+	            
+	            if (rsLocacao.next()) {
+	                return new Locacao(rsLocacao.getDouble("valorDiaria"), rsLocacao.getInt("diasLocados"),
+	                                   rsLocacao.getDouble("valorTotal"), rsLocacao.getString("formaPagamento"),
+	                                   rsLocacao.getString("status"));
+	            }
+	        }
+	    } catch (SQLException e) {
+	        // TODO tratar exceção
+	    }
+	    return null;
+	}
 
 	public void registrarLocacao (Locacao locacao) {
 		Connection connection = estabelecerConexao();
@@ -299,10 +435,10 @@ public class Repositorio {
 		Statement statement = null;
 		try {
 		    statement = connection.createStatement();
-			statement.execute("INSERT INTO locacao (cliente_id, carro_id, valorDiaria, diasLocados, valorTotal, formaPagamento) "
+			statement.execute("INSERT INTO locacao (cliente_id, carro_id, valorDiaria, diasLocados, valorTotal, formaPagamento, status) "
 					+ " VALUES ('" + locacao.getCliente().getId() + "', '" + locacao.getCarro().getId() + "', '" 
 					+ locacao.getValorDiaria() + "', '" + locacao.getDiasLocados() + "', '" + locacao.getValorTotal() 
-					+ "', '" + locacao.getFormaPagamento() + "')");
+					+ "', '" + locacao.getFormaPagamento() + "', '" + locacao.getStatus() + "')");
 			
 		} catch (SQLException e) {
 			// TODO tratar exceção
@@ -722,7 +858,7 @@ public class Repositorio {
     }
     
     public List<Locacao> buscarTodasLocacoes() {
-        String sqlLocacao = "SELECT cliente_id, carro_id, valorDiaria, diasLocados, valorTotal, formaPagamento FROM locacao";
+        String sqlLocacao = "SELECT cliente_id, carro_id, valorDiaria, diasLocados, valorTotal, formaPagamento, status FROM locacao";
         List<Locacao> locacoes = new ArrayList<>();
 
         try (Connection conn = estabelecerConexao();
@@ -742,7 +878,8 @@ public class Repositorio {
                         rsLocacao.getDouble("valorDiaria"), 
                         rsLocacao.getInt("diasLocados"), 
                         rsLocacao.getDouble("valorTotal"), 
-                        rsLocacao.getString("formaPagamento")
+                        rsLocacao.getString("formaPagamento"),
+                        rsLocacao.getString("status")
                 );
                 locacoes.add(locacao);
             }
@@ -755,7 +892,7 @@ public class Repositorio {
    
     public List<Locacao> buscarLocacaoPorCpf(String cpf) {
         String sqlCliente = "SELECT id FROM cliente WHERE cpf = ?";
-        String sqlLocacao = "SELECT carro_id, valorDiaria, diasLocados, valorTotal, formaPagamento FROM locacao WHERE cliente_id = ?";
+        String sqlLocacao = "SELECT carro_id, valorDiaria, diasLocados, valorTotal, formaPagamento, status FROM locacao WHERE cliente_id = ?";
         List<Locacao> locacoes = new ArrayList<>();
 
         try (Connection conn = estabelecerConexao();
@@ -782,7 +919,8 @@ public class Repositorio {
                                 rsLocacao.getDouble("valorDiaria"), 
                                 rsLocacao.getInt("diasLocados"), 
                                 rsLocacao.getDouble("valorTotal"), 
-                                rsLocacao.getString("formaPagamento")
+                                rsLocacao.getString("formaPagamento"),
+                                rsLocacao.getString("status")
                         );
                         locacoes.add(locacao);
                     }
@@ -797,7 +935,7 @@ public class Repositorio {
     
     public List<Locacao> buscarLocacaoPorPlaca(String placa) {
         String sqlCarro = "SELECT id FROM carro WHERE placa = ?";
-        String sqlLocacao = "SELECT cliente_id, valorDiaria, diasLocados, valorTotal, formaPagamento FROM locacao WHERE carro_id = ?";
+        String sqlLocacao = "SELECT cliente_id, valorDiaria, diasLocados, valorTotal, formaPagamento, status FROM locacao WHERE carro_id = ?";
         List<Locacao> locacoes = new ArrayList<>();
 
         try (Connection conn = estabelecerConexao();
@@ -824,7 +962,8 @@ public class Repositorio {
                                 rsLocacao.getDouble("valorDiaria"), 
                                 rsLocacao.getInt("diasLocados"), 
                                 rsLocacao.getDouble("valorTotal"), 
-                                rsLocacao.getString("formaPagamento")
+                                rsLocacao.getString("formaPagamento"),
+                                rsLocacao.getString("status")
                         );
                         locacoes.add(locacao);
                     }

@@ -12,8 +12,7 @@ import com.locar.ui.editar.AgendarVistoriaVeicular;
 import com.locar.ui.editar.CancelarReserva;
 import com.locar.ui.editar.EditarCliente;
 import com.locar.ui.editar.EditarFuncionario;
-import com.locar.ui.editar.EditarLocAtiva;
-import com.locar.ui.editar.EditarLocInativa;
+import com.locar.ui.editar.EditarLocacao;
 import com.locar.ui.editar.EditarReservaAtiva;
 import com.locar.ui.editar.EditarVeiculo;
 import com.locar.ui.relatorios.LocaçoesAtivasRelatorios;
@@ -269,30 +268,14 @@ public class TelaPrincipal extends JFrame {
 		
 		menuEditar.add(submenuVeiculo);
 		
-		JMenu submenuLocaçoes = new JMenu("Locações");
-		submenuLocaçoes.setForeground(Color.BLACK);
-		submenuLocaçoes.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		JMenuItem menuLocaçoes = new JMenuItem("Gerenciar Locações");
+		menuLocaçoes.setForeground(Color.BLACK);
+		menuLocaçoes.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		
-		JMenuItem editarLocaçoesAt = new JMenuItem ("Editar Locações Ativas");
-		editarLocaçoesAt.setForeground(Color.BLACK);
-		editarLocaçoesAt.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		submenuLocaçoes.add(editarLocaçoesAt);
-		
-		editarLocaçoesAt.addActionListener(e ->{
-			EditarLocAtiva telaEditarLocaçaoAtiva = new EditarLocAtiva();
+		menuLocaçoes.addActionListener(e -> {
+			EditarLocacao telaEditarLocaçaoAtiva = new EditarLocacao();
 			dispose();
 			telaEditarLocaçaoAtiva.setVisible(true);
-		});
-		
-		JMenuItem editarLocaçoesIn = new JMenuItem ("Editar Locações Inativas");
-		editarLocaçoesIn.setForeground(Color.BLACK);
-		editarLocaçoesIn.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		submenuLocaçoes.add(editarLocaçoesIn);
-		
-		editarLocaçoesIn.addActionListener(e ->{
-			EditarLocInativa telaEditarLocaçaoInativa = new EditarLocInativa();
-			dispose();
-			telaEditarLocaçaoInativa.setVisible(true);
 		});
 		
 		JMenuItem editarGerenciarFuncionario = new JMenuItem("Gerenciar Funcionario");
@@ -306,7 +289,7 @@ public class TelaPrincipal extends JFrame {
 			telaEditarFuncionario.setVisible(true);
 		});
 		
-		menuEditar.add(submenuLocaçoes);
+		menuEditar.add(menuLocaçoes);
 		
 		JMenu submenuReservas = new JMenu("Reservas");
 		submenuReservas.setForeground(Color.BLACK);

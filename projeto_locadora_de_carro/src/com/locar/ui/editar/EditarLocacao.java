@@ -1,4 +1,4 @@
-package com.locar.ui.cadastro;
+package com.locar.ui.editar;
 
 
 import java.awt.EventQueue;
@@ -26,8 +26,9 @@ import java.awt.Color;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JFormattedTextField;
 
-public class NovaLocação extends JFrame {
+public class EditarLocacao extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -51,7 +52,7 @@ public class NovaLocação extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					NovaLocação frame = new NovaLocação();
+					EditarLocacao frame = new EditarLocacao();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -63,9 +64,9 @@ public class NovaLocação extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public NovaLocação() {
+	public EditarLocacao() {
 		setTitle("Novo Locação");
-		setSize(650,550);
+		setSize(650,580);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		
@@ -75,9 +76,9 @@ public class NovaLocação extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Nova Locação");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		lblNewLabel.setBounds(183, 11, 248, 32);
+		JLabel lblNewLabel = new JLabel("Gerenciamento de locações");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		lblNewLabel.setBounds(113, 9, 425, 32);
 		contentPane.add(lblNewLabel);
 		
 		JLabel locClienteTitulo_Label = new JLabel("Cliente");
@@ -179,10 +180,22 @@ public class NovaLocação extends JFrame {
 		locTipo_comboBox.setBounds(10, 320, 165, 20);
 		contentPane.add(locTipo_comboBox);
 		
+		JComboBox locFormaDePag_comboBox = new JComboBox <> (new String [] {"Dinheiro", "Pix", "Cartão-Debito", "Cartão-Credito",});
+		locFormaDePag_comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		locFormaDePag_comboBox.setBounds(10, 468, 165, 20);
+		contentPane.add(locFormaDePag_comboBox);
+		
+		JComboBox campoTextoStatus = new JComboBox();
+		campoTextoStatus.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		campoTextoStatus.setModel(new DefaultComboBoxModel(new String[] {"Ativa", "Inativa"}));
+		campoTextoStatus.setBounds(209, 466, 131, 22);
+		contentPane.add(campoTextoStatus);
+		
 		locPlaca_textField = new JTextField();
 		locPlaca_textField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 		        String placa = locPlaca_textField.getText();
+		        String cpf = locCPF_textField.getText();
 		        Repositorio repositorio = new Repositorio();
 		        Carro carro = repositorio.buscarCarroPorPlaca(placa);
 		            
@@ -191,7 +204,17 @@ public class NovaLocação extends JFrame {
 		        locAno_textField.setText(String.valueOf(carro.getAno()));
 		        locKM_textField.setText(carro.getKmRodados());
 		        locTipo_comboBox.setSelectedItem(carro.getCategoria());
+		        
+		        Locacao locacao = repositorio.buscarDadosLocacao(cpf, placa);
+		        
+		        locValorDaDiaria_textField.setText(String.valueOf(locacao.getValorDiaria()));
+		        locDiasLocados_textField.setText(String.valueOf(locacao.getDiasLocados()));
+		        locValorTotal_textField.setText(String.valueOf(locacao.getValorTotal()));
+		        locFormaDePag_comboBox.setSelectedItem(locacao.getFormaPagamento());
+		        campoTextoStatus.setSelectedItem(locacao.getStatus());
+		        
 			}
+			
 		});
 		locPlaca_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		locPlaca_textField.setColumns(10);
@@ -305,18 +328,7 @@ public class NovaLocação extends JFrame {
 		locFormaDePag_Label.setBounds(10, 440, 179, 28);
 		contentPane.add(locFormaDePag_Label);
 		
-		JComboBox locFormaDePag_comboBox = new JComboBox <> (new String [] {"Dinheiro", "Pix", "Cartão-Debito", "Cartão-Credito",});
-		locFormaDePag_comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		locFormaDePag_comboBox.setBounds(10, 468, 165, 20);
-		contentPane.add(locFormaDePag_comboBox);
-		
-		JComboBox campoTextoStatus = new JComboBox();
-		campoTextoStatus.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		campoTextoStatus.setModel(new DefaultComboBoxModel(new String[] {"Ativa", "Inativa"}));
-		campoTextoStatus.setBounds(210, 466, 131, 22);
-		contentPane.add(campoTextoStatus);
-		
-		JButton locLocar_Button = new JButton("LoCar!");
+		JButton locLocar_Button = new JButton("Editar");
 		locLocar_Button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -334,16 +346,16 @@ public class NovaLocação extends JFrame {
 	            String status = campoTextoStatus.getSelectedItem().toString();
 	            
 	            ControladorControleAcesso controlador = new ControladorControleAcesso();
-	            controlador.registrarLocacao(cliente, carro, valorDiaria, diasLocados, valorTotal, formaPagamento, status);
+	            controlador.editarLocacao(cliente, carro, valorDiaria, diasLocados, valorTotal, formaPagamento, status);
 	            
-				JOptionPane.showMessageDialog(null, "Locação cadastrada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Locação editada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 			} catch (Exception e1) {
-				JOptionPane.showMessageDialog(null, "Erro ao cadastrar", "Erro", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Erro ao editar", "Erro", JOptionPane.ERROR_MESSAGE);
 			}
 			}
 		});
 		locLocar_Button.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		locLocar_Button.setBounds(515, 468, 109, 35);
+		locLocar_Button.setBounds(533, 500, 89, 35);
 		contentPane.add(locLocar_Button);
 		
 		JSeparator separator = new JSeparator();
@@ -391,13 +403,32 @@ public class NovaLocação extends JFrame {
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnNewButton_1.setBounds(376, 468, 109, 35);
+		btnNewButton_1.setBounds(317, 500, 97, 35);
 		contentPane.add(btnNewButton_1);
 		
 		JLabel locFormaDePag_Label_1 = new JLabel("Status");
 		locFormaDePag_Label_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		locFormaDePag_Label_1.setBounds(211, 440, 128, 28);
+		locFormaDePag_Label_1.setBounds(209, 440, 179, 28);
 		contentPane.add(locFormaDePag_Label_1);
+		
+		JButton locLocar_Button_1 = new JButton("Excluir");
+		locLocar_Button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+        		try {
+        		String cpf = locCPF_textField.getText();
+        		String placa = locPlaca_textField.getText();
+        		Repositorio repositorio = new Repositorio();
+        		repositorio.excluirLocacao(cpf, placa);
+        		
+        		JOptionPane.showMessageDialog(null, "Locacão excluída com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+    		} catch (Exception e2) {
+                JOptionPane.showMessageDialog(null, "Erro ao excluir", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+			}
+		});
+		locLocar_Button_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		locLocar_Button_1.setBounds(424, 500, 99, 35);
+		contentPane.add(locLocar_Button_1);
 		
 	}
 	private void calcularValorTotal() {
