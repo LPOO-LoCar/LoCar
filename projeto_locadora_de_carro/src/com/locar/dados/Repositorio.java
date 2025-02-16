@@ -308,6 +308,43 @@ public class Repositorio {
 	    }
 	}
 	
+	public void editarReserva(Reserva reserva) {
+	    Connection connection = estabelecerConexao();
+	    PreparedStatement preparedStatement = null;
+	    
+	    try {
+	        String sql = "UPDATE reserva SET cliente_id = ?, carro_id = ?, dataRetirada = ?, horaRetirada = ?, " +
+	                     "dataEntrega = ?, horaEntrega = ? WHERE cliente_id = ? AND carro_id = ?";
+	        
+	        preparedStatement = connection.prepareStatement(sql);
+	        preparedStatement.setLong(1, reserva.getCliente().getId()); 
+	        preparedStatement.setLong(2, reserva.getCarro().getId()); 
+	        preparedStatement.setDate(3, java.sql.Date.valueOf(reserva.getDataRetirada()));
+	        preparedStatement.setString(4, reserva.getHoraRetirada());
+	        preparedStatement.setDate(5, java.sql.Date.valueOf(reserva.getDataEntrega()));
+	        preparedStatement.setString(6, reserva.getHoraEntrega());
+	        preparedStatement.setLong(7, reserva.getCliente().getId()); 
+	        preparedStatement.setLong(8, reserva.getCarro().getId());
+	        
+	        preparedStatement.executeUpdate();
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace(); // TODO: Tratar exceção corretamente
+	    } finally {
+	        try {
+	            if (preparedStatement != null) {
+	                preparedStatement.close();
+	            }
+	            if (connection != null) {
+	                connection.close();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace(); // TODO: Tratar exceção corretamente
+	        }
+	    }
+	}
+
+	
 	public void excluirLocacao(String cpf, String placa) {
 	    Connection connection = estabelecerConexao();
 	    PreparedStatement preparedStatement = null;
@@ -334,6 +371,62 @@ public class Repositorio {
 
 	                // Agora, excluir a locação com base no cliente_id e carro_id
 	                String sqlExcluir = "DELETE FROM locacao WHERE cliente_id = ? AND carro_id = ?";
+	                preparedStatement = connection.prepareStatement(sqlExcluir);
+	                preparedStatement.setLong(1, clienteId);
+	                preparedStatement.setLong(2, carroId);
+	                preparedStatement.executeUpdate();
+	            } else {
+	                System.out.println("Carro não encontrado com a placa: " + placa);
+	            }
+	        } else {
+	            System.out.println("Cliente não encontrado com o CPF: " + cpf);
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace(); // TODO: Tratar exceção adequadamente
+	    } finally {
+	        try {
+	            if (resultSet != null) {
+	                resultSet.close();
+	            }
+	            if (preparedStatement != null) {
+	                preparedStatement.close();
+	            }
+	            if (connection != null) {
+	                connection.close();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace(); // TODO: Tratar exceção adequadamente
+	        }
+	    }
+	}
+	
+	public void excluirReserva(String cpf, String placa) {
+	    Connection connection = estabelecerConexao();
+	    PreparedStatement preparedStatement = null;
+	    ResultSet resultSet = null;
+
+	    try {
+	        // Primeiro, buscar o cliente_id com base no cpf
+	        String sqlCliente = "SELECT id FROM cliente WHERE cpf = ?";
+	        preparedStatement = connection.prepareStatement(sqlCliente);
+	        preparedStatement.setString(1, cpf);
+	        resultSet = preparedStatement.executeQuery();
+
+	        if (resultSet.next()) {
+	            Long clienteId = resultSet.getLong("id");
+
+	            // Agora, buscar o carro_id com base na placa
+	            String sqlCarro = "SELECT id FROM carro WHERE placa = ?";
+	            preparedStatement = connection.prepareStatement(sqlCarro);
+	            preparedStatement.setString(1, placa);
+	            resultSet = preparedStatement.executeQuery();
+
+	            if (resultSet.next()) {
+	                Long carroId = resultSet.getLong("id");
+
+	                // Agora, excluir a reserva com base no cliente_id e carro_id
+	                String sqlExcluir = "DELETE FROM reserva WHERE cliente_id = ? AND carro_id = ?";
 	                preparedStatement = connection.prepareStatement(sqlExcluir);
 	                preparedStatement.setLong(1, clienteId);
 	                preparedStatement.setLong(2, carroId);
@@ -428,6 +521,49 @@ public class Repositorio {
 	    }
 	    return null;
 	}
+	
+	public Reserva buscarDadosReserva(String cpf, String placa) {
+	    String sqlCliente = "SELECT id FROM cliente WHERE cpf = ?";
+	    String sqlCarro = "SELECT id FROM carro WHERE placa = ?";
+	    String sqlReserva = "SELECT dataRetirada, horaRetirada, dataEntrega, horaEntrega FROM reserva WHERE cliente_id = ? AND carro_id = ?";
+	    
+	    try (Connection conn = estabelecerConexao();
+	         PreparedStatement stmtCliente = conn.prepareStatement(sqlCliente);
+	         PreparedStatement stmtCarro = conn.prepareStatement(sqlCarro)) {
+	        
+	        stmtCliente.setString(1, cpf);
+	        ResultSet rsCliente = stmtCliente.executeQuery();
+	        
+	        if (!rsCliente.next()) {
+	            return null;
+	        }
+	        int clienteId = rsCliente.getInt("id");
+	        
+	        stmtCarro.setString(1, placa);
+	        ResultSet rsCarro = stmtCarro.executeQuery();
+	        
+	        if (!rsCarro.next()) {
+	            return null;
+	        }
+	        int carroId = rsCarro.getInt("id");
+	        
+	        try (PreparedStatement stmtReserva = conn.prepareStatement(sqlReserva)) {
+	            stmtReserva.setInt(1, clienteId);
+	            stmtReserva.setInt(2, carroId);
+	            ResultSet rsReserva = stmtReserva.executeQuery();
+	            
+	            if (rsReserva.next()) {
+	                // Supondo que a classe Reserva tenha um construtor adequado para os parâmetros
+	                return new Reserva(rsReserva.getString("dataRetirada"), rsReserva.getString("horaRetirada"),
+	                                   rsReserva.getString("dataEntrega"), rsReserva.getString("horaEntrega"));
+	            }
+	        }
+	    } catch (SQLException e) {
+	        // TODO tratar exceção
+	    }
+	    return null;
+	}
+
 
 	public void registrarLocacao (Locacao locacao) {
 		Connection connection = estabelecerConexao();

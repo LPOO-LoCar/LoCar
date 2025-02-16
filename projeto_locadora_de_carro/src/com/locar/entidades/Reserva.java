@@ -20,6 +20,14 @@ public class Reserva {
 		this.horaEntrega = horaEntrega;
 	}
 
+	public Reserva(String dataRetirada, String horaRetirada, String dataEntrega,
+			String horaEntrega) {
+		this.dataRetirada = dataRetirada;
+		this.horaRetirada = horaRetirada;
+		this.dataEntrega = dataEntrega;
+		this.horaEntrega = horaEntrega;
+	}
+
 	public long getId() {
 		return id;
 	}

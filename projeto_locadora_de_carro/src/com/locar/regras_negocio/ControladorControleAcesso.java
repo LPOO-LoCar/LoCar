@@ -103,6 +103,17 @@ repositorio.editarFuncionario(funcionario);
 		
 	}
 	
+	public void editarReserva (Cliente cliente, Carro carro, String dataRetirada, String horaRetirada, String dataEntrega,
+			String horaEntrega) {
+		
+		// TODO validações
+		
+		Reserva reserva = new Reserva(cliente, carro, dataRetirada, horaRetirada,dataEntrega,horaEntrega);
+		Repositorio repositorio = new Repositorio();
+		repositorio.editarReserva(reserva);
+		
+	}
+	
 	public void registrarAgendamentoManuntencao (Carro carro, String tipoManuntencao, String dataManuntencao, 
 			String hora, String observacao) {
 		
