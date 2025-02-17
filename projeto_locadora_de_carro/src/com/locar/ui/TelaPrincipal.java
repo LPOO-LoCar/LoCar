@@ -442,6 +442,7 @@ public class TelaPrincipal extends JFrame {
 		
 		menuHelpMe.addActionListener(e ->{
 			HelpMe telaHelpMe = new HelpMe();
+			dispose();
 			telaHelpMe.setVisible(true);
 		});
 		
@@ -450,22 +451,16 @@ public class TelaPrincipal extends JFrame {
 		menuSobre.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuAjuda.add(menuSobre);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\mathe\\Downloads\\logo-locar (2)-Photoroom.png"));
-		lblNewLabel.setBounds(144, 80, 495, 390);
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\mathe\\Downloads\\logo-locar.jpg"));
+		lblNewLabel.setBounds(27, 33, 730, 505);
 		contentPane.add(lblNewLabel);
-		
 				
 		menuSobre.addActionListener(e -> {
 			Sobre telaAjuda = new Sobre();
+			dispose();
 			telaAjuda.setVisible(true);
 		});
-		
-		//Imagem
-		
-		JLabel carrinho = new JLabel("");
-		carrinho.setIcon(new ImageIcon(getClass().getResource("/imagem/LOCAR.jpg")));
-		carrinho.setBounds(27, 33, 730, 505);
-		contentPane.add(carrinho);
+	
 	}
 }

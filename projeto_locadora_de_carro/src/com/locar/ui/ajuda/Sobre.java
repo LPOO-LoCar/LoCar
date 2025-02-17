@@ -10,7 +10,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 import javax.swing.JTextPane;
 
-public class SobreAjuda extends JFrame {
+public class Sobre extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -22,7 +22,7 @@ public class SobreAjuda extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SobreAjuda frame = new SobreAjuda();
+					Sobre frame = new Sobre();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -34,7 +34,7 @@ public class SobreAjuda extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SobreAjuda() {
+	public Sobre() {
 		setTitle("Sobre");
 		setSize(600,450);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
