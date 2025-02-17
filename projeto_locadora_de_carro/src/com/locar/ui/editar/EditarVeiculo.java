@@ -36,6 +36,7 @@ public class EditarVeiculo {
 	private JTextField campoTextoNumMotor;
 	private JTextField campoTextoChassi;
 	private JTextField campoTextoKmRodados;
+	private String funcao;
 
 	/**
 	 * Launch the application.
@@ -44,7 +45,7 @@ public class EditarVeiculo {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EditarVeiculo window = new EditarVeiculo();
+					EditarVeiculo window = new EditarVeiculo("ADMIN");
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -56,7 +57,8 @@ public class EditarVeiculo {
 	/**
 	 * Create the application.
 	 */
-	public EditarVeiculo() {
+	public EditarVeiculo(String funcao) {
+		this.funcao = funcao;
 		initialize();
 	}
 
@@ -356,7 +358,7 @@ public class EditarVeiculo {
         frame.getContentPane().add(btnRemover);
         botaoVoltar.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
-        	TelaPrincipal telaPrincipal = new TelaPrincipal();
+        	TelaPrincipal telaPrincipal = new TelaPrincipal(funcao);
 			frame.dispose();
 		    telaPrincipal.setVisible(true);
         }

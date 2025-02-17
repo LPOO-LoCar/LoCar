@@ -47,6 +47,7 @@ public class EditarFuncionario extends JFrame {
 	private JTextField funComplemento_textField;
 	private JTextField funSenha_textField;
 	private JTextField funConfirmacaoSenha_textField;
+	private String funcao;
 
 	/**
 	 * Launch the application.
@@ -55,7 +56,7 @@ public class EditarFuncionario extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EditarFuncionario frame = new EditarFuncionario();
+					EditarFuncionario frame = new EditarFuncionario("ADMIN");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -67,7 +68,8 @@ public class EditarFuncionario extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EditarFuncionario() {
+	public EditarFuncionario(String funcao) {
+		this.funcao = funcao;
 		setTitle("Novo Funcionário");
 		setSize(700,710);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -618,7 +620,7 @@ public class EditarFuncionario extends JFrame {
 		JButton funVoltar_Button = new JButton("Voltar");
 		funVoltar_Button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaPrincipal telaPrincipal = new TelaPrincipal();
+				TelaPrincipal telaPrincipal = new TelaPrincipal(funcao);
 				dispose();
 				telaPrincipal.setVisible(true);
 			}

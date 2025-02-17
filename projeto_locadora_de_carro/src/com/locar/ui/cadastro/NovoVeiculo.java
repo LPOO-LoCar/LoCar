@@ -311,7 +311,7 @@ public class NovoVeiculo {
         frame.getContentPane().add(lblNewLabel_3_1_1_1_1_2_1_1);
         botaoVoltar.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
-        	TelaPrincipal telaPrincipal = new TelaPrincipal();
+        	TelaPrincipal telaPrincipal = new TelaPrincipal("ADMIN");
 			frame.dispose();
 		    telaPrincipal.setVisible(true);
         }

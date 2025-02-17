@@ -48,6 +48,7 @@ public class AgendarVistoriaVeicular extends JFrame {
 	private JTextField campoTextoHora;
 	private JTable tabela;
 	private DefaultTableModel modelo;
+	private String funcao;
 
 	/**
 	 * Launch the application.
@@ -56,7 +57,7 @@ public class AgendarVistoriaVeicular extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AgendarVistoriaVeicular frame = new AgendarVistoriaVeicular();
+					AgendarVistoriaVeicular frame = new AgendarVistoriaVeicular("ADMIN");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -68,7 +69,8 @@ public class AgendarVistoriaVeicular extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AgendarVistoriaVeicular() {
+	public AgendarVistoriaVeicular(String funcao) {
+		this.funcao = funcao;
 		setTitle("Agendar Manutenção Veicular");
 		setSize(700,700);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -299,7 +301,7 @@ public class AgendarVistoriaVeicular extends JFrame {
 		JButton btnNewButton_1 = new JButton("Voltar");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaPrincipal telaPrincipal = new TelaPrincipal();
+				TelaPrincipal telaPrincipal = new TelaPrincipal(funcao);
 				dispose();
 				telaPrincipal.setVisible(true);
 			}

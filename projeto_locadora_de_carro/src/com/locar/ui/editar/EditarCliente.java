@@ -45,6 +45,7 @@ public class EditarCliente {
 	private JTextField campoTextoEmail;
 	private JTextField campoTextoCnh;
 	private JTextField campoTextoVencimentoCnh;
+	private String funcao;
 
 	/**
 	 * Launch the application.
@@ -53,7 +54,7 @@ public class EditarCliente {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EditarCliente window = new EditarCliente();
+					EditarCliente window = new EditarCliente("ADMIN");
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -65,7 +66,8 @@ public class EditarCliente {
 	/**
 	 * Create the application.
 	 */
-	public EditarCliente() {
+	public EditarCliente(String funcao) {
+		this.funcao = funcao;
 		initialize();
 	}
 
@@ -454,7 +456,7 @@ public class EditarCliente {
 
         botaoVoltar.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
-			TelaPrincipal telaPrincipal = new TelaPrincipal();
+			TelaPrincipal telaPrincipal = new TelaPrincipal(funcao);
 			frame.dispose();
 			telaPrincipal.setVisible(true);
         }

@@ -45,8 +45,8 @@ public class Login extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	private void abrirTelaPrincipal() {
-		JFrame telaPrincipal = new TelaPrincipal();
+	private void abrirTelaPrincipal(String funcao) {
+		JFrame telaPrincipal = new TelaPrincipal(funcao);
 		telaPrincipal.setSize(800,600);
 		telaPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		telaPrincipal.setVisible(true);
@@ -103,7 +103,9 @@ public class Login extends JFrame {
 				
 				if (usuario.equals("admin") && senha.equals("1234")) {
 					dispose();
-					abrirTelaPrincipal();
+					abrirTelaPrincipal("ADMIN");
+				} else if (usuario.equals("user") && senha.equals("1234")){
+					abrirTelaPrincipal("USER");
 				} else {
 					JOptionPane.showMessageDialog(Login.this, "Usuário ou senha incorretos", "Erro", JOptionPane.ERROR_MESSAGE);
 				}
@@ -118,5 +120,3 @@ public class Login extends JFrame {
 		contentPane.add(campoTextoSenha);
 	}
 }
-
-

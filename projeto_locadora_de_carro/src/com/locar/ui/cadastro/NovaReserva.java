@@ -46,6 +46,7 @@ public class NovaReserva extends JFrame {
 	private JTextField resHoradeRetirada_textField;
 	private JTextField resDatadeEntrega_textField;
 	private JTextField resHoradeEntrega_textField;
+	private String funcao;
 
 	/**
 	 * Launch the application.
@@ -54,7 +55,7 @@ public class NovaReserva extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					NovaReserva frame = new NovaReserva();
+					NovaReserva frame = new NovaReserva("ADMIN");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -66,7 +67,8 @@ public class NovaReserva extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public NovaReserva() {
+	public NovaReserva(String funcao) {
+		this.funcao = funcao;
 		setTitle("Nova Reserva");
 		setSize(650,590);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -235,9 +237,9 @@ public class NovaReserva extends JFrame {
 		separator_1.setBounds(0, 229, 634, 1);
 		contentPane.add(separator_1);
 		
-		JLabel resTempoTitulo_Label = new JLabel("Periodo e Status de Reserva");
+		JLabel resTempoTitulo_Label = new JLabel("Periodo de Reserva");
 		resTempoTitulo_Label.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		resTempoTitulo_Label.setBounds(10, 349, 374, 28);
+		resTempoTitulo_Label.setBounds(10, 349, 272, 28);
 		contentPane.add(resTempoTitulo_Label);
 		
 		JLabel resDatadeRetirada_Label = new JLabel("Data de Retirada:");
@@ -352,16 +354,6 @@ public class NovaReserva extends JFrame {
 		resHoradeEntrega_textField.setBounds(276, 470, 168, 20);
 		contentPane.add(resHoradeEntrega_textField);
 		
-		JLabel resStatusdeReserva_Label = new JLabel("Status de Reserva:");
-		resStatusdeReserva_Label.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		resStatusdeReserva_Label.setBounds(10, 512, 165, 28);
-		contentPane.add(resStatusdeReserva_Label);
-		
-		JComboBox resStatusdeReserva_comboBox = new JComboBox <> (new String [] {"Ativa", "Cancelada", "Concluida"});
-		resStatusdeReserva_comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		resStatusdeReserva_comboBox.setBounds(174, 514, 93, 24);
-		contentPane.add(resStatusdeReserva_comboBox);
-		
 		JButton reservar_Button = new JButton("Reservar");
 		reservar_Button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -405,7 +397,7 @@ public class NovaReserva extends JFrame {
 		JButton btnNewButton = new JButton("Voltar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaPrincipal telaPrincipal = new TelaPrincipal();
+				TelaPrincipal telaPrincipal = new TelaPrincipal(funcao);
 				dispose();
 				telaPrincipal.setVisible(true);
 			}

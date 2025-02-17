@@ -33,7 +33,7 @@ import javax.swing.JButton;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class EditarReservaAtiva extends JFrame {
+public class EditarReserva extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -48,6 +48,7 @@ public class EditarReservaAtiva extends JFrame {
 	private JTextField resHoradeRetirada_textField;
 	private JTextField resDatadeEntrega_textField;
 	private JTextField resHoradeEntrega_textField;
+	private String funcao;
 
 	/**
 	 * Launch the application.
@@ -56,7 +57,7 @@ public class EditarReservaAtiva extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EditarReservaAtiva frame = new EditarReservaAtiva();
+					EditarReserva frame = new EditarReserva("ADMIN");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -68,7 +69,8 @@ public class EditarReservaAtiva extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EditarReservaAtiva() {
+	public EditarReserva(String funcao) {
+		this.funcao = funcao;
 		setTitle("Nova Reserva");
 		setSize(650,590);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -248,9 +250,9 @@ public class EditarReservaAtiva extends JFrame {
 		separator_1.setBounds(0, 229, 634, 1);
 		contentPane.add(separator_1);
 		
-		JLabel resTempoTitulo_Label = new JLabel("Periodo e Status de Reserva");
+		JLabel resTempoTitulo_Label = new JLabel("Periodo de Reserva");
 		resTempoTitulo_Label.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		resTempoTitulo_Label.setBounds(10, 349, 374, 28);
+		resTempoTitulo_Label.setBounds(10, 349, 267, 28);
 		contentPane.add(resTempoTitulo_Label);
 		
 		JLabel resDatadeRetirada_Label = new JLabel("Data de Retirada:");
@@ -365,16 +367,6 @@ public class EditarReservaAtiva extends JFrame {
 		resHoradeEntrega_textField.setBounds(276, 470, 168, 20);
 		contentPane.add(resHoradeEntrega_textField);
 		
-		JLabel resStatusdeReserva_Label = new JLabel("Status de Reserva:");
-		resStatusdeReserva_Label.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		resStatusdeReserva_Label.setBounds(10, 512, 165, 28);
-		contentPane.add(resStatusdeReserva_Label);
-		
-		JComboBox resStatusdeReserva_comboBox = new JComboBox <> (new String [] {"Ativa", "Cancelada", "Concluida"});
-		resStatusdeReserva_comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		resStatusdeReserva_comboBox.setBounds(174, 514, 93, 24);
-		contentPane.add(resStatusdeReserva_comboBox);
-		
 		JButton reservar_Button = new JButton("Editar");
 		reservar_Button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -413,7 +405,7 @@ public class EditarReservaAtiva extends JFrame {
 		JButton btnNewButton = new JButton("Voltar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaPrincipal telaPrincipal = new TelaPrincipal();
+				TelaPrincipal telaPrincipal = new TelaPrincipal(funcao);
 				dispose();
 				telaPrincipal.setVisible(true);
 			}
@@ -439,7 +431,7 @@ public class EditarReservaAtiva extends JFrame {
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnNewButton_1.setBounds(295, 510, 100, 35);
+		btnNewButton_1.setBounds(286, 509, 100, 35);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_1_1 = new JButton("Excluir");

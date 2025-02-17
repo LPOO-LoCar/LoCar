@@ -35,6 +35,7 @@ public class BuscarLocacao extends JFrame {
 	private JTable tabela;
 	private DefaultTableModel modelo;
 	private JPanel contentPane;
+	private String funcao;
 
 	/**
 	 * Launch the application.
@@ -43,7 +44,7 @@ public class BuscarLocacao extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BuscarLocacao frame = new BuscarLocacao();
+					BuscarLocacao frame = new BuscarLocacao("ADMIN");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,7 +56,8 @@ public class BuscarLocacao extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BuscarLocacao() {
+	public BuscarLocacao(String funcao) {
+		this.funcao = funcao;
 		setTitle("Buscar Locaçao");
 		setSize(800,600);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -153,7 +155,7 @@ public class BuscarLocacao extends JFrame {
         JButton btnNewButton_1 = new JButton("Voltar");
         btnNewButton_1.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-    			TelaPrincipal telaPrincipal = new TelaPrincipal();
+    			TelaPrincipal telaPrincipal = new TelaPrincipal(funcao);
     			dispose();
     			telaPrincipal.setVisible(true);
         	}
@@ -172,17 +174,13 @@ public class BuscarLocacao extends JFrame {
         
         modelo.setRowCount(0);
         
-        if (locacoes.isEmpty()) { 
-            JOptionPane.showMessageDialog(this, "Locação não encontrada.", "Erro", JOptionPane.ERROR_MESSAGE);
-        } else {
-            for (Locacao locacao : locacoes) { 
+        for (Locacao locacao : locacoes) { 
                 modelo.addRow(new Object[]{
                 		locacao.getCliente().getId(), locacao.getCarro().getId(), locacao.getValorDiaria(), locacao.getDiasLocados(),
                 		locacao.getValorTotal(), locacao.getFormaPagamento()
                 });
             }
         }
-    }
     private void buscarLocacaoPorCpf() {
         String cpf = locCPF_textField.getText();
         Repositorio repositorio = new Repositorio();

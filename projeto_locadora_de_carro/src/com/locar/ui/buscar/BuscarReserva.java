@@ -34,6 +34,7 @@ public class BuscarReserva extends JFrame {
 	private JTextField campoTextoPlaca;
 	private JTable tabela;
 	private DefaultTableModel modelo;
+	private String funcao;
 
 	/**
 	 * Launch the application.
@@ -42,7 +43,7 @@ public class BuscarReserva extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BuscarReserva frame = new BuscarReserva();
+					BuscarReserva frame = new BuscarReserva("ADMIN");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -54,7 +55,8 @@ public class BuscarReserva extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BuscarReserva() {
+	public BuscarReserva(String funcao) {
+		this.funcao = funcao;
 		setTitle("Buscar Reserva");
 		setSize(800,600);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -146,7 +148,7 @@ public class BuscarReserva extends JFrame {
         JButton btnNewButton_1 = new JButton("Voltar");
         btnNewButton_1.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-       			TelaPrincipal telaPrincipal = new TelaPrincipal();
+       			TelaPrincipal telaPrincipal = new TelaPrincipal(funcao);
     			dispose();
     			telaPrincipal.setVisible(true);
         	}
@@ -164,17 +166,13 @@ public class BuscarReserva extends JFrame {
         
         modelo.setRowCount(0);
         
-        if (reservas.isEmpty()) { 
-            JOptionPane.showMessageDialog(this, "Locação não encontrada.", "Erro", JOptionPane.ERROR_MESSAGE);
-        } else {
-            for (Reserva reserva : reservas) { 
+        for (Reserva reserva : reservas) { 
                 modelo.addRow(new Object[]{
                 		reserva.getCliente().getId(), reserva.getCarro().getId(), reserva.getDataRetirada(), reserva.getHoraRetirada(),
                 		reserva.getDataEntrega(), reserva.getHoraEntrega()
                 });
             }
         }
-    }
     private void buscarReservaPorCpf() {
         String cpf = campoTextoCpf.getText();
         Repositorio repositorio = new Repositorio();

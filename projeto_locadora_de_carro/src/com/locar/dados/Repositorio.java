@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.locar.entidades.*;
 
@@ -308,6 +310,85 @@ public class Repositorio {
 	    }
 	}
 	
+    public Map<String, Integer> obterDadosRelatorioMarca() {
+        Connection connection = estabelecerConexao();
+        Map<String, Integer> contagemMarcas = new HashMap<>();
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            stmt = connection.createStatement();
+
+            // Passo 1: Buscar todos os carro_id na tabela locacao
+            rs = stmt.executeQuery("SELECT carro_id FROM locacao");
+            while (rs.next()) {
+                Long carroId = rs.getLong("carro_id");
+
+                // Passo 2: Buscar a marca do carro pelo ID
+                Statement stmtCarro = connection.createStatement();
+                ResultSet rsCarro = stmtCarro.executeQuery("SELECT marca FROM carro WHERE id = " + carroId);
+                if (rsCarro.next()) {
+                    String marca = rsCarro.getString("marca");
+                    contagemMarcas.put(marca, contagemMarcas.getOrDefault(marca, 0) + 1);
+                }
+                rsCarro.close();
+                stmtCarro.close();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // Tratar erro corretamente
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (connection != null) connection.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return contagemMarcas;
+    }
+    
+    public Map<String, Integer> obterDadosRelatorioModelo() {
+        Connection connection = estabelecerConexao();
+        Map<String, Integer> contagemModelos = new HashMap<>();
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            stmt = connection.createStatement();
+
+            // Passo 1: Buscar todos os carro_id na tabela locacao
+            rs = stmt.executeQuery("SELECT carro_id FROM locacao");
+            while (rs.next()) {
+                Long carroId = rs.getLong("carro_id");
+
+                // Passo 2: Buscar o modelo do carro pelo ID
+                Statement stmtCarro = connection.createStatement();
+                ResultSet rsCarro = stmtCarro.executeQuery("SELECT modelo FROM carro WHERE id = " + carroId);
+                if (rsCarro.next()) {
+                    String modelo = rsCarro.getString("modelo");
+                    contagemModelos.put(modelo, contagemModelos.getOrDefault(modelo, 0) + 1);
+                }
+                rsCarro.close();
+                stmtCarro.close();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // Tratar erro corretamente
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (connection != null) connection.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return contagemModelos;
+    }
+
+	
 	public void editarReserva(Reserva reserva) {
 	    Connection connection = estabelecerConexao();
 	    PreparedStatement preparedStatement = null;
@@ -587,6 +668,35 @@ public class Repositorio {
 			}
 		}
 		
+	}
+	
+	public double calcularReceitaTotal() {
+	    Connection connection = estabelecerConexao();
+	    Statement statement = null;
+	    ResultSet resultSet = null;
+	    double soma = 0.0;
+	    
+	    try {
+	        statement = connection.createStatement();
+	        resultSet = statement.executeQuery("SELECT SUM(valorTotal) FROM locacao");
+	        
+	        if (resultSet.next()) {
+	            soma = resultSet.getDouble(1);
+	        }
+	        
+	    } catch (SQLException e) {
+	        // TODO tratar exceção
+	    } finally {
+	        try {
+	            if (resultSet != null) resultSet.close();
+	            if (statement != null) statement.close();
+	            if (connection != null) connection.close();
+	        } catch (Exception e) {
+	            // TODO tratar exceção
+	        }
+	    }
+	    
+	    return soma;
 	}
 	
 	public void registrarReserva (Reserva reserva) {

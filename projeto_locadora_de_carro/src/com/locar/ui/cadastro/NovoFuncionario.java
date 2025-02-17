@@ -574,7 +574,7 @@ public class NovoFuncionario extends JFrame {
 		JButton funVoltar_Button = new JButton("Voltar");
 		funVoltar_Button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaPrincipal telaPrincipal = new TelaPrincipal();
+				TelaPrincipal telaPrincipal = new TelaPrincipal("ADMIN");
 				dispose();
 				telaPrincipal.setVisible(true);
 			}

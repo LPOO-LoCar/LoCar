@@ -44,6 +44,7 @@ public class NovoCliente {
 	private JTextField campoTextoEmail;
 	private JTextField campoTextoCnh;
 	private JTextField campoTextoVencimentoCnh;
+	private String funcao;
 
 	/**
 	 * Launch the application.
@@ -52,7 +53,7 @@ public class NovoCliente {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					NovoCliente window = new NovoCliente();
+					NovoCliente window = new NovoCliente("USER");
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -64,7 +65,8 @@ public class NovoCliente {
 	/**
 	 * Create the application.
 	 */
-	public NovoCliente() {
+	public NovoCliente(String funcao) {
+		this.funcao = funcao;
 		initialize();
 	}
 
@@ -413,7 +415,7 @@ public class NovoCliente {
 
         botaoVoltar.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
-			TelaPrincipal telaPrincipal = new TelaPrincipal();
+			TelaPrincipal telaPrincipal = new TelaPrincipal(funcao);
 			frame.dispose();
 			telaPrincipal.setVisible(true);
         }

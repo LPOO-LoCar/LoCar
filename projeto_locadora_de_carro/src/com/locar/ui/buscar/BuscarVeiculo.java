@@ -33,6 +33,7 @@ public class BuscarVeiculo extends JFrame {
 	private JTextField campoTextoModelo;
 	private JTable tabela;
 	private DefaultTableModel modelo;
+	private String funcao;
 
 	/**
 	 * Launch the application.
@@ -41,7 +42,7 @@ public class BuscarVeiculo extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BuscarVeiculo frame = new BuscarVeiculo();
+					BuscarVeiculo frame = new BuscarVeiculo("ADMIN");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,7 +54,8 @@ public class BuscarVeiculo extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BuscarVeiculo() {
+	public BuscarVeiculo(String funcao) {
+		this.funcao = funcao;
 		setTitle("Buscar Veiculo");
 		setSize(800,600);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -143,7 +145,7 @@ public class BuscarVeiculo extends JFrame {
         JButton btnNewButton_1 = new JButton("Voltar");
         btnNewButton_1.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-    			TelaPrincipal telaPrincipal = new TelaPrincipal();
+    			TelaPrincipal telaPrincipal = new TelaPrincipal(funcao);
     			dispose();
     			telaPrincipal.setVisible(true);
         	}
@@ -161,10 +163,7 @@ public class BuscarVeiculo extends JFrame {
         
         modelo.setRowCount(0); 
 
-        if (carros.isEmpty()) { 
-            JOptionPane.showMessageDialog(this, "Veículo não encontrado.", "Erro", JOptionPane.ERROR_MESSAGE);
-        } else {
-            for (Carro carro : carros) { 
+        for (Carro carro : carros) { 
                 modelo.addRow(new Object[]{
                     carro.getMarca(), 
                     carro.getModelo(), 
@@ -176,7 +175,6 @@ public class BuscarVeiculo extends JFrame {
                 });
             }
         }
-    }
 	
     private void buscarCarro() {
         String placa = campoTextoPlaca.getText();

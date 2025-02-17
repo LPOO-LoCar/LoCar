@@ -7,36 +7,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.locar.ui.cadastro.NovoVeiculo;
-import com.locar.ui.editar.AgendarManutençãoVeicular;
-import com.locar.ui.editar.AgendarVistoriaVeicular;
-import com.locar.ui.editar.CancelarReserva;
-import com.locar.ui.editar.EditarCliente;
-import com.locar.ui.editar.EditarFuncionario;
-import com.locar.ui.editar.EditarLocacao;
-import com.locar.ui.editar.EditarReservaAtiva;
-import com.locar.ui.editar.EditarVeiculo;
-import com.locar.ui.relatorios.LocaçoesAtivasRelatorios;
-import com.locar.ui.relatorios.LocaçoesRelatorios;
-import com.locar.ui.relatorios.ManutençaoVeicularRelatorios;
-import com.locar.ui.relatorios.ReservasRelatorios;
-import com.locar.ui.relatorios.VistoriasRelatorios;
-import com.locar.ui.relatorios.VisualizarClientesRelatorios;
-import com.locar.ui.relatorios.VisualizarFuncionariosRelatorios;
-import com.locar.ui.relatorios.VisualizarReservasRelatorios;
-import com.locar.ui.relatorios.VisualizarVeiculosRelatorios;
-import com.locar.ui.cadastro.NovoCliente;
+import com.locar.ui.editar.*;
 import com.locar.ui.ajuda.HelpMe;
 import com.locar.ui.ajuda.Sobre;
-import com.locar.ui.buscar.BuscarCliente;
-import com.locar.ui.buscar.BuscarFuncionario;
-import com.locar.ui.buscar.BuscarLocacao;
-import com.locar.ui.buscar.BuscarReserva;
-import com.locar.ui.buscar.BuscarVeiculo;
-import com.locar.ui.cadastro.MudarSenha;
-import com.locar.ui.cadastro.NovaLocação;
-import com.locar.ui.cadastro.NovaReserva;
-import com.locar.ui.cadastro.NovoFuncionario;
-
+import com.locar.ui.buscar.*;
+import com.locar.ui.cadastro.*;
+import com.locar.ui.relatorios.*;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.BorderLayout;
@@ -66,7 +42,7 @@ public class TelaPrincipal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaPrincipal frame = new TelaPrincipal();
+					TelaPrincipal frame = new TelaPrincipal("ADMIN");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -78,7 +54,7 @@ public class TelaPrincipal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaPrincipal() {
+	public TelaPrincipal(String funcao) {
 		setTitle("Locar - Locadora de Veiculos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
@@ -111,7 +87,7 @@ public class TelaPrincipal extends JFrame {
 		menuArquivo.add(novoClienteMenuItem);
 		
 		novoClienteMenuItem.addActionListener(e -> {
-			NovoCliente telaNovoCliente = new NovoCliente();
+			NovoCliente telaNovoCliente = new NovoCliente(funcao);
 			dispose();
 			telaNovoCliente.setVisible(true);
 		});
@@ -122,9 +98,13 @@ public class TelaPrincipal extends JFrame {
 		menuArquivo.add(novoVeiculoMenuItem);
 		
 		novoVeiculoMenuItem.addActionListener(e -> {
+			if (funcao.equals("ADMIN")) {
 			NovoVeiculo telaNovoVeiculo = new NovoVeiculo();
 			dispose();
 			telaNovoVeiculo.setVisible(true);
+			} else {
+	            JOptionPane.showMessageDialog(null, "Sem permissão", "Erro", JOptionPane.ERROR_MESSAGE);
+	        }
 		});
 		
 		JMenuItem novoFuncionarioMenuItem = new JMenuItem("Novo Funcionário");
@@ -133,10 +113,13 @@ public class TelaPrincipal extends JFrame {
 		menuArquivo.add(novoFuncionarioMenuItem);
 		
 		novoFuncionarioMenuItem.addActionListener (e -> {
+			if (funcao.equals("ADMIN")) {
 			NovoFuncionario telaNovoFuncionario = new NovoFuncionario();
 			dispose();
 			telaNovoFuncionario.setVisible(true);
-			
+			} else {
+	            JOptionPane.showMessageDialog(null, "Sem permissão", "Erro", JOptionPane.ERROR_MESSAGE);
+	        }
 		});
 		
 		JMenuItem novaLocaçaoMenuItem = new JMenuItem("Nova Locação");
@@ -145,7 +128,7 @@ public class TelaPrincipal extends JFrame {
 		menuArquivo.add(novaLocaçaoMenuItem);
 		
 		novaLocaçaoMenuItem.addActionListener(e ->{
-			NovaLocação telaNovaLocaçao = new NovaLocação();
+			NovaLocação telaNovaLocaçao = new NovaLocação(funcao);
 			dispose();
 			telaNovaLocaçao.setVisible(true);
 		});
@@ -156,7 +139,7 @@ public class TelaPrincipal extends JFrame {
 		menuArquivo.add(novaReservaArquivo);
 		
 		novaReservaArquivo.addActionListener(e -> {
-			NovaReserva telaNovaReserva = new NovaReserva();
+			NovaReserva telaNovaReserva = new NovaReserva(funcao);
 			dispose();
 			telaNovaReserva.setVisible(true);
 		});
@@ -231,7 +214,7 @@ public class TelaPrincipal extends JFrame {
 		submenuVeiculo.add(editarremoverVeiculo);
 		
 		editarremoverVeiculo.addActionListener(e -> {
-			EditarVeiculo telaEditarVeiculo = new EditarVeiculo();
+			EditarVeiculo telaEditarVeiculo = new EditarVeiculo(funcao);
 			dispose();
 			telaEditarVeiculo.setVisible(true);
 		});
@@ -241,7 +224,7 @@ public class TelaPrincipal extends JFrame {
 		submenuVeiculo.add(agendarManutençao);
 		
 		agendarManutençao.addActionListener(e ->{
-			AgendarManutençãoVeicular telaAgendarManutençao = new AgendarManutençãoVeicular();
+			AgendarManutençãoVeicular telaAgendarManutençao = new AgendarManutençãoVeicular(funcao);
 			dispose();
 			telaAgendarManutençao.setVisible(true);
 		});
@@ -251,7 +234,7 @@ public class TelaPrincipal extends JFrame {
 		submenuVeiculo.add(agendarVistoria);
 		
 		agendarVistoria.addActionListener(e -> {
-			AgendarVistoriaVeicular telaAgendarVistoria = new AgendarVistoriaVeicular();
+			AgendarVistoriaVeicular telaAgendarVistoria = new AgendarVistoriaVeicular(funcao);
 			dispose();
 			telaAgendarVistoria.setVisible(true);
 		});
@@ -259,7 +242,7 @@ public class TelaPrincipal extends JFrame {
 		JMenuItem editarGerenciarCliente = new JMenuItem("Gerenciar Cliente");
 		editarGerenciarCliente.setForeground(Color.BLACK);
 		editarGerenciarCliente.addActionListener(e -> {
-			EditarCliente telaEditarCliente = new EditarCliente();
+			EditarCliente telaEditarCliente = new EditarCliente(funcao);
 			dispose();
 			telaEditarCliente.setVisible(true);
 		});
@@ -273,7 +256,7 @@ public class TelaPrincipal extends JFrame {
 		menuLocaçoes.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		
 		menuLocaçoes.addActionListener(e -> {
-			EditarLocacao telaEditarLocaçaoAtiva = new EditarLocacao();
+			EditarLocacao telaEditarLocaçaoAtiva = new EditarLocacao(funcao);
 			dispose();
 			telaEditarLocaçaoAtiva.setVisible(true);
 		});
@@ -284,38 +267,25 @@ public class TelaPrincipal extends JFrame {
 		menuEditar.add(editarGerenciarFuncionario);
 		
 		editarGerenciarFuncionario.addActionListener(e -> {
-			EditarFuncionario telaEditarFuncionario = new EditarFuncionario();
+			EditarFuncionario telaEditarFuncionario = new EditarFuncionario(funcao);
 			dispose();
 			telaEditarFuncionario.setVisible(true);
 		});
 		
 		menuEditar.add(menuLocaçoes);
 		
-		JMenu submenuReservas = new JMenu("Reservas");
-		submenuReservas.setForeground(Color.BLACK);
-		submenuReservas.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		
-		JMenuItem editarReservasAt = new JMenuItem ("Editar Reservas Ativas");
-		editarReservasAt.setForeground(Color.BLACK);
-		editarReservasAt.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		submenuReservas.add(editarReservasAt);
-		
-		editarReservasAt.addActionListener(e -> {
-			EditarReservaAtiva telaEditarReservaAtiva = new EditarReservaAtiva();
+		JMenuItem menuReservas = new JMenuItem("Gerenciar Reservas");
+		menuReservas.setForeground(Color.BLACK);
+		menuReservas.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+	
+		menuReservas.addActionListener(e -> {
+			EditarReserva telaEditarReservaAtiva = new EditarReserva(funcao);
+			dispose();
 			telaEditarReservaAtiva.setVisible(true);
+
 		});
 		
-		JMenuItem cancelarReservas = new JMenuItem ("Cancelar Reserva");
-		cancelarReservas.setForeground(Color.BLACK);
-		cancelarReservas.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		submenuReservas.add(cancelarReservas);
-		
-		cancelarReservas.addActionListener(e -> {
-			CancelarReserva telaCancelarReserva = new CancelarReserva();
-			telaCancelarReserva.setVisible(true);
-		});
-		
-		menuEditar.add(submenuReservas);
+		menuEditar.add(menuReservas);
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setForeground(Color.BLACK);
@@ -335,7 +305,7 @@ public class TelaPrincipal extends JFrame {
 		menuBuscar.add(buscarCliente);
 		
 		buscarCliente.addActionListener(e -> {
-			BuscarCliente telaBuscarCliente = new BuscarCliente();
+			BuscarCliente telaBuscarCliente = new BuscarCliente(funcao);
 			dispose();
 			telaBuscarCliente.setVisible(true);
 		});
@@ -346,7 +316,7 @@ public class TelaPrincipal extends JFrame {
 		menuBuscar.add(buscarVeiculo);
 		
 		buscarVeiculo.addActionListener(e -> {
-			BuscarVeiculo telaBuscarVeiculo = new BuscarVeiculo();
+			BuscarVeiculo telaBuscarVeiculo = new BuscarVeiculo(funcao);
 			dispose();
 			telaBuscarVeiculo.setVisible(true);
 		});
@@ -368,7 +338,7 @@ public class TelaPrincipal extends JFrame {
 		menuBuscar.add(buscarLocaçao);
 		
 		buscarLocaçao.addActionListener(e -> {
-			BuscarLocacao telaBuscarLocaçao = new BuscarLocacao();
+			BuscarLocacao telaBuscarLocaçao = new BuscarLocacao(funcao);
 			dispose();
 			telaBuscarLocaçao.setVisible(true);
 		});
@@ -379,7 +349,7 @@ public class TelaPrincipal extends JFrame {
 		menuBuscar.add(buscarReserva);
 		
 		buscarReserva.addActionListener(e ->{
-			BuscarReserva telaBuscarReserva = new BuscarReserva();
+			BuscarReserva telaBuscarReserva = new BuscarReserva(funcao);
 			dispose();
 			telaBuscarReserva.setVisible(true);
 		});
@@ -431,101 +401,26 @@ public class TelaPrincipal extends JFrame {
 		menuRelatorios.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuBar.add(menuRelatorios);
 		
-		JMenu menuVisualizar = new JMenu("Visualizar");
-		menuVisualizar.setForeground(Color.BLACK);
-		menuVisualizar.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		menuRelatorios.add(menuVisualizar);
+		JMenuItem menuRelatóriosVeículos = new JMenuItem("Veículos");
+		menuRelatóriosVeículos.setForeground(Color.BLACK);
+		menuRelatóriosVeículos.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		menuRelatorios.add(menuRelatóriosVeículos);
 		
-		JMenuItem relLocaçoesAtivas = new JMenuItem("Locações Ativas");
-		menuVisualizar.add(relLocaçoesAtivas);
-		
-		relLocaçoesAtivas.addActionListener(e -> {
-			LocaçoesAtivasRelatorios telaRelatoriosLocaçoesAtivas = new LocaçoesAtivasRelatorios();
-			telaRelatoriosLocaçoesAtivas.setVisible(true);
+		menuRelatóriosVeículos.addActionListener(e ->{
+			RelatoriosVeiculos telaVeiculosRelatorios = new RelatoriosVeiculos(funcao);
+			dispose();
+			telaVeiculosRelatorios.setVisible(true);
 		});
 		
-		JMenuItem relVisualizarReservas = new JMenuItem("Reservas");
-		menuVisualizar.add(relVisualizarReservas);
+		JMenuItem menuRelatóriosFinanceiros = new JMenuItem("Financeiros");
+		menuRelatóriosFinanceiros.setForeground(Color.BLACK);
+		menuRelatóriosFinanceiros.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		menuRelatorios.add(menuRelatóriosFinanceiros);
 		
-		relVisualizarReservas.addActionListener(e -> {
-			VisualizarReservasRelatorios telaVisualizarRelatorios = new VisualizarReservasRelatorios();
-			telaVisualizarRelatorios.setVisible(true);
-		});
-		
-		JMenuItem relVisualizarClientes = new JMenuItem("Cadastro de Clientes");
-		menuVisualizar.add(relVisualizarClientes);
-		
-		relVisualizarClientes.addActionListener(e -> {
-			VisualizarClientesRelatorios telaVisualizarClientes = new VisualizarClientesRelatorios();
-			telaVisualizarClientes.setVisible(true);
-		});
-		
-		JMenuItem relVisualizarVeiculos = new JMenuItem("Cadastro de Veículos");
-		menuVisualizar.add(relVisualizarVeiculos);
-		
-		relVisualizarVeiculos.addActionListener(e -> {
-			VisualizarVeiculosRelatorios telaVisualizarVeiculos = new VisualizarVeiculosRelatorios();
-			telaVisualizarVeiculos.setVisible(true);
-		});
-		
-		JMenuItem relVisualizarFuncionarios = new JMenuItem("Cadastro de Funcionários");
-		menuVisualizar.add(relVisualizarFuncionarios);
-		
-		relVisualizarFuncionarios.addActionListener(e -> {
-			VisualizarFuncionariosRelatorios telaVisualizarFuncionarios = new VisualizarFuncionariosRelatorios();
-			telaVisualizarFuncionarios.setVisible(true);
-		});
-		
-		JMenu menuGerarRelatorios = new JMenu("Gerar Relatórios");
-		menuGerarRelatorios.setForeground(Color.BLACK);
-		menuGerarRelatorios.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		menuRelatorios.add(menuGerarRelatorios);
-		
-		JMenu relReceita = new JMenu("Receita"); //Conversar sobre isso
-		menuGerarRelatorios.add(relReceita);
-		
-		JMenuItem relReceitaDiaria = new JMenuItem("Receita Diaria");
-		relReceita.add(relReceitaDiaria);
-		
-		JMenuItem relReceitaSemanal = new JMenuItem("Receita Semanal");
-		relReceita.add(relReceitaSemanal);
-		
-		JMenuItem relReceitaMensal = new JMenuItem("Receita Mensal");
-		relReceita.add(relReceitaMensal);
-		
-		JMenuItem relReceitaAnual = new JMenuItem("Receita Anual");
-		relReceita.add(relReceitaAnual);
-		
-		JMenuItem relManutençaoVeicular = new JMenuItem("Manutenção Veícular");
-		menuGerarRelatorios.add(relManutençaoVeicular);
-		
-		relManutençaoVeicular.addActionListener(e -> {
-			ManutençaoVeicularRelatorios telaManutençaoVeicular = new ManutençaoVeicularRelatorios();
-			telaManutençaoVeicular.setVisible(true);
-		});
-		
-		JMenuItem relVistorias = new JMenuItem("Vistorias");
-		menuGerarRelatorios.add(relVistorias);
-		
-		relVistorias.addActionListener(e -> {
-			VistoriasRelatorios telaVistorias = new VistoriasRelatorios();
-			telaVistorias.setVisible(true);
-		});
-		
-		JMenuItem relLocaçoes = new JMenuItem("Locações");
-		menuGerarRelatorios.add(relLocaçoes);
-		
-		relLocaçoes.addActionListener(e -> {
-			LocaçoesRelatorios telaLocaçoes = new LocaçoesRelatorios();
-			telaLocaçoes.setVisible(true);
-		});
-		
-		JMenuItem relReservas = new JMenuItem("Reservas");
-		menuGerarRelatorios.add(relReservas);
-		
-		relReservas.addActionListener(e ->{
-			ReservasRelatorios telaReservas = new ReservasRelatorios();
-			telaReservas.setVisible(true);
+		menuRelatóriosFinanceiros.addActionListener(e ->{
+			RelatoriosFinanceiros telaRelatoriosFinanceiros = new RelatoriosFinanceiros(funcao);
+			dispose();
+			telaRelatoriosFinanceiros.setVisible(true);
 		});
 		
 		JSeparator separator_4 = new JSeparator();

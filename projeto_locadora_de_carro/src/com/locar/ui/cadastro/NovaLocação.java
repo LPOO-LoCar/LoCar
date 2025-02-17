@@ -43,6 +43,7 @@ public class NovaLocação extends JFrame {
 	private JTextField locValorDaDiaria_textField;
 	private JTextField locDiasLocados_textField;
 	private JTextField locValorTotal_textField;
+	private String funcao;
 
 	/**
 	 * Launch the application.
@@ -51,7 +52,7 @@ public class NovaLocação extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					NovaLocação frame = new NovaLocação();
+					NovaLocação frame = new NovaLocação("ADMIN");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -63,7 +64,8 @@ public class NovaLocação extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public NovaLocação() {
+	public NovaLocação(String funcao) {
+		this.funcao = funcao;
 		setTitle("Novo Locação");
 		setSize(650,550);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -364,7 +366,7 @@ public class NovaLocação extends JFrame {
 		JButton btnNewButton = new JButton("Voltar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaPrincipal telaPrincipal = new TelaPrincipal();
+				TelaPrincipal telaPrincipal = new TelaPrincipal(funcao);
 				dispose();
 				telaPrincipal.setVisible(true);
 			}

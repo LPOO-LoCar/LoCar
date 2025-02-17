@@ -44,6 +44,7 @@ public class EditarLocacao extends JFrame {
 	private JTextField locValorDaDiaria_textField;
 	private JTextField locDiasLocados_textField;
 	private JTextField locValorTotal_textField;
+	private String funcao;
 
 	/**
 	 * Launch the application.
@@ -52,7 +53,7 @@ public class EditarLocacao extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EditarLocacao frame = new EditarLocacao();
+					EditarLocacao frame = new EditarLocacao("ADMIN");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -64,7 +65,8 @@ public class EditarLocacao extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EditarLocacao() {
+	public EditarLocacao(String funcao) {
+		this.funcao = funcao;
 		setTitle("Novo Locação");
 		setSize(650,580);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -376,7 +378,7 @@ public class EditarLocacao extends JFrame {
 		JButton btnNewButton = new JButton("Voltar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaPrincipal telaPrincipal = new TelaPrincipal();
+				TelaPrincipal telaPrincipal = new TelaPrincipal(funcao);
 				dispose();
 				telaPrincipal.setVisible(true);
 			}
