@@ -463,6 +463,9 @@ public class TelaPrincipal extends JFrame {
 		
 		//Imagem
 		
-
+		JLabel carrinho = new JLabel("");
+		carrinho.setIcon(new ImageIcon(getClass().getResource("/imagem/LOCAR.jpg")));
+		carrinho.setBounds(27, 33, 730, 505);
+		contentPane.add(carrinho);
 	}
 }
