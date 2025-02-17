@@ -450,6 +450,11 @@ public class TelaPrincipal extends JFrame {
 		menuSobre.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuAjuda.add(menuSobre);
 		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\mathe\\Downloads\\logo-locar (2)-Photoroom.png"));
+		lblNewLabel.setBounds(144, 80, 495, 390);
+		contentPane.add(lblNewLabel);
+		
 				
 		menuSobre.addActionListener(e -> {
 			Sobre telaAjuda = new Sobre();
@@ -458,9 +463,6 @@ public class TelaPrincipal extends JFrame {
 		
 		//Imagem
 		
-		/*JLabel carrinho = new JLabel("");
-		carrinho.setIcon(new ImageIcon(getClass().getResource("/imagem/CarroNeon.jpg")));
-		carrinho.setBounds(27, 33, 730, 505);
-		contentPane.add(carrinho);*/
+
 	}
 }
