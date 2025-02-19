@@ -27,6 +27,8 @@ import java.awt.Color;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class NovaLocação extends JFrame {
 
@@ -345,8 +347,11 @@ public class NovaLocação extends JFrame {
 	            String formaPagamento = locFormaDePag_comboBox.getSelectedItem().toString();
 	            String status = campoTextoStatus.getSelectedItem().toString();
 	            
+	            LocalDate dataAtual = LocalDate.now();
+	            String dataLocacao = dataAtual.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+	            
 	            ControladorControleAcesso controlador = new ControladorControleAcesso();
-	            controlador.registrarLocacao(cliente, carro, valorDiaria, diasLocados, valorTotal, formaPagamento, status);
+	            controlador.registrarLocacao(cliente, carro, valorDiaria, diasLocados, valorTotal, formaPagamento, status, dataLocacao);
 	            GerarPdf gerarPdf = new GerarPdf();
 	            gerarPdf.gerarPDF(nome, cpf, email, telefone, placa, marca, modelo, categoria, ano, kmRodados, valorDiaria, diasLocados, valorTotal, formaPagamento);
 	            

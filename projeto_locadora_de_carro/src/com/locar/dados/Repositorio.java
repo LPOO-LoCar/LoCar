@@ -386,8 +386,8 @@ public class Repositorio {
         return contagemModelos;
     }
 
-	
 	public void editarReserva(Reserva reserva) {
+
 	    Connection connection = estabelecerConexao();
 	    PreparedStatement preparedStatement = null;
 	    
@@ -422,8 +422,8 @@ public class Repositorio {
 	        }
 	    }
 	}
-
 	
+
 	public void excluirLocacao(String cpf, String placa) {
 	    Connection connection = estabelecerConexao();
 	    PreparedStatement preparedStatement = null;
@@ -480,6 +480,7 @@ public class Repositorio {
 	    }
 	}
 	
+	
 	public void excluirReserva(String cpf, String placa) {
 	    Connection connection = estabelecerConexao();
 	    PreparedStatement preparedStatement = null;
@@ -535,7 +536,6 @@ public class Repositorio {
 	        }
 	    }
 	}
-
 
 	public Funcionario buscarDadosFuncionario(String cpf) {
 	    String sql = "SELECT nome, rg, org_exp, telefone, email, data_nascimento, data_exp, cnh, validade_cnh, cep, rua, " +
@@ -649,10 +649,10 @@ public class Repositorio {
 		Statement statement = null;
 		try {
 		    statement = connection.createStatement();
-			statement.execute("INSERT INTO locacao (cliente_id, carro_id, valorDiaria, diasLocados, valorTotal, formaPagamento, status) "
+			statement.execute("INSERT INTO locacao (cliente_id, carro_id, valorDiaria, diasLocados, valorTotal, formaPagamento, status, dataLocacao) "
 					+ " VALUES ('" + locacao.getCliente().getId() + "', '" + locacao.getCarro().getId() + "', '" 
 					+ locacao.getValorDiaria() + "', '" + locacao.getDiasLocados() + "', '" + locacao.getValorTotal() 
-					+ "', '" + locacao.getFormaPagamento() + "', '" + locacao.getStatus() + "')");
+					+ "', '" + locacao.getFormaPagamento() + "', '" + locacao.getStatus() + "', '" + locacao.getDataLocacao() +"')");
 			
 		} catch (SQLException e) {
 			// TODO tratar exceção
@@ -695,6 +695,48 @@ public class Repositorio {
 	    
 	    return soma;
 	}
+
+	    public double calcularReceitaMesAtual() {
+	        return calcularReceita("WHERE STR_TO_DATE(dataLocacao, '%d/%m/%Y') >= DATE_FORMAT(NOW(), '%Y-%m-01')");
+	    }
+
+	    public double calcularReceitaSemestreAtual() {
+	        return calcularReceita("WHERE STR_TO_DATE(dataLocacao, '%d/%m/%Y') >= DATE_FORMAT(NOW() - INTERVAL (MONTH(NOW())-1) MONTH, '%Y-01-01')");
+	    }
+
+	    public double calcularReceitaAnoAtual() {
+	        return calcularReceita("WHERE STR_TO_DATE(dataLocacao, '%d/%m/%Y') >= DATE_FORMAT(NOW(), '%Y-01-01')");
+	    }
+
+	    private double calcularReceita(String filtro) {
+	        Connection connection = estabelecerConexao();
+	        Statement statement = null;
+	        ResultSet resultSet = null;
+	        double soma = 0.0;
+
+	        try {
+	            statement = connection.createStatement();
+	            resultSet = statement.executeQuery("SELECT SUM(valorTotal) FROM locacao " + filtro);
+
+	            if (resultSet.next()) {
+	                soma = resultSet.getDouble(1);
+	            }
+
+	        } catch (SQLException e) {
+	            e.printStackTrace(); // Trate a exceção de forma adequada
+	        } finally {
+	            try {
+	                if (resultSet != null) resultSet.close();
+	                if (statement != null) statement.close();
+	                if (connection != null) connection.close();
+	            } catch (Exception e) {
+	                e.printStackTrace(); // Trate a exceção de fechamento
+	            }
+	        }
+
+	        return soma;
+	    }
+	
 	
 	public void registrarReserva (Reserva reserva) {
 		Connection connection = estabelecerConexao();
@@ -720,6 +762,7 @@ public class Repositorio {
 		
 	}
 	
+	
 	public void registrarAgendamentoManuntencao (AgendamentoManuntencao agendamentoManuntencao) {
 		Connection connection = estabelecerConexao();
 		
@@ -744,6 +787,7 @@ public class Repositorio {
 		
 	}
 	
+	
 	public void registrarAgendamentoVistoria (AgendamentoVistoria agendamentoVistoria) {
 		Connection connection = estabelecerConexao();
 		
@@ -767,6 +811,7 @@ public class Repositorio {
 		}
 		
 	}
+	
 	
     public List<AgendamentoManuntencao> buscarTodosAgendamentosManuntencao() {
         String sqlAgendamentoManuntencao = "SELECT id_carro, tipoManuntencao, dataManuntencao, hora, observacao FROM agendamentomanuntencao";
@@ -797,6 +842,7 @@ public class Repositorio {
         return agendamentosManuntencao;
     }
     
+    
     public List<AgendamentoVistoria> buscarTodosAgendamentosVistoria() {
         String sqlAgendamentoVistoria = "SELECT id_carro, tipoManuntencao, dataManuntencao, hora, observacao FROM agendamentovistoria";
         List<AgendamentoVistoria> agendamentosVistoria = new ArrayList<>();
@@ -825,6 +871,7 @@ public class Repositorio {
 
         return agendamentosVistoria;
     }
+    
 	
     public List<Cliente> buscarTodosClientes() {
         String sql = "SELECT nomeCompleto, dataNascimento, telefone, email , sexo, cnh, vencimentoCnh FROM cliente";
@@ -853,6 +900,7 @@ public class Repositorio {
         return clientes;
     }
     
+    
     public List<Funcionario> buscarTodosFuncionarios() {
         String sql = "SELECT SELECT nome, rg, telefone, email , data_nascimento, cnh, validade_cnh, cep FROM funcionario";
         List<Funcionario> funcionarios = new ArrayList<>();
@@ -880,6 +928,7 @@ public class Repositorio {
         }
         return funcionarios;
     }
+    
     public Cliente buscarDadosCliente(String cpf) {
         String sql = "SELECT nomeCompleto, dataNascimento, sexo, cnh, vencimentoCnh, bairroRua, numero, "
         		+ " cep, cidade, estado, telefone, email FROM cliente WHERE cpf = ?";
@@ -917,6 +966,7 @@ public class Repositorio {
         return null;
     }
     
+    
     public Funcionario buscarFuncionarioPorCpf(String cpf) {
         String sql = "SELECT nome, rg, telefone, email , data_nascimento, cnh, validade_cnh, cep FROM funcionario WHERE cpf = ?";
         try (Connection conn = estabelecerConexao();
@@ -934,6 +984,7 @@ public class Repositorio {
         }
         return null;
     }
+    
     
     public Funcionario buscarFuncionarioPorNome(String nome) {
         String sql = "SELECT nome, rg, telefone, email , data_nascimento, cnh, validade_cnh, cep FROM funcionario WHERE nome = ?";
@@ -953,6 +1004,7 @@ public class Repositorio {
         return null;
     }
     
+    
     public Cliente buscarClientePorNomeCompleto(String nomeCompleto) {
         String sql = "SELECT nomeCompleto, dataNascimento, telefone, email , sexo, cnh, vencimentoCnh FROM cliente WHERE nomeCompleto = ?";
         try (Connection conn = estabelecerConexao();
@@ -969,6 +1021,7 @@ public class Repositorio {
         }
         return null;
     }
+    
     
     public List<Carro> buscarTodosCarros() {
         String sql = "SELECT marca, modelo, ano, cor, placa, numMotor, chassi FROM carro ";
@@ -996,6 +1049,7 @@ public class Repositorio {
         }
         return carros;
     }
+    
     
     public Carro buscarCarro(String placa) {
         String sql = "SELECT marca, modelo, ano, cor, placa, numMotor, chassi FROM carro WHERE placa = ?";
@@ -1416,6 +1470,5 @@ public class Repositorio {
 
         return false;
     }
-
 
 }
