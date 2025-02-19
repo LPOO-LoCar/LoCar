@@ -1,0 +1,33 @@
+Dados de Clientes SQL
+
+INSERT INTO cliente (nomeCompleto, dataNascimento, cpf, sexo, cnh, vencimentoCnh, bairroRua, numero, cep, cidade, estado, telefone, email) VALUES
+('Ana Regina Souza', '1990-01-01', '12345678901', 'F', '9876543210', '2025-01-01', 'Rua das Flores', 123, '12345-678', 'São Paulo', 'SP', '11987654321', 'ana@email.com'),
+('Breno Lima', '1988-05-20', '23456789012', 'M', '8765432109', '2026-05-20', 'Av. Central', 456, '54321-876', 'Rio de Janeiro', 'RJ', '21987654321', 'bruno@email.com'),
+('Carlos Mendes', '1992-09-15', '34567890123', 'M', '7654321098', '2027-09-15', 'Praça da Liberdade', 789, '67890-123', 'Belo Horizonte', 'MG', '31987654321', 'carlos@email.com'),
+('Daniela Castro', '1995-03-10', '45678901234', 'F', '6543210987', '2028-03-10', 'Rua Verde', 101, '87654-321', 'Curitiba', 'PR', '41987654321', 'daniela@email.com'),
+('Eduardo Pereira', '1985-07-25', '56789012345', 'M', '5432109876', '2029-07-25', 'Rua Azul', 202, '98765-432', 'Porto Alegre', 'RS', '51987654321', 'eduardo@email.com'),
+('Fernanda Oliveira', '1993-11-30', '67890123456', 'F', '4321098765', '2030-11-30', 'Av. Amarela', 303, '12345-678', 'Florianópolis', 'SC', '48987654321', 'fernanda@email.com'),
+('Gabriel Santos', '1991-06-05', '78901234567', 'M', '3210987654', '2031-06-05', 'Rua Roxa', 404, '54321-876', 'Salvador', 'BA', '71987654321', 'gabriel@email.com'),
+('Helena Martins', '1994-02-20', '89012345678', 'F', '2109876543', '2032-02-20', 'Av. Vermelha', 505, '67890-123', 'Recife', 'PE', '81987654321', 'helena@email.com'),
+('Igor Nascimento', '1987-08-10', '90123456789', 'M', '1098765432', '2033-08-10', 'Praça Azul', 606, '87654-321', 'Fortaleza', 'CE', '85987654321', 'igor@email.com'),
+('Juliana Rocha', '1996-04-15', '01234567890', 'F', '0987654321', '2034-04-15', 'Rua Cinza', 707, '98765-432', 'Manaus', 'AM', '92987654321', 'juliana@email.com');
+('Maria Silva', '1988-05-10', '12345678901', 'F', '123456789', '2025-12-31', 'Rua das Flores', 123, '12345678', 'São Paulo', 'SP', '11999999999', 'maria.silva@email.com'),
+('José Santos', '1975-11-20', '98765432109', 'M', '987654321', '2024-06-15', 'Avenida Paulista', 456, '98765432', 'Rio de Janeiro', 'RJ', '21988888888', 'jose.santos@email.com'),
+('Ana Paula Oliveira', '1992-03-05', '45678912304', 'F', '456789123', '2026-09-20', 'Rua Augusta', 789, '45678912', 'Belo Horizonte', 'MG', '31977777777', 'ana.paula@email.com'),
+('Carlos Pereira', '1980-07-15', '78912345607', 'M', '789123456', '2023-12-10', 'Rua da Bahia', 1011, '78912345', 'Salvador', 'BA', '71966666666', 'carlos.pereira@email.com'),
+('Fernanda Rodrigues', '1995-12-25', '10234567890', 'F', '102345678', '2027-04-05', 'Avenida Brasil', 1213, '10234567', 'Brasília', 'DF', '61955555555', 'fernanda.rodrigues@email.com'),
+('Ricardo Almeida', '1987-09-18', '23456789012', 'M', '234567890', '2024-11-25', 'Rua Chile', 1415, '23456789', 'Curitiba', 'PR', '41944444444', 'ricardo.almeida@email.com'),
+('Juliana Lima', '1990-06-02', '34567890123', 'F', '345678901', '2026-02-10', 'Avenida Portugal', 1617, '34567890', 'Porto Alegre', 'RS', '51933333333', 'juliana.lima@email.com'),
+('Marcelo Costa', '1982-01-12', '45678901234', 'M', '456789012', '2023-08-15', 'Rua Itália', 1819, '45678901', 'Fortaleza', 'CE', '85922222222', 'marcelo.costa@email.com'),
+('Bruna Carvalho', '1998-04-28', '56789012345', 'F', '567890123', '2025-05-20', 'Avenida Alemanha', 2021, '56789012', 'Manaus', 'AM', '92911111111', 'bruna.carvalho@email.com'),
+('Gustavo Souza', '1979-10-09', '67890123456', 'M', '678901234', '2027-07-01', 'Rua França', 2223, '67890123', 'Recife', 'PE', '81900000000', 'gustavo.souza@email.com'),
+('Isabela Ferreira', '1993-08-17', '78901234567', 'F', '789012345', '2024-03-05', 'Avenida Espanha', 2425, '78901234', 'Goiânia', 'GO', '62999999999', 'isabela.ferreira@email.com'),
+('Fábio Silva', '1968-02-23', '89012345678', 'M', '890123456', '2026-10-10', 'Rua Holanda', 2627, '89012345', 'Vitória', 'ES', '27988888888', 'fabio.silva@email.com'),
+('Renata Oliveira', '1955-12-05', '90123456789', 'F', '901234567', '2023-06-20', 'Avenida Bélgica', 2829, '90123456', 'Florianópolis', 'SC', '48977777777', 'renata.oliveira@email.com'),
+('Rodrigo Santos', '1991-07-11', '01234567890', 'M', '012345678', '2025-01-25', 'Rua Suíça', 3031, '01234567', 'Campo Grande', 'MS', '67966666666', 'rodrigo.santos@email.com'),
+('Camila Pereira', '1983-03-29', '12345678902', 'F', '123456789', '2027-08-01', 'Avenida Áustria', 3233, '12345678', 'Cuiabá', 'MT', '65955555555', 'camila.pereira@email.com'),
+('Lucas Almeida', '1979-09-03', '23456789013', 'M', '234567890', '2024-04-15', 'Rua Dinamarca', 3435, '23456789', 'Porto Velho', 'RO', '69944444444', 'lucas.almeida@email.com'),
+('Gabriela Lima', '1996-05-16', '34567890124', 'F', '345678901', '2026-11-20', 'Avenida Noruega', 3637, '34567890', 'Rio Branco', 'AC', '68933333333', 'gabriela.lima@email.com');
+('Xuxa Pinto','1998-08-17', '89791351687', 'F', '687981651', '2025-01-25', 'Rua Pernambuco', 0017, '31864684', 'Olinda', 'PE', '65955555555', 'xuxapinto@email.com'),
+('Chumbinho de Rato', '2006-08-15', '68765016521','M', '354687651', '2026-09-20', 'Travessa do Lagão', 3546, '12345678', 'Paulista', 'PE', '6654687878', 'chumbin@email.com'),
+('Danoninho de Morango', '1989-08-07', '12345678978', 'M', '1234567897', '2023-06-20', 'Rua Três', 1213, '45678147', 'Olinda','PE', '4567891235', 'modanoninho@email.com');
