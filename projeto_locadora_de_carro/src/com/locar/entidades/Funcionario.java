@@ -75,6 +75,18 @@ public class Funcionario {
 		
 	}
 
+	public Funcionario(String nome, String rg, String telefone, String email, String dataNascimento, String cnh,
+			String validadeCNH, String cep) {
+		this.nome = nome;
+		this.rg = rg;
+		this.telefone = telefone;
+		this.email = email;
+		this.dataNascimento = dataNascimento;
+		this.cnh = cnh;
+		this.validadeCNH = validadeCNH;
+		this.cep = cep;
+	}
+
 	public String getNome() {
 		return nome;
 	}

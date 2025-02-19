@@ -107,8 +107,6 @@ public class Repositorio {
 		
 	}
 	
-	
-	
 	public void registrarCarro (Carro carro) {
 		Connection connection = estabelecerConexao();
 		
@@ -645,7 +643,6 @@ public class Repositorio {
 	    return null;
 	}
 
-
 	public void registrarLocacao (Locacao locacao) {
 		Connection connection = estabelecerConexao();
 		
@@ -856,6 +853,33 @@ public class Repositorio {
         return clientes;
     }
     
+    public List<Funcionario> buscarTodosFuncionarios() {
+        String sql = "SELECT SELECT nome, rg, telefone, email , data_nascimento, cnh, validade_cnh, cep FROM funcionario";
+        List<Funcionario> funcionarios = new ArrayList<>();
+        
+        try (Connection conn = estabelecerConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) { 
+                Funcionario funcionario = new Funcionario(
+                    rs.getString("nome"),
+                    rs.getString("rg"),
+                    rs.getString("telefone"),
+                    rs.getString("email"),
+                    rs.getString("cnh"),
+                    rs.getString("cnh"),
+                    rs.getString("validade_cnh"),
+                    rs.getString("cep")
+                );
+                funcionarios.add(funcionario); 
+            }
+        } catch (SQLException e) {
+            // TODO: Tratar exceção 
+
+        }
+        return funcionarios;
+    }
     public Cliente buscarDadosCliente(String cpf) {
         String sql = "SELECT nomeCompleto, dataNascimento, sexo, cnh, vencimentoCnh, bairroRua, numero, "
         		+ " cep, cidade, estado, telefone, email FROM cliente WHERE cpf = ?";
@@ -886,6 +910,42 @@ public class Repositorio {
             if (rs.next()) {
                 return new Cliente(rs.getString("nomeCompleto"),rs.getString("dataNascimento"), rs.getString("telefone"),
                 		rs.getString("email"), rs.getString("sexo"), rs.getString("cnh"), rs.getString("vencimentoCnh"));
+            }
+        } catch (SQLException e) {
+            // TODO tratar exeção
+        }
+        return null;
+    }
+    
+    public Funcionario buscarFuncionarioPorCpf(String cpf) {
+        String sql = "SELECT nome, rg, telefone, email , data_nascimento, cnh, validade_cnh, cep FROM funcionario WHERE cpf = ?";
+        try (Connection conn = estabelecerConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, cpf);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                return new Funcionario(rs.getString("nome"),rs.getString("rg"), rs.getString("telefone"),
+                		rs.getString("email"), rs.getString("data_nascimento"), rs.getString("cnh"), rs.getString("validade_cnh")
+                		, rs.getString("cep"));
+            }
+        } catch (SQLException e) {
+            // TODO tratar exeção
+        }
+        return null;
+    }
+    
+    public Funcionario buscarFuncionarioPorNome(String nome) {
+        String sql = "SELECT nome, rg, telefone, email , data_nascimento, cnh, validade_cnh, cep FROM funcionario WHERE nome = ?";
+        try (Connection conn = estabelecerConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, nome);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                return new Funcionario(rs.getString("nome"),rs.getString("rg"), rs.getString("telefone"),
+                		rs.getString("email"), rs.getString("data_nascimento"), rs.getString("cnh"), rs.getString("validade_cnh")
+                		, rs.getString("cep"));
             }
         } catch (SQLException e) {
             // TODO tratar exeção
@@ -1026,9 +1086,7 @@ public class Repositorio {
         }
         return null;
     }
-    
-
-    
+      
     public Cliente buscarIdPorCpf(String cpf) {
         String sql = "SELECT id FROM cliente WHERE cpf = ?";
         try (Connection conn = estabelecerConexao();
@@ -1337,5 +1395,27 @@ public class Repositorio {
 
         return reservas;
     }
+
+    public boolean autenticarFuncionario(String cpf, String senha) {
+        String sql = "SELECT senha FROM funcionario WHERE cpf = ?";
+
+        try (Connection conn = estabelecerConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setString(1, cpf);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                String senhaCorreta = rs.getString("senha");
+                return senha.equals(senhaCorreta);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
+
 
 }

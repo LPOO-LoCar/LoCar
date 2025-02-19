@@ -13,6 +13,7 @@ import com.locar.ui.ajuda.Sobre;
 import com.locar.ui.buscar.*;
 import com.locar.ui.cadastro.*;
 import com.locar.ui.relatorios.*;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.BorderLayout;
@@ -71,7 +72,7 @@ public class TelaPrincipal extends JFrame {
 		menuBar.setMargin(new Insets(1, 1, 1, 1));
 		menuBar.setForeground(Color.BLACK);
 		menuBar.setBackground(new Color(240, 240, 240));
-		menuBar.setBounds(0, 0, 774, 31);
+		menuBar.setBounds(0, 0, 784, 31);
 		contentPane.add(menuBar);
 		
 		//Barra de Menu - Botão Arquivo
@@ -144,17 +145,6 @@ public class TelaPrincipal extends JFrame {
 			telaNovaReserva.setVisible(true);
 		});
 		
-		JMenuItem mudarSenhaMenuItem = new JMenuItem("Mudar Senha");
-		mudarSenhaMenuItem.setForeground(Color.BLACK);
-		mudarSenhaMenuItem.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		menuArquivo.add(mudarSenhaMenuItem);
-		
-		mudarSenhaMenuItem.addActionListener(e -> {
-			MudarSenha telaMudarSenha = new MudarSenha();
-			dispose();
-			telaMudarSenha.setVisible(true);
-		});
-		
 		JMenuItem fazerLogoutMenuItem = new JMenuItem("Fazer logout");
 		fazerLogoutMenuItem.setForeground(Color.BLACK);
 		fazerLogoutMenuItem.setFont(new Font("Segoe UI", Font.PLAIN, 18));
@@ -214,9 +204,13 @@ public class TelaPrincipal extends JFrame {
 		submenuVeiculo.add(editarremoverVeiculo);
 		
 		editarremoverVeiculo.addActionListener(e -> {
+			if (funcao.equals("ADMIN")) {
 			EditarVeiculo telaEditarVeiculo = new EditarVeiculo(funcao);
 			dispose();
 			telaEditarVeiculo.setVisible(true);
+			} else {
+				JOptionPane.showMessageDialog(null, "Sem permissão", "Erro", JOptionPane.ERROR_MESSAGE);
+			}
 		});
 		
 		JMenuItem agendarManutençao = new JMenuItem("Agendar Manutenção Veicular");
@@ -224,9 +218,13 @@ public class TelaPrincipal extends JFrame {
 		submenuVeiculo.add(agendarManutençao);
 		
 		agendarManutençao.addActionListener(e ->{
+			if (funcao.equals("ADMIN")) {
 			AgendarManutençãoVeicular telaAgendarManutençao = new AgendarManutençãoVeicular(funcao);
 			dispose();
 			telaAgendarManutençao.setVisible(true);
+			} else {
+	            JOptionPane.showMessageDialog(null, "Sem permissão", "Erro", JOptionPane.ERROR_MESSAGE);
+	        }
 		});
 		
 		JMenuItem agendarVistoria = new JMenuItem("Agendar Vistoria Veicular");
@@ -234,9 +232,13 @@ public class TelaPrincipal extends JFrame {
 		submenuVeiculo.add(agendarVistoria);
 		
 		agendarVistoria.addActionListener(e -> {
+			if (funcao.equals("ADMIN")) {
 			AgendarVistoriaVeicular telaAgendarVistoria = new AgendarVistoriaVeicular(funcao);
 			dispose();
 			telaAgendarVistoria.setVisible(true);
+			} else {
+	            JOptionPane.showMessageDialog(null, "Sem permissão", "Erro", JOptionPane.ERROR_MESSAGE);
+	        }
 		});
 		
 		JMenuItem editarGerenciarCliente = new JMenuItem("Gerenciar Cliente");
@@ -256,9 +258,11 @@ public class TelaPrincipal extends JFrame {
 		menuLocaçoes.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		
 		menuLocaçoes.addActionListener(e -> {
+			
 			EditarLocacao telaEditarLocaçaoAtiva = new EditarLocacao(funcao);
 			dispose();
 			telaEditarLocaçaoAtiva.setVisible(true);
+			
 		});
 		
 		JMenuItem editarGerenciarFuncionario = new JMenuItem("Gerenciar Funcionario");
@@ -267,9 +271,14 @@ public class TelaPrincipal extends JFrame {
 		menuEditar.add(editarGerenciarFuncionario);
 		
 		editarGerenciarFuncionario.addActionListener(e -> {
+			if (funcao.equals("ADMIN")) {
 			EditarFuncionario telaEditarFuncionario = new EditarFuncionario(funcao);
 			dispose();
 			telaEditarFuncionario.setVisible(true);
+			} else {
+				JOptionPane.showMessageDialog(null, "Sem permissão", "Erro", JOptionPane.ERROR_MESSAGE);
+				
+			}
 		});
 		
 		menuEditar.add(menuLocaçoes);
@@ -305,7 +314,7 @@ public class TelaPrincipal extends JFrame {
 		menuBuscar.add(buscarCliente);
 		
 		buscarCliente.addActionListener(e -> {
-			BuscarCliente telaBuscarCliente = new BuscarCliente(funcao);
+			BuscarFuncionario telaBuscarCliente = new BuscarFuncionario(funcao);
 			dispose();
 			telaBuscarCliente.setVisible(true);
 		});
@@ -327,7 +336,7 @@ public class TelaPrincipal extends JFrame {
 		menuBuscar.add(buscarFuncionario);
 		
 		buscarFuncionario.addActionListener(e -> {
-			BuscarFuncionario telaBuscarFuncionario = new BuscarFuncionario();
+			BuscarFuncionario telaBuscarFuncionario = new BuscarFuncionario("ADMIN");
 			dispose();
 			telaBuscarFuncionario.setVisible(true);
 		});
@@ -452,12 +461,12 @@ public class TelaPrincipal extends JFrame {
 		menuAjuda.add(menuSobre);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\mathe\\Downloads\\logo-locar.jpg"));
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\mathe\\Downloads\\IMG_8419 (2).png"));
 		lblNewLabel.setBounds(27, 33, 730, 505);
 		contentPane.add(lblNewLabel);
 				
 		menuSobre.addActionListener(e -> {
-			Sobre telaAjuda = new Sobre();
+			Sobre telaAjuda = new Sobre(funcao);
 			dispose();
 			telaAjuda.setVisible(true);
 		});

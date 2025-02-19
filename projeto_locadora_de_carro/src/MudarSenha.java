@@ -1,4 +1,4 @@
-package com.locar.ui.cadastro;
+
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

@@ -43,7 +43,7 @@ public class BuscarCliente extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BuscarCliente frame = new BuscarCliente("ADMIN");
+					BuscarFuncionario frame = new BuscarFuncionario("ADMIN");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

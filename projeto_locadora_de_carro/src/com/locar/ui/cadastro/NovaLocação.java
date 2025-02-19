@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import com.locar.dados.Repositorio;
 import com.locar.entidades.*;
 import com.locar.regras_negocio.ControladorControleAcesso;
+import com.locar.regras_negocio.GerarPdf;
 import com.locar.ui.TelaPrincipal;
 
 import javax.swing.JLabel;
@@ -329,6 +330,15 @@ public class NovaLocação extends JFrame {
 	            Cliente cliente = repositorio.buscarIdPorCpf(cpf);
 	            Carro carro = repositorio.buscarIdPorPlaca(placa);
 	            
+	            String nome = locNome_textField.getText();
+	            String email = locEmail_textField.getText();
+	            String telefone = locTelefone_textField.getText();
+	            String marca = locMarca_textField.getText();
+	            String modelo = locModelo_textField.getText();
+	            String categoria = locTipo_comboBox.getSelectedItem().toString();
+	            String ano = String.valueOf(locAno_textField.getText());
+	            String kmRodados = locKM_textField.getText();
+	             
 	            double valorDiaria = Double.parseDouble(locValorDaDiaria_textField.getText());
 	            int diasLocados = Integer.parseInt(locDiasLocados_textField.getText());
 	            double valorTotal =  Double.parseDouble(locValorTotal_textField.getText());
@@ -337,6 +347,8 @@ public class NovaLocação extends JFrame {
 	            
 	            ControladorControleAcesso controlador = new ControladorControleAcesso();
 	            controlador.registrarLocacao(cliente, carro, valorDiaria, diasLocados, valorTotal, formaPagamento, status);
+	            GerarPdf gerarPdf = new GerarPdf();
+	            gerarPdf.gerarPDF(nome, cpf, email, telefone, placa, marca, modelo, categoria, ano, kmRodados, valorDiaria, diasLocados, valorTotal, formaPagamento);
 	            
 				JOptionPane.showMessageDialog(null, "Locação cadastrada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 			} catch (Exception e1) {

@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.locar.dados.Repositorio;
+
 import javax.swing.JToolBar;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -99,13 +102,16 @@ public class Login extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String usuario = campoTextoUsuario.getText();
-				String senha = campoTextoSenha.getText();
+				String senha = String.valueOf(campoTextoSenha.getPassword());
+				Repositorio repositorio = new Repositorio();
 				
 				if (usuario.equals("admin") && senha.equals("1234")) {
 					dispose();
 					abrirTelaPrincipal("ADMIN");
-				} else if (usuario.equals("user") && senha.equals("1234")){
-					abrirTelaPrincipal("USER");
+				} else if (repositorio.autenticarFuncionario(usuario, senha)) {
+		            dispose();
+		            abrirTelaPrincipal("USER");
+
 				} else {
 					JOptionPane.showMessageDialog(Login.this, "Usuário ou senha incorretos", "Erro", JOptionPane.ERROR_MESSAGE);
 				}
