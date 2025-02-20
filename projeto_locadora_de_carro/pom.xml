@@ -39,7 +39,7 @@
    <dependency>
     <groupId>org.json</groupId>
     <artifactId>json</artifactId>
-    <version>20210307</version> <!-- Verifique a versão mais recente -->
+    <version>20201115</version> 
    </dependency>
    	<dependency>
 		<groupId>com.github.mifmif</groupId>
