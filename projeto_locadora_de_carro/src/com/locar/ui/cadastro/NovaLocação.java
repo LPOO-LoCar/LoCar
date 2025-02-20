@@ -444,4 +444,5 @@ public class NovaLocação extends JFrame {
 	        locValorTotal_textField.setText("Erro");
 	    }
 	}
+	
 }
