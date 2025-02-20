@@ -5,17 +5,23 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.locar.ui.TelaPrincipal;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JScrollPane;
 import java.awt.Component;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class HelpMeAjuda extends JFrame {
+public class HelpMe extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private String funcao;
 
 	/**
 	 * Launch the application.
@@ -24,7 +30,7 @@ public class HelpMeAjuda extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HelpMeAjuda frame = new HelpMeAjuda();
+					HelpMe frame = new HelpMe("ADMIN");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,7 +42,8 @@ public class HelpMeAjuda extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public HelpMeAjuda() {
+	public HelpMe(String funcao) {
+		this.funcao = funcao;
 		setTitle("Help-me!");
 		setSize(600,450);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -184,7 +191,14 @@ public class HelpMeAjuda extends JFrame {
 		helpText.setEditable(false);
 		scrollPane.setViewportView(helpText);
 		
-		JButton btnNewButton = new JButton("Volta");
+		JButton btnNewButton = new JButton("Voltar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+                TelaPrincipal telaPrincipal = new TelaPrincipal(funcao);
+                dispose();
+                telaPrincipal.setVisible(true);
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnNewButton.setBounds(10, 11, 98, 29);
 		contentPane.add(btnNewButton);

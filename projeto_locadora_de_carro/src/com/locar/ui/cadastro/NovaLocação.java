@@ -9,9 +9,12 @@ import javax.swing.border.EmptyBorder;
 
 import com.locar.dados.Repositorio;
 import com.locar.entidades.*;
+import com.locar.regras_negocio.Auth;
+import com.locar.regras_negocio.Cob;
 import com.locar.regras_negocio.ControladorControleAcesso;
 import com.locar.regras_negocio.GerarPdf;
 import com.locar.ui.TelaPrincipal;
+import com.locar.ui.pagamento.Pagar;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -47,6 +50,7 @@ public class NovaLocação extends JFrame {
 	private JTextField locDiasLocados_textField;
 	private JTextField locValorTotal_textField;
 	private String funcao;
+	private double valorTotal;
 
 	/**
 	 * Launch the application.
@@ -343,7 +347,7 @@ public class NovaLocação extends JFrame {
 	             
 	            double valorDiaria = Double.parseDouble(locValorDaDiaria_textField.getText());
 	            int diasLocados = Integer.parseInt(locDiasLocados_textField.getText());
-	            double valorTotal =  Double.parseDouble(locValorTotal_textField.getText());
+	            valorTotal = valorDiaria * diasLocados;
 	            String formaPagamento = locFormaDePag_comboBox.getSelectedItem().toString();
 	            String status = campoTextoStatus.getSelectedItem().toString();
 	            
@@ -353,7 +357,17 @@ public class NovaLocação extends JFrame {
 	            ControladorControleAcesso controlador = new ControladorControleAcesso();
 	            controlador.registrarLocacao(cliente, carro, valorDiaria, diasLocados, valorTotal, formaPagamento, status, dataLocacao);
 	            GerarPdf gerarPdf = new GerarPdf();
-	            gerarPdf.gerarPDF(nome, cpf, email, telefone, placa, marca, modelo, categoria, ano, kmRodados, valorDiaria, diasLocados, valorTotal, formaPagamento);
+	            gerarPdf.gerarPDF(nome, cpf, email, telefone, placa, marca, modelo, categoria, ano, kmRodados, valorDiaria,
+	            		diasLocados, valorTotal, formaPagamento);
+	            
+                Auth auth = new Auth();
+                String access_token = auth.geraToken();
+                Cob cobranca = new Cob();
+                String resultCob = cobranca.doCob(access_token);
+                int idCob = cobranca.getIdCob(resultCob);
+	            Pagar telaPagamento = new Pagar(valorTotal, cliente, carro, access_token, idCob);
+                telaPagamento.setVisible(true);  // Mostra a tela de pagamento
+                dispose();
 	            
 				JOptionPane.showMessageDialog(null, "Locação cadastrada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 			} catch (Exception e1) {

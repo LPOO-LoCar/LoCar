@@ -18,6 +18,8 @@ public class Carro {
     private int numLugares;
     private int numPortas;
     
+    public Carro() {
+    }
     
     public Carro(String marca, String modelo, int ano, String cor, String placa, String numMotor,
             String chassi, String combustivel, String transmissao, String categoria, String conservacao,

@@ -16,6 +16,9 @@ public class Cliente {
     private String telefone;
     private String email;
     
+    public Cliente() {
+    }
+    
     public Cliente(String nomeCompleto, String dataNascimento, String cpf, String sexo, String cnh,
     		String vencimentoCnh, String bairroRua, int numero, String cep, String cidade, String estado,
     		String telefone, String email) {

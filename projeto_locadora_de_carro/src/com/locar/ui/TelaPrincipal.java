@@ -450,7 +450,7 @@ public class TelaPrincipal extends JFrame {
 		menuAjuda.add(menuHelpMe);
 		
 		menuHelpMe.addActionListener(e ->{
-			HelpMe telaHelpMe = new HelpMe();
+			HelpMe telaHelpMe = new HelpMe(funcao);
 			dispose();
 			telaHelpMe.setVisible(true);
 		});
