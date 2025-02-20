@@ -41,6 +41,5 @@ public class App
     	imageName=loc.saveImage(image); //salvando a imagem
     	loc.showImage(imageName); //exibindo a imagem
     	
-    	
     }
 }

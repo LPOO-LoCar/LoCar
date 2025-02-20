@@ -347,7 +347,7 @@ public class NovaLocação extends JFrame {
 	             
 	            double valorDiaria = Double.parseDouble(locValorDaDiaria_textField.getText());
 	            int diasLocados = Integer.parseInt(locDiasLocados_textField.getText());
-	            valorTotal = valorDiaria * diasLocados;
+	            double valorTotal = valorDiaria * diasLocados;
 	            String formaPagamento = locFormaDePag_comboBox.getSelectedItem().toString();
 	            String status = campoTextoStatus.getSelectedItem().toString();
 	            
@@ -360,14 +360,9 @@ public class NovaLocação extends JFrame {
 	            gerarPdf.gerarPDF(nome, cpf, email, telefone, placa, marca, modelo, categoria, ano, kmRodados, valorDiaria,
 	            		diasLocados, valorTotal, formaPagamento);
 	            
-                Auth auth = new Auth();
-                String access_token = auth.geraToken();
-                Cob cobranca = new Cob();
-                String resultCob = cobranca.doCob(access_token);
-                int idCob = cobranca.getIdCob(resultCob);
-	            Pagar telaPagamento = new Pagar(valorTotal, cliente, carro, access_token, idCob);
-                telaPagamento.setVisible(true);  // Mostra a tela de pagamento
-                dispose();
+	            Pagar telaPagar = new Pagar(valorTotal);
+	            telaPagar.setVisible(true);
+	            dispose();
 	            
 				JOptionPane.showMessageDialog(null, "Locação cadastrada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 			} catch (Exception e1) {
