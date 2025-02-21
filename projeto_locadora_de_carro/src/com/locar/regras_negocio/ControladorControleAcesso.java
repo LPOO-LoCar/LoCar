@@ -130,9 +130,6 @@ public class ControladorControleAcesso {
 	        throw new IllegalArgumentException("CPF deve ter 11 dígitos numéricos.");
 	    }
 	    
-	    if (sexo == null || (!sexo.equalsIgnoreCase("M") && !sexo.equalsIgnoreCase("F"))) {
-	        throw new IllegalArgumentException("Sexo deve ser 'M' ou 'F'.");
-	    }
 	    if (cnh == null || cnh.trim().isEmpty()) {
 	        throw new IllegalArgumentException("CNH é obrigatória.");
 	    }

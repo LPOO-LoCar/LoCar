@@ -261,9 +261,13 @@ public class EditarVeiculo {
 						categoria, conservacao, direcao, kmRodados, numLugares, numPortas);
 				
 				JOptionPane.showMessageDialog(null, "Veiculo editado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-			} catch (Exception e1) {
-				JOptionPane.showMessageDialog(null, "Erro ao editar", "Erro", JOptionPane.ERROR_MESSAGE);
-			}
+			} catch (IllegalArgumentException e1) {
+                // Exibe a mensagem de erro específica que foi gerada
+                JOptionPane.showMessageDialog(null, e1.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e1) {
+                // Caso algum erro inesperado aconteça, exibe uma mensagem genérica
+                JOptionPane.showMessageDialog(null, "Erro ao editar o veículo. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
 			
 			}
 		});
