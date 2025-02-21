@@ -337,8 +337,12 @@ public class NovoCliente {
             		controlador.registrarCliente(nomeCompleto,dataNascimento, cpf, sexo, cnh, vencimentoCnh, bairroRua, numero, cep, cidade, estado, telefone, email);
             		
             		JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-        		} catch (Exception e1) {
-                    JOptionPane.showMessageDialog(null, "Erro ao cadastrar", "Erro", JOptionPane.ERROR_MESSAGE);
+        		} catch (IllegalArgumentException e1) {
+                    // Exibe a mensagem de erro específica que foi gerada
+                    JOptionPane.showMessageDialog(null, e1.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                } catch (Exception e1) {
+                    // Caso algum erro inesperado aconteça, exibe uma mensagem genérica
+                    JOptionPane.showMessageDialog(null, "Erro ao cadastrar o cliente. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
         		
         	}

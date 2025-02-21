@@ -271,9 +271,13 @@ public class AgendarManutençãoVeicular extends JFrame {
 	            controlador.registrarAgendamentoManuntencao(carro, tipoManuntencao, data, hora, observacao);
 	            
 				JOptionPane.showMessageDialog(null, "Agendamento de manuntenção feita com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-			} catch (Exception e1) {
-				JOptionPane.showMessageDialog(null, "Erro ao agendar", "Erro", JOptionPane.ERROR_MESSAGE);
-			}
+			} catch (IllegalArgumentException e1) {
+                // Exibe a mensagem de erro específica que foi gerada
+                JOptionPane.showMessageDialog(null, e1.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e1) {
+                // Caso algum erro inesperado aconteça, exibe uma mensagem genérica
+                JOptionPane.showMessageDialog(null, "Erro ao cadastrar a locação. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
 			}
 				
 		});

@@ -23,7 +23,7 @@ public class Loc {
 		StringBuilder responseBuilder = new StringBuilder();
     	HttpsURLConnection conn = null;
     	try {
-    		URL url = new URL("https://api.sandbox.gerencianet.com.br/v2/loc/" + idCob + "/qrcode");              
+    		URL url = new URL ("https://api-pix.gerencianet.com.br/v2/loc/"+idCob+"/qrcode"); //Para ambiente de Produção              
 	        conn = (HttpsURLConnection)url.openConnection();
 	        conn.setDoOutput(true);
 	        conn.setRequestMethod("GET");
@@ -51,8 +51,6 @@ public class Loc {
 	
 	public String getQrCode(String loc) {
 		try {
-			loc = "{\"qrcode\":\"" + loc.trim() + "\"}";
-	        System.out.println("loc: " + loc);
     		JSONObject jsonObject = new JSONObject(loc);
     		this.qRCode = jsonObject.getString("qrcode");
 		} catch (Exception e) {

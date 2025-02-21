@@ -129,7 +129,7 @@ public class NovoVeiculo {
 		
 		JComboBox campoTextoCombustivel = new JComboBox();
 		campoTextoCombustivel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		campoTextoCombustivel.setModel(new DefaultComboBoxModel(new String[] {"Gasolina", "Diesel"}));
+		campoTextoCombustivel.setModel(new DefaultComboBoxModel(new String[] {"Gasolina", "Diesel", "Flex"}));
 		campoTextoCombustivel.setBounds(122, 290, 107, 22);
 		frame.getContentPane().add(campoTextoCombustivel);
 		
@@ -140,7 +140,7 @@ public class NovoVeiculo {
 		
 		JComboBox campoTextoCategoria = new JComboBox();
 		campoTextoCategoria.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		campoTextoCategoria.setModel(new DefaultComboBoxModel(new String[] {"Hatch", "Sedan", "SUV", "Picape", "Minivan", "Outro"}));
+		campoTextoCategoria.setModel(new DefaultComboBoxModel(new String[] {"Hatch", "Sedan", "SUV", "Picape", "Minivan", "Hatchback", "Esportivo"}));
 		campoTextoCategoria.setBounds(122, 321, 107, 22);
 		frame.getContentPane().add(campoTextoCategoria);
 		
@@ -151,7 +151,7 @@ public class NovoVeiculo {
 		
 		JComboBox campoTextoTransmissao = new JComboBox();
 		campoTextoTransmissao.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		campoTextoTransmissao.setModel(new DefaultComboBoxModel(new String[] {"Manual", "Automático"}));
+		campoTextoTransmissao.setModel(new DefaultComboBoxModel(new String[] {"Manual", "Automática"}));
 		campoTextoTransmissao.setBounds(453, 290, 105, 22);
 		frame.getContentPane().add(campoTextoTransmissao);
 		
@@ -162,7 +162,7 @@ public class NovoVeiculo {
 		
 		JComboBox campoTextoConservacao = new JComboBox();
 		campoTextoConservacao.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		campoTextoConservacao.setModel(new DefaultComboBoxModel(new String[] {"Novo", "Seminovo", "Usado"}));
+		campoTextoConservacao.setModel(new DefaultComboBoxModel(new String[] {"Bom", "Ótimo", "Excelente", "Seminovo", "Usado", "Novo"}));
 		campoTextoConservacao.setBounds(453, 320, 105, 22);
 		frame.getContentPane().add(campoTextoConservacao);
 		
@@ -192,7 +192,7 @@ public class NovoVeiculo {
 		frame.getContentPane().add(separator_2);
 		
         JComboBox campoTextoDirecao = new JComboBox();
-        campoTextoDirecao.setModel(new DefaultComboBoxModel(new String[] {"Manual", "Hidraulica", "Eletrica"}));
+        campoTextoDirecao.setModel(new DefaultComboBoxModel(new String[] {"Manual", "Hidráulica", "Elétrica"}));
         campoTextoDirecao.setFont(new Font("Tahoma", Font.PLAIN, 18));
         campoTextoDirecao.setBounds(122, 353, 107, 22);
         frame.getContentPane().add(campoTextoDirecao);
@@ -232,9 +232,13 @@ public class NovoVeiculo {
 						categoria, conservacao, direcao, kmRodados, numLugares, numPortas);
 				
 				JOptionPane.showMessageDialog(null, "Veiculo cadastrado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-			} catch (Exception e1) {
-				JOptionPane.showMessageDialog(null, "Erro ao cadastrar", "Erro", JOptionPane.ERROR_MESSAGE);
-			}
+			} catch (IllegalArgumentException e1) {
+                // Exibe a mensagem de erro específica que foi gerada
+                JOptionPane.showMessageDialog(null, e1.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e1) {
+                // Caso algum erro inesperado aconteça, exibe uma mensagem genérica
+                JOptionPane.showMessageDialog(null, "Erro ao cadastrar o veículo. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
 			
 			}
 		});

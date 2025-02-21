@@ -46,7 +46,7 @@ public class Cob {
     	HttpsURLConnection conn = null;
     	
     	try {
-    		System.setProperty("javax.net.ssl.keyStore", "prod278612.p12"); 
+    		System.setProperty("javax.net.ssl.keyStore", "homologacao-712869-LoCar.p12"); 
 	        
     		String txid;
     		Generex generex = new Generex("[a-zA-Z0-9]{26,35}");

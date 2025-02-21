@@ -21,6 +21,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Login extends JFrame {
 
@@ -77,9 +79,9 @@ public class Login extends JFrame {
 		lblNewLabel_2.setBounds(143, 62, 322, 27);
 		contentPane.add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("Usuário:");
+		JLabel lblNewLabel_3 = new JLabel("Usuário(CPF):");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_3.setBounds(241, 137, 91, 27);
+		lblNewLabel_3.setBounds(226, 137, 128, 27);
 		contentPane.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Fazer Login");
@@ -94,6 +96,11 @@ public class Login extends JFrame {
 		contentPane.add(lblNewLabel_5);
 		
 		campoTextoUsuario = new JTextField();
+		campoTextoUsuario.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+			}
+		});
 		campoTextoUsuario.setColumns(10);
 		campoTextoUsuario.setBounds(143, 175, 276, 20);
 		contentPane.add(campoTextoUsuario);

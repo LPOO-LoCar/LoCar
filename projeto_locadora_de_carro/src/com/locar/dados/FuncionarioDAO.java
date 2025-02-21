@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
+
 public class FuncionarioDAO {
 
     private static final String URL = "jdbc:mysql://127.0.0.1:3306/locadora_de_carro";
@@ -40,8 +42,7 @@ public class FuncionarioDAO {
             stmt.setString(16, complemento);
             stmt.setString(17, senha);
 
-            stmt.executeUpdate();
-            System.out.println("Funcionário cadastrado com sucesso!");
+            stmt.executeUpdate();      
 
         } catch (SQLException e) {
             System.out.println("Erro ao cadastrar funcionário: " + e.getMessage());

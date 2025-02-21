@@ -1,5 +1,9 @@
 package com.locar.entidades;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 public class Carro {
     private long id;
     private String marca;
@@ -17,6 +21,7 @@ public class Carro {
     private String kmRodados;
     private int numLugares;
     private int numPortas;
+    private List<Reserva> reservas;
     
     public Carro() {
     }
@@ -208,6 +213,33 @@ public class Carro {
     
     public void setNumPortas(int numPortas) { 
     	this.numPortas = numPortas; 
+    }
+    
+    public boolean estaDisponivel(String dataRetirada, String dataEntrega) {
+        SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
+
+        try {
+            // Converte as datas fornecidas para objetos Date
+            Date dataRetiradaDate = formatoData.parse(dataRetirada);
+            Date dataEntregaDate = formatoData.parse(dataEntrega);
+
+            // Verifica se o carro está disponível para o intervalo de datas
+            for (Reserva reserva : reservas) {
+                Date reservaDataRetirada = formatoData.parse(reserva.getDataRetirada());
+                Date reservaDataEntrega = formatoData.parse(reserva.getDataEntrega());
+
+                // Verifica se o intervalo de datas da nova reserva sobrepõe o intervalo de reservas existentes
+                if ((dataRetiradaDate.before(reservaDataEntrega) && dataEntregaDate.after(reservaDataRetirada))) {
+                    return false; // O carro já está reservado no período desejado
+                }
+            }
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Formato de data inválido.");
+        }
+
+        // Se não houver sobreposição de reservas, o carro está disponível
+        return true;
     }
     
 }

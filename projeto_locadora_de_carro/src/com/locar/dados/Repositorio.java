@@ -794,9 +794,9 @@ public class Repositorio {
 		Statement statement = null;
 		try {
 		    statement = connection.createStatement();
-			statement.execute("INSERT INTO agendamentovistoria (id_carro, tipoManuntencao, dataManuntencao,hora, observacao) "
+			statement.execute("INSERT INTO agendamentovistoria (id_carro, tipoVistoria, dataVistoria,hora, observacao) "
 					+ " VALUES ('" + agendamentoVistoria.getCarro().getId() + "', '" 
-					+ agendamentoVistoria.getTipoManuntencao() + "', '" + agendamentoVistoria.getDataManuntencao() + "', '"
+					+ agendamentoVistoria.getTipoVistoria() + "', '" + agendamentoVistoria.getDataVistoria() + "', '"
 					+ agendamentoVistoria.getHora() + "', '" + agendamentoVistoria.getObservacao() + "')");
 			
 		} catch (SQLException e) {
@@ -902,7 +902,7 @@ public class Repositorio {
     
     
     public List<Funcionario> buscarTodosFuncionarios() {
-        String sql = "SELECT SELECT nome, rg, telefone, email , data_nascimento, cnh, validade_cnh, cep FROM funcionario";
+        String sql = "SELECT nome, rg, telefone, email , data_nascimento, cnh, validade_cnh, cep FROM funcionario";
         List<Funcionario> funcionarios = new ArrayList<>();
         
         try (Connection conn = estabelecerConexao();
@@ -948,12 +948,12 @@ public class Repositorio {
         }
         return null;
     }
-	
+    
     public Cliente buscarClientePorCpf(String cpf) {
-        String sql = "SELECT nomeCompleto, dataNascimento, telefone, email , sexo, cnh, vencimentoCnh FROM cliente WHERE cpf = ?";
+    	String sql = "SELECT nomeCompleto, dataNascimento, telefone, email, sexo, cnh, vencimentoCnh FROM cliente WHERE cpf LIKE ?";
         try (Connection conn = estabelecerConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, cpf);
+            stmt.setString(1, "%" + cpf + "%");
             ResultSet rs = stmt.executeQuery();
             
             if (rs.next()) {
@@ -966,6 +966,32 @@ public class Repositorio {
         return null;
     }
     
+    public List<Cliente> buscarClientesPorCpf(String cpf) {
+        String sql = "SELECT nomeCompleto, dataNascimento, telefone, email, sexo, cnh, vencimentoCnh FROM cliente WHERE cpf LIKE ?";
+        List<Cliente> clientes = new ArrayList<>();
+
+        try (Connection conn = estabelecerConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, "%" + cpf + "%"); // CPF deve ser buscado exato, sem LIKE
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                clientes.add(new Cliente(
+                    rs.getString("nomeCompleto"),
+                    rs.getString("dataNascimento"),
+                    rs.getString("telefone"),
+                    rs.getString("email"),
+                    rs.getString("sexo"),
+                    rs.getString("cnh"),
+                    rs.getString("vencimentoCnh")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // TODO: Tratar exceção corretamente
+        }
+        return clientes;
+    }
     
     public Funcionario buscarFuncionarioPorCpf(String cpf) {
         String sql = "SELECT nome, rg, telefone, email , data_nascimento, cnh, validade_cnh, cep FROM funcionario WHERE cpf = ?";
@@ -1004,23 +1030,32 @@ public class Repositorio {
         return null;
     }
     
-    
-    public Cliente buscarClientePorNomeCompleto(String nomeCompleto) {
-        String sql = "SELECT nomeCompleto, dataNascimento, telefone, email , sexo, cnh, vencimentoCnh FROM cliente WHERE nomeCompleto = ?";
+    public List<Cliente> buscarClientesPorNomeCompleto(String nomeCompleto) {
+        String sql = "SELECT nomeCompleto, dataNascimento, telefone, email, sexo, cnh, vencimentoCnh FROM cliente WHERE nomeCompleto LIKE ?";
+        List<Cliente> clientes = new ArrayList<>();
+
         try (Connection conn = estabelecerConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, nomeCompleto);
+            stmt.setString(1, "%" + nomeCompleto + "%");
             ResultSet rs = stmt.executeQuery();
-            
-            if (rs.next()) {
-                return new Cliente(rs.getString("nomeCompleto"),rs.getString("dataNascimento"), rs.getString("telefone"),
-                		rs.getString("email"), rs.getString("sexo"), rs.getString("cnh"), rs.getString("vencimentoCnh"));
+
+            while (rs.next()) {
+                clientes.add(new Cliente(
+                    rs.getString("nomeCompleto"),
+                    rs.getString("dataNascimento"),
+                    rs.getString("telefone"),
+                    rs.getString("email"),
+                    rs.getString("sexo"),
+                    rs.getString("cnh"),
+                    rs.getString("vencimentoCnh")
+                ));
             }
         } catch (SQLException e) {
-            // TODO tratar exeção
+            e.printStackTrace(); // TODO: Tratar exceção corretamente
         }
-        return null;
+        return clientes;
     }
+
     
     
     public List<Carro> buscarTodosCarros() {

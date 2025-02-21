@@ -3,15 +3,15 @@ package com.locar.entidades;
 public class AgendamentoVistoria {
 	
 	private Carro carro;
-	private String tipoManuntencao;
-	private String dataManuntencao;
+	private String tipoVistoria;
+	private String dataVistoria;
 	private String hora;
 	private String observacao;
 	
-	public AgendamentoVistoria(Carro carro, String tipoManuntencao, String dataManuntencao, String hora, String observacao) {
+	public AgendamentoVistoria(Carro carro, String tipoVistoria, String dataVistoria, String hora, String observacao) {
 		this.carro = carro;
-		this.tipoManuntencao = tipoManuntencao;
-		this.dataManuntencao = dataManuntencao;
+		this.tipoVistoria = tipoVistoria;
+		this.dataVistoria = dataVistoria;
 		this.hora = hora;
 		this.observacao = observacao;
 	}
@@ -21,17 +21,17 @@ public class AgendamentoVistoria {
 	public void setCarro(Carro carro) {
 		this.carro = carro;
 	}
-	public String getTipoManuntencao() {
-		return tipoManuntencao;
+	public String getTipoVistoria() {
+		return tipoVistoria;
 	}
-	public void setTipoManuntencao(String tipoManuntencao) {
-		this.tipoManuntencao = tipoManuntencao;
+	public void setTipoVistoria(String tipoVistoria) {
+		this.tipoVistoria = tipoVistoria;
 	}
-	public String getDataManuntencao() {
-		return dataManuntencao;
+	public String getDataVistoria() {
+		return dataVistoria;
 	}
-	public void setDataManuntencao(String dataManuntencao) {
-		this.dataManuntencao = dataManuntencao;
+	public void setDataVistoria(String dataVistoria) {
+		this.dataVistoria = dataVistoria;
 	}
 	public String getHora() {
 		return hora;

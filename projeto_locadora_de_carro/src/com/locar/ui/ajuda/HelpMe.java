@@ -45,7 +45,7 @@ public class HelpMe extends JFrame {
 	public HelpMe(String funcao) {
 		this.funcao = funcao;
 		setTitle("Help-me!");
-		setSize(600,450);
+		setSize(750,600);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		
@@ -56,19 +56,21 @@ public class HelpMe extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel helpMe_Label = new JLabel("Help-me!");
-		helpMe_Label.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		helpMe_Label.setBounds(248, 11, 70, 29);
+		helpMe_Label.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		helpMe_Label.setBounds(314, 5, 122, 29);
 		contentPane.add(helpMe_Label);
 		
 		JLabel lblNewLabel = new JLabel("Ajuda do Sistema");
-		lblNewLabel.setBounds(237, 37, 91, 14);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel.setBounds(296, 35, 196, 25);
 		contentPane.add(lblNewLabel);
 		
 		JScrollPane scrollPane = new JScrollPane((Component) null);
-		scrollPane.setBounds(10, 61, 564, 350);
+		scrollPane.setBounds(10, 61, 714, 489);
 		contentPane.add(scrollPane);
 		
 		JTextArea helpText = new JTextArea();
+		helpText.setFont(new Font("Monospaced", Font.PLAIN, 15));
 		helpText.setText("1. Menu Arquivo\r\n\t>"
 				+ " É onde toda nova movimentação da locadora pode ser acessada.\r\n"
 				+ " 1.1. Novo Cliente\r\n"
@@ -199,8 +201,8 @@ public class HelpMe extends JFrame {
                 telaPrincipal.setVisible(true);
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnNewButton.setBounds(10, 11, 98, 29);
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton.setBounds(10, 11, 98, 35);
 		contentPane.add(btnNewButton);
 	}
 }

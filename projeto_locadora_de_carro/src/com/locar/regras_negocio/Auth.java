@@ -12,10 +12,11 @@ import javax.net.ssl.SSLSocketFactory;
 import org.json.JSONObject;
 
 public class Auth {
-	private final String client_id = "Client_Id_84c9e11ffc7f73bfca3f6573dedbe1e5acf3d07a";
-	private final String client_secret = "Client_Secret_ef783d43c9c3bc3843bd4cc2c048197394b7a6de";
+	private final String client_id = "Client_Id_764329f0b42987cdb05a1d20279bc6138905cf1b";
+	private final String client_secret = "Client_Secret_235d859d66d6e5db240841752e2bd7ecd491063f";
 	private final String basicAuth = Base64.getEncoder().encodeToString(((client_id+':'+client_secret).getBytes()));
 	
+
 	public String geraToken() {
 		String access_token="";
 		try {
@@ -23,7 +24,7 @@ public class Auth {
 	        System.setProperty("javax.net.ssl.keyStore", "homologacao-712869-LoCar.p12"); 
 	        SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
 	       
-	        URL url = new URL("https://api.sandbox.gerencianet.com.br/oauth/token");             
+	        URL url = new URL("https://api.sandbox.gerencianet.com.br/oauth/token");              
 	        HttpsURLConnection conn = (HttpsURLConnection)url.openConnection();
 	        conn.setDoOutput(true);
 	        conn.setRequestMethod("POST");

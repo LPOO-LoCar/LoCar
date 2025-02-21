@@ -15,6 +15,9 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import com.locar.regras_negocio.FuncionarioRegras;
@@ -304,7 +307,6 @@ public class NovoFuncionario extends JFrame {
 		funCadastrar_Button.setBounds(553, 625, 121, 35);
 		funCadastrar_Button.addActionListener(new ActionListener () {
 			public void actionPerformed(ActionEvent e) {
-		        try {
 		            String senha = funSenha_textField.getText();
 		            String confirmacaoSenha = funConfirmacaoSenha_textField.getText();
 		            
@@ -312,11 +314,7 @@ public class NovoFuncionario extends JFrame {
 
 		            if (funcionarioRegras.validarSenhas(senha, confirmacaoSenha)) {
 		                cadastrarFuncionario();
-		                JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-		            }
-		        } catch (Exception e1) {
-		            JOptionPane.showMessageDialog(null, "Erro ao cadastrar", "Erro", JOptionPane.ERROR_MESSAGE);
-		        }
+		            }	            
 			}
 		});
 		contentPane.add(funCadastrar_Button);
@@ -620,7 +618,6 @@ public class NovoFuncionario extends JFrame {
         String senha = funSenha_textField.getText();
         String confirmacaoSenha = funConfirmacaoSenha_textField.getText();
 
-        // Chama a camada de regras de negócio
         FuncionarioRegras regras = new FuncionarioRegras();
         regras.cadastrarFuncionario(nome, cpf, rg, orgExp, telefone, email, dataNascimento, dataExp, cnh, validadeCNH,
                 cep, rua, numeroRua, bairro, cidade, complemento, senha, confirmacaoSenha);

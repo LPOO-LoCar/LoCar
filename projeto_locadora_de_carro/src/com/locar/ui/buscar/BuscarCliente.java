@@ -181,30 +181,58 @@ public class BuscarCliente extends JFrame {
             		cliente.getSexo(), cliente.getCnh(), cliente.getVencimentoCnh()});
         }
     }
+    
     private void buscarClientePorCpf() {
         String cpf = locCPF_textField.getText();
         Repositorio repositorio = new Repositorio();
-        Cliente cliente = repositorio.buscarClientePorCpf(cpf);
-        
-        modelo.setRowCount(0); 
-        if (cliente != null) {
-            modelo.addRow(new Object[]{cliente.getNomeCompleto(),cliente.getDataNascimento(), cliente.getTelefone(), cliente.getEmail(),
-            		cliente.getSexo(), cliente.getCnh(), cliente.getVencimentoCnh()});
+        List<Cliente> clientes = repositorio.buscarClientesPorCpf(cpf);
+
+        modelo.setRowCount(0); // Limpa a tabela antes de adicionar os novos resultados
+
+        if (!clientes.isEmpty()) {
+            for (Cliente cliente : clientes) {
+                modelo.addRow(new Object[]{
+                    cliente.getNomeCompleto(),
+                    cliente.getDataNascimento(),
+                    cliente.getTelefone(),
+                    cliente.getEmail(),
+                    cliente.getSexo(),
+                    cliente.getCnh(),
+                    cliente.getVencimentoCnh()
+                });
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Cliente não encontrado.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
     private void buscarClientePorNomeCompleto() {
-        String nomeCompleto = locNome_textField.getText();
+        String nomeCompleto = locNome_textField.getText().trim(); // Remove espaços extras
+        if (nomeCompleto.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, insira um nome válido.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         Repositorio repositorio = new Repositorio();
-        Cliente cliente = repositorio.buscarClientePorNomeCompleto(nomeCompleto);
-        
-        modelo.setRowCount(0); 
-        if (cliente != null) {
-            modelo.addRow(new Object[]{cliente.getNomeCompleto(),cliente.getDataNascimento(), cliente.getTelefone(), cliente.getEmail(),
-            		cliente.getSexo(), cliente.getCnh(), cliente.getVencimentoCnh()});
+        List<Cliente> clientes = repositorio.buscarClientesPorNomeCompleto(nomeCompleto); // Alterado para retornar uma lista
+
+        modelo.setRowCount(0); // Limpa a tabela antes de adicionar os novos resultados
+
+        if (clientes != null && !clientes.isEmpty()) {
+            for (Cliente cliente : clientes) {
+                modelo.addRow(new Object[]{
+                    cliente.getNomeCompleto(),
+                    cliente.getDataNascimento(),
+                    cliente.getTelefone(),
+                    cliente.getEmail(),
+                    cliente.getSexo(),
+                    cliente.getCnh(),
+                    cliente.getVencimentoCnh()
+                });
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Cliente não encontrado.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
+
 }

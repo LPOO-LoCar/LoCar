@@ -314,7 +314,7 @@ public class TelaPrincipal extends JFrame {
 		menuBuscar.add(buscarCliente);
 		
 		buscarCliente.addActionListener(e -> {
-			BuscarFuncionario telaBuscarCliente = new BuscarFuncionario(funcao);
+			BuscarCliente telaBuscarCliente = new BuscarCliente(funcao);
 			dispose();
 			telaBuscarCliente.setVisible(true);
 		});

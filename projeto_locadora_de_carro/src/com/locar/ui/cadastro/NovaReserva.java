@@ -121,13 +121,18 @@ public class NovaReserva extends JFrame {
 		});
 		locCPF_textField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		        String cpf = locCPF_textField.getText();
-		        Repositorio repositorio = new Repositorio();
-		        Cliente cliente = repositorio.buscarClientePorCpf(cpf);
-		            
-		        locNome_textField.setText(cliente.getNomeCompleto());
-		        locTelefone_textField.setText(cliente.getTelefone());
-		        locEmail_textField.setText(cliente.getEmail());
+				String cpf = locCPF_textField.getText();
+				Repositorio repositorio = new Repositorio();
+				Cliente cliente = repositorio.buscarClientePorCpf(cpf);
+
+				if (cliente != null) {
+				    locNome_textField.setText(cliente.getNomeCompleto());
+				    locTelefone_textField.setText(cliente.getTelefone());
+				    locEmail_textField.setText(cliente.getEmail());
+				} else {
+				    
+				    JOptionPane.showMessageDialog(null, "Cliente não encontrado.");
+				}
 			}
 		});
 		locCPF_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -187,12 +192,18 @@ public class NovaReserva extends JFrame {
 		locPlaca_textField = new JTextField();
 		locPlaca_textField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		        String placa = locPlaca_textField.getText();
-		        Repositorio repositorio = new Repositorio();
-		        Carro carro = repositorio.buscarCarroPorPlaca(placa);
-		            
-		        locMarca_textField.setText(carro.getMarca());
-		        locModelo_textField.setText(carro.getModelo());
+				String placa = locPlaca_textField.getText();
+				Repositorio repositorio = new Repositorio();
+				Carro carro = repositorio.buscarCarroPorPlaca(placa);
+
+				if (carro != null) {
+				    locMarca_textField.setText(carro.getMarca());
+				    locModelo_textField.setText(carro.getModelo());
+				    locTipo_comboBox.setSelectedItem(carro.getCategoria());
+				} else {
+				    
+				    JOptionPane.showMessageDialog(null, "Carro não encontrado.");
+				}
 			}
 		});
 		locPlaca_textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -380,9 +391,13 @@ public class NovaReserva extends JFrame {
 		            EnviarEmail.agendarEmailLembrete(email, nome, dataRetirada, horaRetirada);
 
 		            JOptionPane.showMessageDialog(null, "Reserva cadastrada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-		        } catch (Exception e1) {
-		            JOptionPane.showMessageDialog(null, "Erro ao cadastrar reserva", "Erro", JOptionPane.ERROR_MESSAGE);
-		        }
+		        } catch (IllegalArgumentException e1) {
+                    // Exibe a mensagem de erro específica que foi gerada
+                    JOptionPane.showMessageDialog(null, e1.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                } catch (Exception e1) {
+                    // Caso algum erro inesperado aconteça, exibe uma mensagem genérica
+                    JOptionPane.showMessageDialog(null, "Erro ao cadastrar a reserva. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
 		    }
 		});
 		reservar_Button.setFont(new Font("Tahoma", Font.PLAIN, 20));
