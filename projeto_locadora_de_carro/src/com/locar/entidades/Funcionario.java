@@ -18,7 +18,7 @@ public class Funcionario {
 		private String cidade;
 		private String complemento;
 		private String senha;
-		
+
 	public Funcionario (String nome, String cpf, String rg, String orgExp, String telefone, String email, String dataNascimento, String dataExp,
 			String cnh, String validadeCNH, String cep, String rua, String numeroRua, String bairro, String cidade, String complemento, String senha) {
 			this.setNome(nome);
@@ -39,7 +39,7 @@ public class Funcionario {
 			this.setComplemento(complemento);
 			this.setSenha(senha);
 	}
-	
+
 	public Funcionario (String nome, String rg, String orgExp, String telefone, String email, String dataNascimento, String dataExp,
 			String cnh, String validadeCNH, String cep, String rua, String numeroRua, String bairro, String cidade, String complemento, String senha) {
 			this.setNome(nome);
@@ -72,7 +72,7 @@ public class Funcionario {
 		this.dataNascimento = dataNascimento;
 		this.email = email;
 		this.cnh = cnh;
-		
+
 	}
 
 	public Funcionario(String nome, String rg, String telefone, String email, String dataNascimento, String cnh,

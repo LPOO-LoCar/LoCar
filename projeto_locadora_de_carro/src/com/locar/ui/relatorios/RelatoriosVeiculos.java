@@ -1,33 +1,33 @@
 package com.locar.ui.relatorios;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Map;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JSeparator;
+import javax.swing.WindowConstants;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.labels.ItemLabelAnchor;
+import org.jfree.chart.labels.ItemLabelPosition;
+import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
+import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
-import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
-import org.jfree.chart.labels.ItemLabelPosition;
-import org.jfree.chart.labels.ItemLabelAnchor;
-import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-import com.locar.dados.Repositorio;
+import com.locar.dados.FinanceiroRepositorio;
 import com.locar.ui.TelaPrincipal;
-
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class RelatoriosVeiculos {
 
@@ -36,7 +36,8 @@ public class RelatoriosVeiculos {
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 try {
                     RelatoriosVeiculos window = new RelatoriosVeiculos("ADMIN");
                     window.frame.setVisible(true);
@@ -55,7 +56,7 @@ public class RelatoriosVeiculos {
     private void initialize() {
         frame = new JFrame();
         frame.setBounds(100, 100, 700, 700);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
         frame.setLocationRelativeTo(null);
 
@@ -63,7 +64,7 @@ public class RelatoriosVeiculos {
         lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
         lblNewLabel.setBounds(10, 57, 385, 30);
         frame.getContentPane().add(lblNewLabel);
-        
+
         JLabel lblNewLabel_1 = new JLabel("Relatórios de Veículos");
         lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 35));
         lblNewLabel_1.setBounds(171, 7, 356, 35);
@@ -75,19 +76,18 @@ public class RelatoriosVeiculos {
         frame.getContentPane().add(separator);
 
         DefaultCategoryDataset datasetMarcas = new DefaultCategoryDataset();
-        Repositorio repositorio = new Repositorio();
-        Map<String, Integer> dados = repositorio.obterDadosRelatorioMarca();
+        FinanceiroRepositorio financeiroRepositorio = new FinanceiroRepositorio();
+        Map<String, Integer> dados = financeiroRepositorio.obterDadosRelatorioMarca();
 
         for (Map.Entry<String, Integer> entry : dados.entrySet()) {
             datasetMarcas.addValue(entry.getValue(), "Marcas", entry.getKey());
         }
 
         JFreeChart chartMarcas = ChartFactory.createBarChart(null, null, "Total de locações", datasetMarcas, PlotOrientation.VERTICAL, true, false, false);
-        chartMarcas.setBackgroundPaint(Color.white);
 
         CategoryPlot plot = (CategoryPlot) chartMarcas.getPlot();
         NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
-        rangeAxis.setTickUnit(new org.jfree.chart.axis.NumberTickUnit(1));
+        rangeAxis.setTickUnit(new org.jfree.chart.axis.NumberTickUnit(2));
 
         BarRenderer renderer = (BarRenderer) plot.getRenderer();
         renderer.setMaximumBarWidth(0.2);
@@ -100,19 +100,19 @@ public class RelatoriosVeiculos {
         ChartPanel chartPanel = new ChartPanel(chartMarcas);
         chartPanel.setBounds(44, 98, 583, 245);
         frame.getContentPane().add(chartPanel);
-        
+
         JLabel lblModelosDeVeculos = new JLabel("Modelos de veículos mais utilizados");
         lblModelosDeVeculos.setFont(new Font("Tahoma", Font.PLAIN, 25));
         lblModelosDeVeculos.setBounds(10, 351, 438, 30);
         frame.getContentPane().add(lblModelosDeVeculos);
-      
+
         JSeparator separator_1 = new JSeparator();
         separator_1.setForeground(Color.BLACK);
         separator_1.setBounds(-1, 382, 694, 2);
         frame.getContentPane().add(separator_1);
-        
+
         DefaultCategoryDataset datasetModelos = new DefaultCategoryDataset();
-        Map<String, Integer> dadosModelos = repositorio.obterDadosRelatorioModelo();
+        Map<String, Integer> dadosModelos = financeiroRepositorio.obterDadosRelatorioModelo();
 
         for (Map.Entry<String, Integer> entry : dadosModelos.entrySet()) {
             datasetModelos.addValue(entry.getValue(), "Modelos", entry.getKey());
@@ -123,7 +123,7 @@ public class RelatoriosVeiculos {
 
         CategoryPlot plotModelos = (CategoryPlot) chartModelos.getPlot();
         NumberAxis rangeAxisModelos = (NumberAxis) plotModelos.getRangeAxis();
-        rangeAxisModelos.setTickUnit(new org.jfree.chart.axis.NumberTickUnit(1));
+        rangeAxisModelos.setTickUnit(new org.jfree.chart.axis.NumberTickUnit(2));
 
         BarRenderer rendererModelos = (BarRenderer) plotModelos.getRenderer();
         rendererModelos.setMaximumBarWidth(0.2);
@@ -136,10 +136,11 @@ public class RelatoriosVeiculos {
         ChartPanel chartPanelModelos = new ChartPanel(chartModelos);
         chartPanelModelos.setBounds(49, 398, 583, 245);
         frame.getContentPane().add(chartPanelModelos);
-        
+
         JButton btnNewButton = new JButton("Voltar");
         btnNewButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            @Override
+			public void actionPerformed(ActionEvent e) {
                 TelaPrincipal telaPrincipal = new TelaPrincipal(funcao);
                 frame.dispose();
                 telaPrincipal.setVisible(true);
@@ -149,7 +150,7 @@ public class RelatoriosVeiculos {
         btnNewButton.setBounds(10, 11, 89, 35);
         frame.getContentPane().add(btnNewButton);
     }
-    
+
     public void setVisible(boolean b) {
         frame.setVisible(b);
     }

@@ -1,14 +1,17 @@
 package com.locar.entidades;
 
-public class AgendamentoManuntencao {
-	
+public class AgendamentoManutencao {
+
 	private Carro carro;
 	private String tipoManuntencao;
 	private String dataManuntencao;
 	private String hora;
 	private String observacao;
 	
-	public AgendamentoManuntencao(Carro carro, String tipoManuntencao, String dataManuntencao, String hora, String observacao) {
+	public AgendamentoManutencao() {
+	}
+
+	public AgendamentoManutencao(Carro carro, String tipoManuntencao, String dataManuntencao, String hora, String observacao) {
 		this.carro = carro;
 		this.tipoManuntencao = tipoManuntencao;
 		this.dataManuntencao = dataManuntencao;
@@ -45,5 +48,5 @@ public class AgendamentoManuntencao {
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
-	
+
 }

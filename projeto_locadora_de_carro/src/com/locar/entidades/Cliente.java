@@ -15,10 +15,10 @@ public class Cliente {
     private String estado;
     private String telefone;
     private String email;
-    
+
     public Cliente() {
     }
-    
+
     public Cliente(String nomeCompleto, String dataNascimento, String cpf, String sexo, String cnh,
     		String vencimentoCnh, String bairroRua, int numero, String cep, String cidade, String estado,
     		String telefone, String email) {
@@ -36,13 +36,12 @@ public class Cliente {
     	this.telefone = telefone;
     	this.email = email;
     }
-    
+
     public Cliente(String nomeCompleto, String dataNascimento, String sexo, String cnh,
     		String vencimentoCnh, String bairroRua, int numero, String cep, String cidade, String estado,
     		String telefone, String email) {
     	this.nomeCompleto = nomeCompleto;
     	this.dataNascimento = dataNascimento;
-    	this.cpf = cpf;
     	this.sexo = sexo;
     	this.cnh = cnh;
     	this.vencimentoCnh = vencimentoCnh;
@@ -54,13 +53,13 @@ public class Cliente {
     	this.telefone = telefone;
     	this.email = email;
     }
-    
+
     public Cliente(String nomeCompleto, String telefone, String email) {
     	this.nomeCompleto = nomeCompleto;
     	this.telefone = telefone;
     	this.email = email;
     }
-    
+
     public Cliente(String nomeCompleto, String dataNascimento, String telefone, String email, String sexo, String cnh,
     		String vencimentoCnh) {
     	this.nomeCompleto = nomeCompleto;
@@ -71,8 +70,8 @@ public class Cliente {
     	this.cnh = cnh;
     	this.vencimentoCnh = vencimentoCnh;
     }
-    
-    
+
+
     public Cliente(Long id) {
     	this.id = id;
     }
@@ -84,12 +83,12 @@ public class Cliente {
     public void setId(long id) {
         this.id = id;
     }
-    
+
     public String getNomeCompleto() {
         return nomeCompleto;
     }
 
-    public void setNome(String nomeCompleto) {
+    public void setNomeCompleto(String nomeCompleto) {
         this.nomeCompleto = nomeCompleto;
     }
 
@@ -116,19 +115,19 @@ public class Cliente {
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
-    
+
     public String getCnh() {
         return cnh;
     }
-    
+
     public void setCnh(String cnh) {
         this.cnh = cnh;
     }
-    
+
     public String getVencimentoCnh() {
         return vencimentoCnh;
     }
-    
+
     public void setVencimentoCnh(String vencimentoCnh) {
         this.vencimentoCnh = vencimentoCnh;
     }

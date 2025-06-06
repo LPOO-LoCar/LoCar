@@ -1,15 +1,26 @@
 package com.locar.regras_negocio;
 
-import jakarta.mail.*;
-import jakarta.mail.internet.*; 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Properties;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import jakarta.mail.Authenticator;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.PasswordAuthentication;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 
 public class EnviarEmail {
     private static final String REMETENTE = "matheussoa1507@gmail.com";
-    private static final String SENHA = "buvp vnlq jwcz ceuk"; 
+    private static final String SENHA = "buvp vnlq jwcz ceuk";
     private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     public static void enviarEmailReserva(String destinatario, String nomeCliente, String dataRetirada, String horaRetirada) {
@@ -20,7 +31,8 @@ public class EnviarEmail {
         props.put("mail.smtp.starttls.enable", "true");
 
         Session session = Session.getInstance(props, new Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
+            @Override
+			protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(REMETENTE, SENHA);
             }
         });
@@ -41,7 +53,7 @@ public class EnviarEmail {
             e.printStackTrace();
         }
     }
-    
+
     public static void enviarEmailAgendado(String destinatario, String nomeCliente, String dataRetirada, String horaRetirada) {
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -50,7 +62,8 @@ public class EnviarEmail {
         props.put("mail.smtp.starttls.enable", "true");
 
         Session session = Session.getInstance(props, new Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
+            @Override
+			protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(REMETENTE, SENHA);
             }
         });
@@ -78,7 +91,7 @@ public class EnviarEmail {
             Date retirada = inputFormat.parse(dataRetirada + " " + horaRetirada);
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(retirada);
-            calendar.add(Calendar.DAY_OF_YEAR, -1); 
+            calendar.add(Calendar.DAY_OF_YEAR, -1);
             Date lembrete = calendar.getTime();
             long delay = lembrete.getTime() - System.currentTimeMillis();
 

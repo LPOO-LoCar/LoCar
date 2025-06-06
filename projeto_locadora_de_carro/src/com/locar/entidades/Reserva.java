@@ -8,10 +8,10 @@ public class Reserva {
 	private String horaRetirada;
 	private String dataEntrega;
 	private String horaEntrega;
-	
+
 	public Reserva(Cliente cliente, Carro carro, String dataRetirada, String horaRetirada, String dataEntrega,
 			String horaEntrega) {
-		
+
 		this.cliente = cliente;
 		this.carro = carro;
 		this.dataRetirada = dataRetirada;
@@ -83,7 +83,7 @@ public class Reserva {
 	public void setHoraEntrega(String horaEntrega) {
 		this.horaEntrega = horaEntrega;
 	}
-	
-	
+
+
 
 }

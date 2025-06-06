@@ -10,7 +10,7 @@ public class Locacao {
     private String formaPagamento;
     private String status;
     private String dataLocacao;
-    
+
     public Locacao(Cliente cliente, Carro carro,  double valorDiaria, int diasLocados, double valorTotal, String formaPagamento, String status,
     		String dataLocacao) {
         this.cliente = cliente;
@@ -22,7 +22,7 @@ public class Locacao {
         this.status = status;
         this.dataLocacao = dataLocacao;
         }
-    
+
     public Locacao(Cliente cliente, Carro carro,  double valorDiaria, int diasLocados, double valorTotal, String formaPagamento, String status) {
         this.cliente = cliente;
         this.carro = carro;
@@ -84,11 +84,11 @@ public class Locacao {
     public double getValorTotal() {
         return valorTotal;
     }
-    
+
     public void setValorTotal(Double valorTotal) {
     	this.valorTotal = valorTotal;
     }
-    
+
     public String getFormaPagamento() {
         return formaPagamento;
     }

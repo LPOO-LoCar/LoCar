@@ -1,33 +1,33 @@
 package com.locar.ui.ajuda;
 
+import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.locar.ui.TelaPrincipal;
-
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JScrollPane;
-import java.awt.Component;
-import javax.swing.JTextArea;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class HelpMe extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private String funcao;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					HelpMe frame = new HelpMe("ADMIN");
@@ -43,34 +43,33 @@ public class HelpMe extends JFrame {
 	 * Create the frame.
 	 */
 	public HelpMe(String funcao) {
-		this.funcao = funcao;
 		setTitle("Help-me!");
 		setSize(750,600);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
-		
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel helpMe_Label = new JLabel("Help-me!");
 		helpMe_Label.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		helpMe_Label.setBounds(314, 5, 122, 29);
 		contentPane.add(helpMe_Label);
-		
+
 		JLabel lblNewLabel = new JLabel("Ajuda do Sistema");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel.setBounds(296, 35, 196, 25);
 		contentPane.add(lblNewLabel);
-		
+
 		JScrollPane scrollPane = new JScrollPane((Component) null);
 		scrollPane.setBounds(10, 61, 714, 489);
 		contentPane.add(scrollPane);
-		
+
 		JTextArea helpText = new JTextArea();
-		helpText.setFont(new Font("Monospaced", Font.PLAIN, 15));
+		helpText.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		helpText.setText("1. Menu Arquivo\r\n\t>"
 				+ " É onde toda nova movimentação da locadora pode ser acessada.\r\n"
 				+ " 1.1. Novo Cliente\r\n"
@@ -192,9 +191,10 @@ public class HelpMe extends JFrame {
 				+ "  - Um pouco sobre nós\r\n");
 		helpText.setEditable(false);
 		scrollPane.setViewportView(helpText);
-		
+
 		JButton btnNewButton = new JButton("Voltar");
 		btnNewButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
                 TelaPrincipal telaPrincipal = new TelaPrincipal(funcao);
                 dispose();

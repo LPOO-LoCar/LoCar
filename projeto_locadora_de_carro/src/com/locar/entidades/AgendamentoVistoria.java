@@ -1,13 +1,13 @@
 package com.locar.entidades;
 
 public class AgendamentoVistoria {
-	
+
 	private Carro carro;
 	private String tipoVistoria;
 	private String dataVistoria;
 	private String hora;
 	private String observacao;
-	
+
 	public AgendamentoVistoria(Carro carro, String tipoVistoria, String dataVistoria, String hora, String observacao) {
 		this.carro = carro;
 		this.tipoVistoria = tipoVistoria;
@@ -45,5 +45,5 @@ public class AgendamentoVistoria {
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
-	
+
 }

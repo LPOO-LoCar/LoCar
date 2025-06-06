@@ -3,9 +3,12 @@ package com.locar.regras_negocio;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import javax.swing.JOptionPane;
 
-import com.itextpdf.text.*;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
 public class GerarPdf {
@@ -14,9 +17,9 @@ public class GerarPdf {
                           String formaPagamento) {
         Document document = new Document();
         try {
-        	
+
             String diretorio = "C:\\Users\\mathe\\Downloads\\pdfs\\";
-            String nomeArquivo = getNovoNomeArquivo(diretorio, "locacao");
+            String nomeArquivo = getNovoNomeArquivo(diretorio, "Locacao");
 
             PdfWriter.getInstance(document, new FileOutputStream(diretorio + nomeArquivo));
             document.open();
@@ -25,12 +28,10 @@ public class GerarPdf {
             Font subTituloFont = new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD);
             Font conteudoFont = new Font(Font.FontFamily.HELVETICA, 12);
 
-            // Título principal
             Paragraph titulo = new Paragraph("INFORMAÇÕES DE LOCAÇÃO\n\n", tituloFont);
             titulo.setAlignment(Element.ALIGN_CENTER);
             document.add(titulo);
 
-            // Seção Cliente
             document.add(new Paragraph("Cliente", subTituloFont));
             document.add(new Paragraph("Nome: " + nome, conteudoFont));
             document.add(new Paragraph("CPF: " + cpf, conteudoFont));
@@ -38,7 +39,6 @@ public class GerarPdf {
             document.add(new Paragraph("Telefone: " + telefone, conteudoFont));
             document.add(new Paragraph("\n"));
 
-            // Seção Veículo
             document.add(new Paragraph("Veículo", subTituloFont));
             document.add(new Paragraph("Placa: " + placa, conteudoFont));
             document.add(new Paragraph("Marca: " + marca, conteudoFont));
@@ -48,7 +48,7 @@ public class GerarPdf {
             document.add(new Paragraph("Km Rodados: " + kmRodados, conteudoFont));
             document.add(new Paragraph("\n"));
 
-            // Seção Locação
+
             document.add(new Paragraph("Dados da Locação", subTituloFont));
             document.add(new Paragraph("Valor da diária: R$ " + String.format("%.2f", valorDiaria), conteudoFont));
             document.add(new Paragraph("Dias locados: " + diasLocados, conteudoFont));
@@ -56,12 +56,11 @@ public class GerarPdf {
             document.add(new Paragraph("Forma de pagamento: " + formaPagamento, conteudoFont));
 
             document.close();
-            JOptionPane.showMessageDialog(null, "PDF gerado com sucesso!");
         } catch (DocumentException | IOException ex) {
             ex.printStackTrace();
         }
     }
-    
+
     private String getNovoNomeArquivo(String diretorio, String baseNome) {
         int numero = 1;
         File arquivo;
