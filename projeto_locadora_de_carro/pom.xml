@@ -38,38 +38,20 @@
 			<artifactId>jfreechart</artifactId>
 			<version>1.5.3</version>
 		</dependency>
-		<!-- SDK EFÍ Bank para Java -->
 		<dependency>
-			<groupId>br.com.efipay.efisdk</groupId>
-			<artifactId>sdk-java-apis-efi</artifactId>
-			<version>1.1.1</version>
+			<groupId>com.mercadopago</groupId>
+			<artifactId>sdk-java</artifactId>
+			<version>2.5.0</version>
 		</dependency>
-
-		<!-- Jackson para manipulação de JSON -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.15.2</version>
-		</dependency>
-
-		<!-- Apache HttpClient (dependência do SDK EFÍ) -->
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.5.14</version>
-		</dependency>
-
-		<!-- Para gerar QR Code (caso queira exibir o QR Code localmente) -->
 		<dependency>
 			<groupId>com.google.zxing</groupId>
 			<artifactId>core</artifactId>
-			<version>3.5.1</version>
+			<version>3.5.3</version>
 		</dependency>
-
 		<dependency>
 			<groupId>com.google.zxing</groupId>
 			<artifactId>javase</artifactId>
-			<version>3.5.1</version>
+			<version>3.5.3</version>
 		</dependency>
 	</dependencies>
 </project>

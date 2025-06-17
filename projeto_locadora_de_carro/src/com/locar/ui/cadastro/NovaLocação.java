@@ -1,6 +1,5 @@
 package com.locar.ui.cadastro;
 
-
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -30,6 +29,7 @@ import com.locar.entidades.Cliente;
 import com.locar.regras_negocio.ControladorControleAcesso;
 import com.locar.regras_negocio.GerarPdf;
 import com.locar.ui.TelaPrincipal;
+import com.locar.ui.pagamento.TelaPagamentoPix;
 
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -369,8 +369,15 @@ public class NovaLocação extends JFrame {
 	            GerarPdf gerarPdf = new GerarPdf();
 	            gerarPdf.gerarPDF(nome, cpf, email, telefone, placa, marca, modelo, categoria, ano, kmRodados, valorDiaria,
 	            		diasLocados, valorTotal, formaPagamento);
-
-				JOptionPane.showMessageDialog(null, "Locação cadastrada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+	            
+	            if (formaPagamento.equals("Pix")) {
+	                JOptionPane.showMessageDialog(null, "Locação cadastrada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+	                TelaPagamentoPix telaPagamentoPix = new TelaPagamentoPix(valorTotal, nome, cpf);
+						telaPagamentoPix.setVisible(true);
+					} else {
+						JOptionPane.showMessageDialog(null, "Locação cadastrada com sucesso!", "Sucesso",
+								JOptionPane.INFORMATION_MESSAGE);
+					}
 			} catch (IllegalArgumentException e1) {
                 JOptionPane.showMessageDialog(null, e1.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             } catch (Exception e1) {
